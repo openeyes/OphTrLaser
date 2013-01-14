@@ -27,7 +27,7 @@
 	<div
 		class="side left eventDetail<?php if(!$element->hasRight()) { ?> inactive<?php } ?>"
 		data-side="right">
-		<h4 style="align: center">Right</h4>
+		<h4>Right</h4>
 		<div class="activeForm">
 			<a href="#" class="removeSide">-</a>
 			<?php
@@ -38,13 +38,13 @@
 			?>
 		</div>
 		<div class="inactiveForm">
-			<a href="#">Add left side</a>
+			<a href="#">Add right side</a>
 		</div>
 	</div>
 	<div
 		class="side right eventDetail<?php if(!$element->hasLeft()) { ?> inactive<?php } ?>"
 		data-side="left">
-		<h4 style="align: center">Left</h4>
+		<h4>Left</h4>
 		<div class="activeForm">
 			<a href="#" class="removeSide">-</a>
 			<?php 

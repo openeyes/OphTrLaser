@@ -92,7 +92,6 @@ class Element_OphTrLaser_Treatment extends SplitEventTypeElement
 			'procedure_assignments' => array(self::HAS_MANY, 'OphTrLaser_LaserProcedureAssignment', 'treatment_id', 'order' => 'display_order ASC'),
 			'right_procedures' => array(self::HAS_MANY, 'Procedure', 'procedure_id', 'order' => 'display_order ASC', 'through' => 'procedure_assignments', 'on' => 'procedure_assignments.eye_id = ' . self::RIGHT_EYE_ID),
 			'left_procedures' => array(self::HAS_MANY, 'Procedure', 'procedure_id', 'order' => 'display_order ASC', 'through' => 'procedure_assignments', 'on' => 'procedure_assignments.eye_id = ' . self::LEFT_EYE_ID),
-			#'left_procedures' => array(self::HAS_MANY, 'OphTrLaser_LaserProcedureAssignment', 'treatment_id', 'order' => 'display_order ASC', 'on' => 'left_procedures.eye_id = ' . self::LEFT_EYE_ID),
 		);
 	}
 
@@ -198,6 +197,7 @@ class Element_OphTrLaser_Treatment extends SplitEventTypeElement
 	 * wrapper function to update the procedures for this treatment on the right eye
 	 */
 	public function updateRightProcedures($data) {
+		error_log(print_r($data, true));
 		$this->updateProcedures($data, self::RIGHT_EYE_ID);
 	}
 	

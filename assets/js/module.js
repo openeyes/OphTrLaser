@@ -61,31 +61,6 @@ $(document).ready(function() {
 		}
 	});
 	
-	// manage treatment changes
-	$('#active_elements').delegate('input[name="Element_OphTrLaser_Treatment\[MultiSelectList_treatment_right_procedures\]"], ' + 
-			'input[name="Element_OphTrLaser_Treatment\[MultiSelectList_treatment_left_procedures\]"]', 
-			'change', function(e) {
-		// work out what side we are on
-		var side = $(this).closest('.eventDetail').attr('data-side');
-		var physical_side = 'left';
-		if (side == 'left') {
-			physical_side = 'right';
-		}
-		
-		// if there is at least one procedure
-		if (proceduresForSide(side)) {
-			// show the eyedraw for each active child element
-			$('.Element_OphTrLaser_Site > .active_child_elements > .element').each(function() {
-				//showSide($(this), physical_side);
-			});
-		}
-		else {
-			// hide the eyedraws on the active child elements
-		}
-		
-		
-	});
-	
 	// side adding and removing
 	$(this).delegate('#event_content .side .activeForm a.removeSide', 'click', function(e) {
 		
@@ -126,28 +101,6 @@ $(document).ready(function() {
 		e.preventDefault();
 	});
 });
-
-// check if there are procedures set for a side (the eye(data) side, not physical(display) side)
-function proceduresForSide(side) {
-	if ($('input[name="treatment_'+side+'_procedures\[\]"]').length) {
-		return true;
-	}
-	return false;
-}
-
-// probably redundant
-function showSide(el, pside) {
-	if (el.find('input.sideField').val()) 
-	el.find('input.sideField').each(function() {
-		$(this).val(3); // Both eyes
-	});
-	
-	el.find('.'+pside+' .side').removeClass('inactive');
-} 
-
-function hideSide(el, pside) {
-	// may have to hide the element completely if the other side is not shown.
-}
 
 function OphTrLaser_AnteriorSegment_init() {
 	
