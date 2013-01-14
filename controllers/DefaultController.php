@@ -17,7 +17,7 @@ class DefaultController extends NestedElementsEventTypeController {
 			$criteria = new CDbCriteria;
 			$criteria->compare('event.episode_id',$this->episode->id);
 			$criteria->compare('event.event_type_id',$event_type_id);
-			$criteria->order = 't.last_modified_date desc';
+			$criteria->order = 'event.created_date desc';
 			$criteria->limit = 1;
 			// try and find the element type we're suppposed to import from
 			$import = ElementType::model(self::$IMPORT_ELEMENTS[get_class($element)])->with('event')->find($criteria);
