@@ -40,40 +40,37 @@ class m130102_154840_event_type_OphTrLaser extends CDbMigration
 
 		// create an element_type entry for this element type name if one doesn't already exist
 		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Site',':eventTypeId'=>$event_type['id']))->queryRow()) {
-			$this->insert('element_type', array('name' => 'Site','class_name' => 'Element_OphTrLaser_Site', 'event_type_id' => $event_type['id'], 'display_order' => 1));
+			$this->insert('element_type', array('name' => 'Site','class_name' => 'Element_OphTrLaser_Site', 'event_type_id' => $event_type['id'], 'display_order' => 1, 'required' => true));
 		}
-		// select the element_type_id for this element type name
-		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Site'))->queryRow();
+		
+		
 		// create an element_type entry for this element type name if one doesn't already exist
-		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Treatment',':eventTypeId'=>$event_type['id']))->queryRow()) {
-			$this->insert('element_type', array('name' => 'Treatment','class_name' => 'Element_OphTrLaser_Treatment', 'event_type_id' => $event_type['id'], 'display_order' => 1));
+		if ($treatment_element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Treatment',':eventTypeId'=>$event_type['id']))->queryRow()) {
+			$treatment_id = $treatment_element_type->id;
+		} else {
+			$this->insert('element_type', array('name' => 'Treatment','class_name' => 'Element_OphTrLaser_Treatment', 'event_type_id' => $event_type['id'], 'display_order' => 2, 'required' => true));
+			$treatment_id = $this->dbConnection->lastInsertID;
 		}
-		// select the element_type_id for this element type name
-		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Treatment'))->queryRow();
+		
 		// create an element_type entry for this element type name if one doesn't already exist
 		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Anterior Segment',':eventTypeId'=>$event_type['id']))->queryRow()) {
-			$this->insert('element_type', array('name' => 'Anterior Segment','class_name' => 'Element_OphTrLaser_AnteriorSegment', 'event_type_id' => $event_type['id'], 'display_order' => 1));
+			$this->insert('element_type', array('name' => 'Anterior Segment','class_name' => 'Element_OphTrLaser_AnteriorSegment', 'event_type_id' => $event_type['id'], 'display_order' => 3, 'parent_element_type_id' => $treatment_id, 'default' => false, 'required' => false));
 		}
-		// select the element_type_id for this element type name
-		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Anterior Segment'))->queryRow();
+		
 		// create an element_type entry for this element type name if one doesn't already exist
 		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Posterior Pole',':eventTypeId'=>$event_type['id']))->queryRow()) {
-			$this->insert('element_type', array('name' => 'Posterior Pole','class_name' => 'Element_OphTrLaser_PosteriorPole', 'event_type_id' => $event_type['id'], 'display_order' => 1));
+			$this->insert('element_type', array('name' => 'Posterior Pole','class_name' => 'Element_OphTrLaser_PosteriorPole', 'event_type_id' => $event_type['id'], 'display_order' => 4, 'parent_element_type_id' => $treatment_id, 'default' => false, 'required' => false));
 		}
-		// select the element_type_id for this element type name
-		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Posterior Pole'))->queryRow();
+		
 		// create an element_type entry for this element type name if one doesn't already exist
 		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Fundus',':eventTypeId'=>$event_type['id']))->queryRow()) {
-			$this->insert('element_type', array('name' => 'Fundus','class_name' => 'Element_OphTrLaser_Fundus', 'event_type_id' => $event_type['id'], 'display_order' => 1));
+			$this->insert('element_type', array('name' => 'Fundus','class_name' => 'Element_OphTrLaser_Fundus', 'event_type_id' => $event_type['id'], 'display_order' => 5, 'parent_element_type_id' => $treatment_id, 'default' => false, 'required' => false));
 		}
-		// select the element_type_id for this element type name
-		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Fundus'))->queryRow();
+		
 		// create an element_type entry for this element type name if one doesn't already exist
 		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Comments',':eventTypeId'=>$event_type['id']))->queryRow()) {
-			$this->insert('element_type', array('name' => 'Comments','class_name' => 'Element_OphTrLaser_Comments', 'event_type_id' => $event_type['id'], 'display_order' => 1));
+			$this->insert('element_type', array('name' => 'Comments','class_name' => 'Element_OphTrLaser_Comments', 'event_type_id' => $event_type['id'], 'display_order' => 6, 'required' => true));
 		}
-		// select the element_type_id for this element type name
-		$element_type = $this->dbConnection->createCommand()->select('id')->from('element_type')->where('event_type_id=:eventTypeId and name=:name', array(':eventTypeId'=>$event_type['id'],':name'=>'Comments'))->queryRow();
 		
 		// element lookup table et_ophtrlaser_site_laser
 		$this->createTable('et_ophtrlaser_site_laser', array(
@@ -124,12 +121,11 @@ class m130102_154840_event_type_OphTrLaser extends CDbMigration
 
 
 
-		// create the table for this element type: et_modulename_elementtypename
+		// create the table for this Treatment element
 		$this->createTable('et_ophtrlaser_treatment', array(
 				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
 				'event_id' => 'int(10) unsigned NOT NULL',
 				'eye_id' => 'int(10) unsigned NOT NULL DEFAULT 3', // eye
-				'procedure_id' => 'int(10) unsigned NOT NULL', // Procedure
 				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
 				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
 				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
@@ -139,12 +135,10 @@ class m130102_154840_event_type_OphTrLaser extends CDbMigration
 				'KEY `et_ophtrlaser_treatment_cui_fk` (`created_user_id`)',
 				'KEY `et_ophtrlaser_treatment_ev_fk` (`event_id`)',
 				'KEY `et_ophtrlaser_treatment_eye_id_fk` (`eye_id`)',
-				'KEY `et_ophtrlaser_treatment_procedure_id_fk` (`procedure_id`)',
 				'CONSTRAINT `et_ophtrlaser_treatment_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
 				'CONSTRAINT `et_ophtrlaser_treatment_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
 				'CONSTRAINT `et_ophtrlaser_treatment_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)',
 				'CONSTRAINT `et_ophtrlaser_treatment_eye_id_fk` FOREIGN KEY (`eye_id`) REFERENCES `eye` (`id`)',
-				'CONSTRAINT `et_ophtrlaser_treatment_procedure_id_fk` FOREIGN KEY (`procedure_id`) REFERENCES `proc` (`id`)',
 			), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
 
 
@@ -277,6 +271,29 @@ class m130102_154840_event_type_OphTrLaser extends CDbMigration
 				echo "WARNING: procedure with SNOMED " . $snomed . " is missing!";
 			}
 		}
+		
+		$this->createTable('ophtrlaser_laserprocedure_assignment', array(
+				'id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT',
+				'procedure_id' => 'int(10) unsigned NOT NULL',
+				'treatment_id' => 'int(10) unsigned NOT NULL',
+				'eye_id' => 'int(10) unsigned NOT NULL',
+				'display_order' => 'tinyint(3) unsigned',
+				'last_modified_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'last_modified_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'created_user_id' => 'int(10) unsigned NOT NULL DEFAULT 1',
+				'created_date' => 'datetime NOT NULL DEFAULT \'1901-01-01 00:00:00\'',
+				'PRIMARY KEY (`id`)',
+				'KEY `ophtrlaser_laserprocedure_assignment_lmui_fk` (`last_modified_user_id`)',
+				'KEY `ophtrlaser_laserprocedure_assignment_cui_fk` (`created_user_id`)',
+				'KEY `ophtrlaser_laserprocedure_assignment_proc_fk` (`procedure_id`)',
+				'KEY `ophtrlaser_laserprocedure_assignment_tr_fk` (`treatment_id`)',
+				'KEY `ophtrlaser_laserprocedure_assignment_eye_id_fk` (`eye_id`)',
+				'CONSTRAINT `ophtrlaser_laserprocedure_assignment_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `ophtrlaser_laserprocedure_assignment_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`)',
+				'CONSTRAINT `ophtrlaser_laserprocedure_assignment_proc_fk` FOREIGN KEY (`procedure_id`) REFERENCES `proc` (`id`)',
+				'CONSTRAINT `ophtrlaser_laserprocedure_assignment_tr_fk` FOREIGN KEY (`treatment_id`) REFERENCES `et_ophtrlaser_treatment` (`id`)',
+				'CONSTRAINT `ophtrlaser_laserprocedure_assignment_eye_id_fk` FOREIGN KEY (`eye_id`) REFERENCES `eye` (`id`)',
+				), 'ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin');
 
 	}
 
@@ -287,6 +304,7 @@ class m130102_154840_event_type_OphTrLaser extends CDbMigration
 		$this->dropTable('et_ophtrlaser_site');
 
 		$this->dropTable('et_ophtrlaser_site_laser');
+		$this->dropTable('ophtrlaser_laserprocedure_assignment');
 		$this->dropTable('et_ophtrlaser_treatment');
 		$this->dropTable('et_ophtrlaser_anteriorseg');
 		$this->dropTable('et_ophtrlaser_posteriorpo');
@@ -311,8 +329,9 @@ class m130102_154840_event_type_OphTrLaser extends CDbMigration
 			$this->delete('audit', 'event_id='.$row['id']);
 			$this->delete('event', 'id='.$row['id']);
 		}
-
+		
 		// --- delete entries from element_type ---
+		$this->update('element_type', array('parent_element_type_id' => null), 'event_type_id='.$event_type['id']);
 		$this->delete('element_type', 'event_type_id='.$event_type['id']);
 
 		// --- delete entries from event_type ---

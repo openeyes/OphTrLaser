@@ -12,8 +12,25 @@
 		));
 	?>
 	<?php  $this->displayErrors($errors)?>
-	<?php  $this->renderDefaultElements($this->action->id, $form); ?>
-	<?php  $this->renderOptionalElements($this->action->id, $form); ?>
+		<div id="elements">
+			<div id="active_elements">
+				<?php  $this->renderDefaultElements($this->action->id, $form); ?>
+			</div>
+			<div id="optionals_all" class="clearfix">
+				<h4>Optional Elements</h4>
+				<div>
+					<span class="allButton"><a id="add-all" href="#">Add all</a><img
+						src="<?php echo Yii::app()->createUrl('img/_elements/icons/extra-element_added.png')?>"
+						alt="extra-element_added" width="30" height="20" /></span> <span
+						class="allButton"><a id="remove-all" href="#">Remove all</a><img
+						src="<?php echo Yii::app()->createUrl('img/_elements/icons/extra-element_remove.png')?>"
+						alt="extra-element_remove" width="30" height="20" /></span>
+				</div>
+			</div>
+			<div id="inactive_elements">
+				<?php  $this->renderOptionalElements($this->action->id, $form); ?>
+			</div>
+		</div>
 	<?php  $this->displayErrors($errors)?>
 		<div class="cleartall"></div>
 		<div class="form_button">

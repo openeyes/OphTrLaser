@@ -20,7 +20,7 @@
 $this->widget('application.modules.eyedraw2.OEEyeDrawWidget', array(
 		'doodleToolBarArray' => array('LaserSpot','FocalLaser','LaserCircle','LaserDemarcation','SectorPRP'),
 		'onReadyCommandArray' => array(
-				array('addDoodle', array('Fundus', 'UTear', 'PeripheralRRD', 'RoundHole')),
+				array('addDoodle', array('Fundus')),
 				array('deselectDoodles', array()),
 		),
 		'idSuffix' => $side.'_'.$element->elementType->id,

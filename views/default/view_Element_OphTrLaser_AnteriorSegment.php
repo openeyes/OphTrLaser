@@ -1,39 +1,35 @@
 
 <h4 class="elementTypeName"><?php  echo $element->elementType->name ?></h4>
 
-<table class="subtleWhite normalText">
-	<tbody>
-		<tr>
-			<td colspan="2">
-				<?php
-					$this->widget('application.modules.eyedraw.OEEyeDrawWidgetAnteriorSegment', array(
-						'side'=>$element->eye->getShortName(),
-						'mode'=>'view',
-						'size'=>300,
-						'model'=>$element,
-						'attribute'=>'left_eyedraw',
-					));
-				?>
-			</td>
-		</tr>
-		
-		<tr>
-			<td colspan="2">
-				<?php
-					$this->widget('application.modules.eyedraw.OEEyeDrawWidgetAnteriorSegment', array(
-						'side'=>$element->eye->getShortName(),
-						'mode'=>'view',
-						'size'=>300,
-						'model'=>$element,
-						'attribute'=>'right_eyedraw',
-					));
-				?>
-			</td>
-		</tr>
-		
-		<tr>
-			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('eye_id'))?></td>
-			<td><span class="big"><?php echo $element->eye ? $element->eye->name : 'None'?></span></td>
-		</tr>
-	</tbody>
-</table>
+<div class="cols2 clearfix">
+	<div class="left eventDetail">
+		<?php if($element->hasRight()) {
+			$this->widget('application.modules.eyedraw2.OEEyeDrawWidget', array(
+					'idSuffix' => 'right_'.$element->elementType->id,
+					'side' => 'R',
+					'mode' => 'view',
+					'width' => 200,
+					'height' => 200,
+					'model' => $element,
+					'attribute' => 'right_eyedraw',
+			));
+			} else { ?>
+		Not recorded
+		<?php } ?>
+	</div>
+	<div class="right eventDetail">
+		<?php if($element->hasLeft()) {
+			$this->widget('application.modules.eyedraw2.OEEyeDrawWidget', array(
+					'idSuffix' => 'left_'.$element->elementType->id,
+					'side' => 'L',
+					'mode' => 'view',
+					'width' => 200,
+					'height' => 200,
+					'model' => $element,
+					'attribute' => 'left_eyedraw',
+			));
+			} else { ?>
+		Not recorded
+		<?php } ?>
+	</div>
+</div>

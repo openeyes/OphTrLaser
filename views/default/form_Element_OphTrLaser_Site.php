@@ -16,22 +16,15 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
  ?>
- <?php
-$this->widget('application.modules.eyedraw2.OEEyeDrawWidget', array(
-		'doodleToolBarArray' => array(
-				array('LaserSpot', 'FocalLaser', 'MacularGrid'),
-			),
-		'onReadyCommandArray' => array(
-				array('addDoodle', array('AntSeg')),
-				array('deselectDoodles', array()),
-		),
-		'bindingArray' => array(),
-		'idSuffix' => $side.'_'.$element->elementType->id,
-		'side' => ($side == 'right') ? 'R' : 'L',
-		'mode' => 'edit',
-		'width' => 300,
-		'height' => 300,
-		'model' => $element,
-		'attribute' => $side.'_eyedraw',
-));
-?>
+
+<?php 
+$lasers = Element_OphTrLaser_Site_Laser::model()->with(array('site'))->findAll(array('order' => 'site.short_name asc, t.name asc'));
+$sites  = array();
+foreach ($lasers as $laser) {
+	if(!in_array($laser->site, $sites)) {
+		$sites[] = $laser->site;
+	}
+}
+echo $form->dropDownList($element, 'site_id', CHtml::listData($sites,'id','short_name'),array('empty'=>'- Please select -'))?>
+<?php echo $form->dropDownList($element, 'laser_id', CHtml::listData(Element_OphTrLaser_Site_Laser::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'))?>
+<?php echo $form->dropDownList($element, 'surgeon_id', CHtml::listData($element->surgeons, 'id', 'ReversedFullName'),array('empty'=>'- Please select -'))?>

@@ -16,19 +16,46 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
  ?>
-<div class="element <?php echo $element->elementType->class_name?>"
-	data-element-type-id="<?php echo $element->elementType->id?>"
-	data-element-type-class="<?php echo $element->elementType->class_name?>"
-	data-element-type-name="<?php echo $element->elementType->name?>"
-	data-element-display-order="<?php echo $element->elementType->display_order?>">
-	<h4 class="elementTypeName"><?php  echo $element->elementType->name; ?></h4>
-
-	<?php echo $form->dropDownList($element, 'eye_id', CHtml::listData(Eye::model()->findAll(array('order'=> 'name asc')),'id','name'),array('empty'=>'- Please select -'))?>
-	<?php 
+<div class="cols2 clearfix">
+	<?php echo $form->hiddenInput($element, 'eye_id', false, array('class' => 'sideField')); 
 		$lprocs = OphTrLaser_LaserProcedure::model()->with(array('procedure'))->findAll(array('order'=>'procedure.term asc'));
 		$procs = array();
 		foreach ($lprocs as $lproc) {
 			$procs[] = $lproc->procedure;
 		}
-	echo $form->dropDownList($element, 'procedure_id', CHtml::listData($procs,'id','term'),array('empty'=>'- Please select -'))?>
+	?>
+	<div
+		class="side left eventDetail<?php if(!$element->hasRight()) { ?> inactive<?php } ?>"
+		data-side="right">
+		<h4 style="align: center">Right</h4>
+		<div class="activeForm">
+			<a href="#" class="removeSide">-</a>
+			<?php
+			$form->multiSelectList(
+				$element, 
+				'treatment_right_procedures', 
+				'right_procedures', 'id', CHtml::listData($procs, 'id', 'term'), array(), array('empty' => '- Procedures -', 'label' => $element->getAttributeLabel('procedures')));
+			?>
+		</div>
+		<div class="inactiveForm">
+			<a href="#">Add left side</a>
+		</div>
+	</div>
+	<div
+		class="side right eventDetail<?php if(!$element->hasLeft()) { ?> inactive<?php } ?>"
+		data-side="left">
+		<h4 style="align: center">Left</h4>
+		<div class="activeForm">
+			<a href="#" class="removeSide">-</a>
+			<?php 
+			$form->multiSelectList(
+				$element, 
+				'treatment_left_procedures', 
+				'left_procedures', 'id', CHtml::listData($procs, 'id', 'term'), array(), array('empty' => '- Procedures -', 'label' => $element->getAttributeLabel('procedures')));
+			?>
+		</div>
+		<div class="inactiveForm">
+			<a href="#">Add left side</a>
+		</div>
+	</div>
 </div>

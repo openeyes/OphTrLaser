@@ -16,12 +16,31 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
  ?>
-<div class="element <?php echo $element->elementType->class_name?>"
-	data-element-type-id="<?php echo $element->elementType->id?>"
-	data-element-type-class="<?php echo $element->elementType->class_name?>"
-	data-element-type-name="<?php echo $element->elementType->name?>"
-	data-element-display-order="<?php echo $element->elementType->display_order?>">
-	<h4 class="elementTypeName"><?php  echo $element->elementType->name; ?></h4>
 
-	<?php echo $form->textArea($element, 'comments', array('rows' => 4, 'cols' => 80))?>
+<div class="cols2 clearfix">
+	<?php echo $form->hiddenInput($element, 'eye_id', false, array('class' => 'sideField')); ?>
+	<div
+		class="side left eventDetail<?php if(!$element->hasRight()) { ?> inactive<?php } ?>"
+		data-side="right">
+		<div class="activeForm">
+			<a href="#" class="removeSide">-</a>
+			<?php $this->renderPartial('form_' . get_class($element) . '_OEEyeDraw',
+				array('side' => 'right', 'element' => $element)); ?>
+		</div>
+		<div class="inactiveForm">
+			<a href="#">Add right side</a>
+		</div>
+	</div>
+	<div
+		class="side right eventDetail<?php if(!$element->hasLeft()) { ?> inactive<?php } ?>"
+		data-side="left">
+		<div class="activeForm">
+			<a href="#" class="removeSide">-</a>
+			<?php $this->renderPartial('form_' . get_class($element) . '_OEEyeDraw',
+				array('side' => 'left', 'element' => $element)); ?>
+		</div>
+		<div class="inactiveForm">
+			<a href="#">Add left side</a>
+		</div>
+	</div>
 </div>

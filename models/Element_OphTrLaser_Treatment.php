@@ -23,7 +23,6 @@
  * @property string $id
  * @property integer $event_id
  * @property integer $eye_id
- * @property integer $procedure_id
  *
  * The followings are the available model relations:
  *
@@ -33,12 +32,13 @@
  * @property User $user
  * @property User $usermodified
  * @property Eye $eye
- * @property Procedure $procedure
- */
+  */
 
-class Element_OphTrLaser_Treatment extends BaseEventTypeElement
+class Element_OphTrLaser_Treatment extends SplitEventTypeElement
 {
 	public $service;
+	const RIGHT_EYE_ID = 2;
+	const LEFT_EYE_ID = 1;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -65,11 +65,13 @@ class Element_OphTrLaser_Treatment extends BaseEventTypeElement
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, eye_id, procedure_id, ', 'safe'),
-			array('eye_id, procedure_id, ', 'required'),
+			array('event_id, eye_id, ', 'safe'),
+			array('eye_id,', 'required'),
+			array('left_procedures', 'requiredIfSide', 'side' => 'left'),
+			array('right_procedures', 'requiredIfSide', 'side' => 'right'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, event_id, eye_id, procedure_id, ', 'safe', 'on' => 'search'),
+			array('id, event_id, eye_id', 'safe', 'on' => 'search'),
 		);
 	}
 	
@@ -87,7 +89,10 @@ class Element_OphTrLaser_Treatment extends BaseEventTypeElement
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 			'eye' => array(self::BELONGS_TO, 'Eye', 'eye_id'),
-			'procedure' => array(self::BELONGS_TO, 'Procedure', 'procedure_id'),
+			'procedure_assignments' => array(self::HAS_MANY, 'OphTrLaser_LaserProcedureAssignment', 'treatment_id', 'order' => 'display_order ASC'),
+			'right_procedures' => array(self::HAS_MANY, 'Procedure', 'procedure_id', 'order' => 'display_order ASC', 'through' => 'procedure_assignments', 'on' => 'procedure_assignments.eye_id = ' . self::RIGHT_EYE_ID),
+			'left_procedures' => array(self::HAS_MANY, 'Procedure', 'procedure_id', 'order' => 'display_order ASC', 'through' => 'procedure_assignments', 'on' => 'procedure_assignments.eye_id = ' . self::LEFT_EYE_ID),
+			#'left_procedures' => array(self::HAS_MANY, 'OphTrLaser_LaserProcedureAssignment', 'treatment_id', 'order' => 'display_order ASC', 'on' => 'left_procedures.eye_id = ' . self::LEFT_EYE_ID),
 		);
 	}
 
@@ -99,8 +104,7 @@ class Element_OphTrLaser_Treatment extends BaseEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-'eye_id' => 'eye',
-'procedure_id' => 'Procedure',
+			'procedures' => 'Procedures'
 		);
 	}
 
@@ -117,9 +121,7 @@ class Element_OphTrLaser_Treatment extends BaseEventTypeElement
 
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
-
-$criteria->compare('eye_id', $this->eye_id);
-$criteria->compare('procedure_id', $this->procedure_id);
+		$criteria->compare('eye_id', $this->eye_id);
 		
 		return new CActiveDataProvider(get_class($this), array(
 				'criteria' => $criteria,
@@ -144,13 +146,66 @@ $criteria->compare('procedure_id', $this->procedure_id);
 
 	protected function afterSave()
 	{
-
 		return parent::afterSave();
 	}
 
 	protected function beforeValidate()
 	{
 		return parent::beforeValidate();
+	}
+	
+	/*
+	 * update procedure assignments to given procedure ids on the given side
+	 * 
+	 */
+	public function updateProcedures($proc_ids, $side) {
+		// get the current procedures
+		$current_ids = array();
+		$current_assignments = array();
+		foreach ($this->procedure_assignments as $proc) {
+			if ($proc->eye_id == $side) {
+				$current_ids[] = $proc->procedure_id;
+				$current_assignments[] = $proc;
+			}
+		}
+		
+		// check for new procedures
+		foreach ($proc_ids as $up_id) {
+			if (!in_array($up_id, $current_ids)) {
+				// create new procedure assignment
+				$ass = new OphTrLaser_LaserProcedureAssignment();
+				$ass->eye_id = $side;
+				$ass->treatment_id = $this->id;
+				$ass->procedure_id = $up_id;
+				if (!$ass->save()) {
+					throw new Exception('Unable to save procedure assignment for treatment: '.print_r($ass->getErrors(),true));
+				} 
+			}
+		}
+		
+		// delete removed
+		foreach ($current_assignments as $curr) {
+			if (!in_array($curr->procedure_id, $proc_ids)) {
+				// delete it
+				if (!$curr->delete()) {
+					throw new Exception('Unable to delete procedure assignment for treatment: '.print_r($curr->getErrors(),true));
+				}
+			}
+		}
+	}
+	
+	/*
+	 * wrapper function to update the procedures for this treatment on the right eye
+	 */
+	public function updateRightProcedures($data) {
+		$this->updateProcedures($data, self::RIGHT_EYE_ID);
+	}
+	
+	/*
+	 * wrapper function to update the procedures for this treatment on the left eye
+	*/
+	public function updateLeftProcedures($data) {
+		$this->updateProcedures($data, self::LEFT_EYE_ID);
 	}
 }
 ?>
