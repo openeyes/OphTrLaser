@@ -103,7 +103,9 @@ class Element_OphTrLaser_Treatment extends SplitEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'procedures' => 'Procedures'
+			'procedures' => 'Procedures',
+			'left_procedures' => 'Procedures',
+			'right_procedures' => 'Procedures',
 		);
 	}
 
