@@ -8,10 +8,29 @@ class DefaultController extends NestedElementsEventTypeController {
 			'Element_OphTrLaser_AnteriorSegment' => 'Element_OphCiExamination_AnteriorSegment'
 			);
 	
+	protected function _jsCreate() {
+		$l_by_s = array();
+		foreach (Element_OphTrLaser_Site_Laser::model()->findAll() as $slaser) {
+			$l_by_s[$slaser->site_id][] = array('id' => $slaser->id, 'name' => $slaser->name);
+		}
+		Yii::app()->getClientScript()->registerScript('OphTrLaserJS', 'var lasersBySite = ' . CJavaScript::encode($l_by_s) . ';', CClientScript::POS_HEAD);		
+	}
+	
+	public function actionCreate() {
+		$this->_jsCreate();
+		return parent::actionCreate();
+	}
+	
+	public function actionUpdate($id) {
+		$this->_jsCreate();
+		return parent::actionUpdate($id);
+	}
 	/*
 	 * look for and import eyedraw values from most recent related element if available
 	 */
 	protected function importElementEyeDraw($element) {
+		// because we only do import from examination at this point, we can simply check that the module is installed 
+		// before proceeding
 		if (Yii::app()->hasModule('OphCiExamination') ) {
 			if (array_key_exists(get_class($element), self::$IMPORT_ELEMENTS)) {
 				$event_type_id = EventType::model()->find('class_name = :name', array(':name' => 'OphCiExamination'))->id;

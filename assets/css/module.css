@@ -15,3 +15,5 @@
 #event_content .cols2 div.label { width: 140px; display: inline; }
 #event_content .cols2 .data { display: inline; }
 div.activeForm div.aligned { clear: both;}
+
+span.hint {font-style: italic;}

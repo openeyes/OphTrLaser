@@ -20,11 +20,17 @@
 <?php 
 $lasers = Element_OphTrLaser_Site_Laser::model()->with(array('site'))->findAll(array('order' => 'site.short_name asc, t.name asc'));
 $sites  = array();
+$laser_options = array();
+
 foreach ($lasers as $laser) {
 	if(!in_array($laser->site, $sites)) {
 		$sites[] = $laser->site;
 	}
+	if ($element->site_id && $laser->site_id == $element->site_id) {
+		$laser_options[] = $laser;
+	}
 }
 echo $form->dropDownList($element, 'site_id', CHtml::listData($sites,'id','short_name'),array('empty'=>'- Please select -'))?>
-<?php echo $form->dropDownList($element, 'laser_id', CHtml::listData(Element_OphTrLaser_Site_Laser::model()->findAll(array('order'=> 'display_order asc')),'id','name'),array('empty'=>'- Please select -'))?>
+<?php echo $form->dropDownList($element, 'laser_id', CHtml::listData($laser_options,'id','name'),array('empty'=>'- Please select -'))?>
+<div class="eventDetail" id="laser_select_hint"  style="display:none;"><span class="hint">Please select a site to see the list of available lasers</span></div>
 <?php echo $form->dropDownList($element, 'surgeon_id', CHtml::listData($element->surgeons, 'id', 'ReversedFullName'),array('empty'=>'- Please select -'))?>

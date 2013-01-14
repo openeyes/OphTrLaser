@@ -100,6 +100,23 @@ $(document).ready(function() {
 		
 		e.preventDefault();
 	});
+	
+	// populate laser drop down when the site is changed
+	$(this).delegate('#Element_OphTrLaser_Site_site_id', 'change', function(e) {
+		populateLaserList($(this).val());
+	});
+	$(this).delegate('#Element_OphTrLaser_Site_laser_id', 'focus', function(e) {
+		options = false;
+		$('#Element_OphTrLaser_Site_laser_id option').each(function() {
+			if ($(this).val().length) {
+				options = true;
+				return false;
+			}
+		});
+		if (!options) {
+			$('#laser_select_hint').slideDown('fast');
+		}
+	});
 });
 
 function OphTrLaser_AnteriorSegment_init() {
@@ -111,5 +128,21 @@ function ucfirst(str) { str += ''; var f = str.charAt(0).toUpperCase(); return f
 function eDparameterListener(_drawing) {
 	if (_drawing.selectedDoodle != null) {
 		// handle event
+	}
+}
+
+function populateLaserList(siteId) {
+	// reset list
+	$('#Element_OphTrLaser_Site_laser_id option').each(function() {
+		if ($(this).val().length) {
+			$(this).remove();
+		}
+	});
+	// now populate
+	if (siteId && lasersBySite[siteId]) {
+		for (var i = 0; i < lasersBySite[siteId].length; i++) {
+			$('#Element_OphTrLaser_Site_laser_id').append('<option value="' + lasersBySite[siteId][i]['id'] + '" >'+lasersBySite[siteId][i]['name']+'</option>');
+		}
+		$('#laser_select_hint').slideUp('fast');
 	}
 }

@@ -70,6 +70,7 @@ class Element_OphTrLaser_Site extends BaseEventTypeElement
 		return array(
 			array('event_id, site_id, laser_id, surgeon_id, ', 'safe'),
 			array('site_id, laser_id, surgeon_id, ', 'required'),
+			array('laser_id', 'laserBelongsToSite'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, event_id, site_id, laser_id, surgeon_id, ', 'safe', 'on' => 'search'),
@@ -172,6 +173,15 @@ class Element_OphTrLaser_Site extends BaseEventTypeElement
 		}
 	
 		return $this->surgeonlist;
+	}
+	
+	/*
+	 * validation to ensure that the selected laser is on the selected site
+	 */
+	public function laserBelongsToSite($attribute) {
+		if ($this->site && $this->laser && $this->site != $this->laser->site) {
+			$this->addError($attribute, "Selected laser must be on the selected site");
+		}
 	}
 }
 ?>

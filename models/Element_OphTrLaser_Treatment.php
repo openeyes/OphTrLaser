@@ -197,7 +197,6 @@ class Element_OphTrLaser_Treatment extends SplitEventTypeElement
 	 * wrapper function to update the procedures for this treatment on the right eye
 	 */
 	public function updateRightProcedures($data) {
-		error_log(print_r($data, true));
 		$this->updateProcedures($data, self::RIGHT_EYE_ID);
 	}
 	

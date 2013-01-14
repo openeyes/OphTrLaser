@@ -96,9 +96,9 @@ class Element_OphTrLaser_PosteriorPole extends SplitEventTypeElement
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-'eye_id' => 'Eye',
-'left_eyedraw' => 'Left eyedraw',
-'right_eyedraw' => 'Right eyedraw',
+			'eye_id' => 'Eye',
+			'left_eyedraw' => 'Left eyedraw',
+			'right_eyedraw' => 'Right eyedraw',
 		);
 	}
 
@@ -116,9 +116,9 @@ class Element_OphTrLaser_PosteriorPole extends SplitEventTypeElement
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
 
-$criteria->compare('eye_id', $this->eye_id);
-$criteria->compare('left_eyedraw', $this->left_eyedraw);
-$criteria->compare('right_eyedraw', $this->right_eyedraw);
+		$criteria->compare('eye_id', $this->eye_id);
+		$criteria->compare('left_eyedraw', $this->left_eyedraw);
+		$criteria->compare('right_eyedraw', $this->right_eyedraw);
 		
 		return new CActiveDataProvider(get_class($this), array(
 				'criteria' => $criteria,
