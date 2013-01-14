@@ -13,7 +13,7 @@
 		</tr>
 		<tr>
 			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('surgeon_id'))?></td>
-			<td><span class="big"><?php echo $element->surgeon ? $element->surgeon->first_name : 'None'?></span></td>
+			<td><span class="big"><?php echo $element->surgeon ? $element->surgeon->ReversedFullName : 'None'?></span></td>
 		</tr>
 	</tbody>
 </table>
