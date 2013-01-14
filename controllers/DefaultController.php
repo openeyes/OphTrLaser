@@ -12,20 +12,22 @@ class DefaultController extends NestedElementsEventTypeController {
 	 * look for and import eyedraw values from most recent related element if available
 	 */
 	protected function importElementEyeDraw($element) {
-		if (array_key_exists(get_class($element), self::$IMPORT_ELEMENTS)) {
-			$event_type_id = EventType::model()->find('class_name = :name', array(':name' => 'OphCiExamination'))->id;
-			$criteria = new CDbCriteria;
-			$criteria->compare('event.episode_id',$this->episode->id);
-			$criteria->compare('event.event_type_id',$event_type_id);
-			$criteria->order = 'event.created_date desc';
-			$criteria->limit = 1;
-			// try and find the element type we're suppposed to import from
-			$import = ElementType::model(self::$IMPORT_ELEMENTS[get_class($element)])->with('event')->find($criteria);
-				
-			if ($import) {
-				$element->left_eyedraw = $import->left_eyedraw;
-				$element->right_eyedraw = $import->right_eyedraw;
-				$element->eye_id = $import->eye_id;
+		if (Yii::app()->hasModule('OphCiExamination') ) {
+			if (array_key_exists(get_class($element), self::$IMPORT_ELEMENTS)) {
+				$event_type_id = EventType::model()->find('class_name = :name', array(':name' => 'OphCiExamination'))->id;
+				$criteria = new CDbCriteria;
+				$criteria->compare('event.episode_id',$this->episode->id);
+				$criteria->compare('event.event_type_id',$event_type_id);
+				$criteria->order = 'event.created_date desc';
+				$criteria->limit = 1;
+				// try and find the element type we're suppposed to import from
+				$import = ElementType::model(self::$IMPORT_ELEMENTS[get_class($element)])->with('event')->find($criteria);
+					
+				if ($import) {
+					$element->left_eyedraw = $import->left_eyedraw;
+					$element->right_eyedraw = $import->right_eyedraw;
+					$element->eye_id = $import->eye_id;
+				}
 			}
 		}
 		
