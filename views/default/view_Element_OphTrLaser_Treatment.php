@@ -1,4 +1,4 @@
-
+<div class="element <?php echo $element->elementType->class_name ?>">
 <h4 class="elementTypeName"><?php  echo $element->elementType->name ?></h4>
 <div class="cols2 clearfix">
 	<div class="left eventDetail">
@@ -29,4 +29,6 @@
 		Not recorded
 		<?php } ?>
 	</div>
+</div>
+<?php $this->renderChildDefaultElements($element, $this->action->id, $form, $data); ?>
 </div>
