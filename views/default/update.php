@@ -16,7 +16,7 @@
 		<div id="active_elements">
 			<?php  $this->renderDefaultElements($this->action->id, $form); ?>
 		</div>
-		<div id="optionals_all" class="clearfix">
+		<div class="optionals-header clearfix">
 			<h4>Optional Elements</h4>
 			<div>
 				<span class="allButton"><a id="add-all" href="#">Add all</a><img

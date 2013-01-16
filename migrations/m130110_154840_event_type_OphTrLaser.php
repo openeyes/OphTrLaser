@@ -1,5 +1,5 @@
 <?php 
-class m130102_154840_event_type_OphTrLaser extends CDbMigration
+class m130110_154840_event_type_OphTrLaser extends CDbMigration
 {
 	// procedures not expected to be available when implemented
 	private static $laser_proc_defs = array(
@@ -69,7 +69,7 @@ class m130102_154840_event_type_OphTrLaser extends CDbMigration
 		
 		// create an element_type entry for this element type name if one doesn't already exist
 		if (!$this->dbConnection->createCommand()->select('id')->from('element_type')->where('name=:name and event_type_id=:eventTypeId', array(':name'=>'Comments',':eventTypeId'=>$event_type['id']))->queryRow()) {
-			$this->insert('element_type', array('name' => 'Comments','class_name' => 'Element_OphTrLaser_Comments', 'event_type_id' => $event_type['id'], 'display_order' => 6, 'required' => true));
+			$this->insert('element_type', array('name' => 'Comments','class_name' => 'Element_OphTrLaser_Comments', 'event_type_id' => $event_type['id'], 'display_order' => 6, 'required' => false, 'default' => false));
 		}
 		
 		// element lookup table et_ophtrlaser_site_laser
