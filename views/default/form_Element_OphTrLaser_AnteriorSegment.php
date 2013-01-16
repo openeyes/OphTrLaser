@@ -22,6 +22,7 @@
 	<div
 		class="side left eventDetail<?php if(!$element->hasRight()) { ?> inactive<?php } ?>"
 		data-side="right">
+		<h4>Right</h4>
 		<div class="activeForm">
 			<a href="#" class="removeSide">-</a>
 			<?php $this->renderPartial('form_' . get_class($element) . '_OEEyeDraw',
@@ -34,6 +35,7 @@
 	<div
 		class="side right eventDetail<?php if(!$element->hasLeft()) { ?> inactive<?php } ?>"
 		data-side="left">
+		<h4>Left</h4>
 		<div class="activeForm">
 			<a href="#" class="removeSide">-</a>
 			<?php $this->renderPartial('form_' . get_class($element) . '_OEEyeDraw',
