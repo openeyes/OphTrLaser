@@ -1,5 +1,5 @@
 <?php 
-class m130110_154840_event_type_OphTrLaser extends CDbMigration
+class m130408_140240_event_type_OphTrLaser extends CDbMigration
 {
 	// procedures not expected to be available when implemented
 	private static $laser_proc_defs = array(
