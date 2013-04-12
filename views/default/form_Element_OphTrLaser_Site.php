@@ -30,6 +30,9 @@ foreach ($lasers as $laser) {
 		$laser_options[] = $laser;
 	}
 }
+$sites = Site::model()->findAll('institution_id=1');
+$laser_options = Element_OphTrLaser_Site_Laser::model()->findAll();
+
 echo $form->dropDownList($element, 'site_id', CHtml::listData($sites,'id','short_name'),array('empty'=>'- Please select -'))?>
 <?php echo $form->dropDownList($element, 'laser_id', CHtml::listData($laser_options,'id','name'),array('empty'=>'- Please select -'))?>
 <div class="eventDetail" id="laser_select_hint"  style="display:none;"><span class="hint">Please select a site to see the list of available lasers</span></div>
