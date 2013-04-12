@@ -31,7 +31,7 @@ class DefaultController extends NestedElementsEventTypeController {
 	protected function importElementEyeDraw($element) {
 		// because we only do import from examination at this point, we can simply check that the module is installed 
 		// before proceeding
-		if (Yii::app()->hasModule('OphCiExamination') ) {
+		if ($this->episode && Yii::app()->hasModule('OphCiExamination') ) {
 			if (array_key_exists(get_class($element), self::$IMPORT_ELEMENTS)) {
 				$event_type_id = EventType::model()->find('class_name = :name', array(':name' => 'OphCiExamination'))->id;
 				$criteria = new CDbCriteria;

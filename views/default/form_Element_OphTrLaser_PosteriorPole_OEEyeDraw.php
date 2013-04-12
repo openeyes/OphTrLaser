@@ -17,7 +17,7 @@
  */
  ?>
 <?php
-$widget = $this->widget('application.modules.eyedraw2.OEEyeDrawWidget', array(
+$widget = $this->widget('application.modules.eyedraw.OEEyeDrawWidget', array(
 		'doodleToolBarArray' => array(
 				array('LaserSpot', 'FocalLaser', 'MacularGrid', 'SectorPRPPostPole', 'PRPPostPole'),
 				),
