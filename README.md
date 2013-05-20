@@ -10,4 +10,4 @@ This module is under development and is not ready for deployment. It is dependen
 
 Please contact mike.smith@openeyes.org.uk with any questions on current development status or working with the module. 
 
-It's target release version is 1.3.
+It's target release version is 1.4.
