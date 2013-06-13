@@ -4,7 +4,7 @@ class DefaultController extends NestedElementsEventTypeController {
 	
 	// This map defines which elements can import eyedraw data from the most recent element type in the current episode
 	static $IMPORT_ELEMENTS = array(
-			'Element_OphTrLaser_PosteriorPole' => 'Element_OphCiExamination_PosteriorSegment',
+			'Element_OphTrLaser_PosteriorPole' => 'Element_OphCiExamination_PosteriorPole',
 			'Element_OphTrLaser_AnteriorSegment' => 'Element_OphCiExamination_AnteriorSegment'
 			);
 	
@@ -14,6 +14,15 @@ class DefaultController extends NestedElementsEventTypeController {
 			$l_by_s[$slaser->site_id][] = array('id' => $slaser->id, 'name' => $slaser->name);
 		}
 		Yii::app()->getClientScript()->registerScript('OphTrLaserJS', 'var lasersBySite = ' . CJavaScript::encode($l_by_s) . ';', CClientScript::POS_HEAD);		
+	}
+	
+	protected function beforeAction($action) {
+		if (!Yii::app()->getRequest()->getIsAjaxRequest() && !(in_array($action->id,$this->printActions())) ) {
+			$this->registerCssFile('spliteventtype.css', Yii::app()->createUrl('css/spliteventtype.css'));
+			Yii::app()->getClientScript()->registerScriptFile(Yii::app()->createUrl('js/spliteventtype.js'));
+		}
+	
+		return parent::beforeAction($action);
 	}
 	
 	public function actionCreate() {

@@ -16,6 +16,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
  ?>
+
 <div class="cols2 clearfix">
 	<?php echo $form->hiddenInput($element, 'eye_id', false, array('class' => 'sideField')); 
 		$lprocs = OphTrLaser_LaserProcedure::model()->with(array('procedure'))->findAll(array('order'=>'procedure.term asc'));

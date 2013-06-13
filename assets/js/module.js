@@ -61,6 +61,7 @@ $(document).ready(function() {
 		}
 	});
 	
+	/*
 	// side adding and removing
 	$(this).delegate('#event_content .side .activeForm a.removeSide', 'click', function(e) {
 		
@@ -100,6 +101,7 @@ $(document).ready(function() {
 		
 		e.preventDefault();
 	});
+	*/
 	
 	// populate laser drop down when the site is changed
 	$(this).delegate('#Element_OphTrLaser_Site_site_id', 'change', function(e) {

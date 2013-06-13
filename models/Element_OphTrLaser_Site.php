@@ -179,7 +179,7 @@ class Element_OphTrLaser_Site extends BaseEventTypeElement
 	 * validation to ensure that the selected laser is on the selected site
 	 */
 	public function laserBelongsToSite($attribute) {
-		if ($this->site && $this->laser && $this->site != $this->laser->site) {
+		if ($this->site_id && $this->laser && $this->site_id != $this->laser->site_id) {
 			$this->addError($attribute, "Selected laser must be on the selected site");
 		}
 	}
