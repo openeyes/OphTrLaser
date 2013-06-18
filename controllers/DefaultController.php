@@ -64,8 +64,8 @@ class DefaultController extends NestedElementsEventTypeController {
 	/*
 	 * override to call the eyedraw import for loaded elements
 	 */
-	protected function getElementForElementForm($element_type, $previous_id = 0) {
-		$element = parent::getElementForElementForm($element_type, $previous_id);
+	protected function getElementForElementForm($element_type, $previous_id = 0, $additional) {
+		$element = parent::getElementForElementForm($element_type, $previous_id, $additional);
 		
 		// do eyedraw import
 		$this->importElementEyeDraw($element);
