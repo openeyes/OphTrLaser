@@ -17,7 +17,7 @@
  */
 
 /**
- * This is the model class for table "et_ophtrlaser_site_laser".
+ * This is the model class for table "ophtrlaser_site_laser".
  *
  * The followings are the available columns in table:
  * @property string $id
@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class Element_OphTrLaser_Site_Laser extends BaseActiveRecord
+class OphTrLaser_Site_Laser extends BaseActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -48,7 +48,7 @@ class Element_OphTrLaser_Site_Laser extends BaseActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'et_ophtrlaser_site_laser';
+		return 'ophtrlaser_site_laser';
 	}
 
 	/**
