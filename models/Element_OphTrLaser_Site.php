@@ -186,4 +186,3 @@ class Element_OphTrLaser_Site extends BaseEventTypeElement
 		}
 	}
 }
-?>

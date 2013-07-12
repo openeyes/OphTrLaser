@@ -146,4 +146,3 @@ $criteria->compare('comments', $this->comments);
 		return parent::beforeValidate();
 	}
 }
-?>

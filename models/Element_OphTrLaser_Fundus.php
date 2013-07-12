@@ -179,4 +179,3 @@ $criteria->compare('right_eyedraw', $this->right_eyedraw);
 		return parent::beforeValidate();
 	}
 }
-?>

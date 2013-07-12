@@ -179,4 +179,3 @@ class Element_OphTrLaser_PosteriorPole extends SplitEventTypeElement
 		return parent::beforeValidate();
 	}
 }
-?>

@@ -343,4 +343,3 @@ class m130408_140240_event_type_OphTrLaser extends CDbMigration
 		return true;
 	}
 }
-?>

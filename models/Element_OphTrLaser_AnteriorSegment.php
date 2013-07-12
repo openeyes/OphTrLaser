@@ -179,4 +179,3 @@ $criteria->compare('eye_id', $this->eye_id);
 		return parent::beforeValidate();
 	}
 }
-?>

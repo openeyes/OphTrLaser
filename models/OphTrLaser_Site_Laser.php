@@ -136,4 +136,3 @@ class OphTrLaser_Site_Laser extends BaseActiveRecord
 		return parent::beforeValidate();
 	}
 }
-?>

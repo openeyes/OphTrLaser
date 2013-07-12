@@ -95,4 +95,3 @@ class OphTrLaser_LaserProcedureAssignment extends BaseEventTypeElement
 			));
 	}
 }
-?>
