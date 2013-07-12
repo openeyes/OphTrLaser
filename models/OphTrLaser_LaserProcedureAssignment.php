@@ -56,7 +56,7 @@ class OphTrLaser_LaserProcedureAssignment extends BaseEventTypeElement
 		return array(
 		);
 	}
-	
+
 	/**
 	 * @return array relational rules.
 	 */

@@ -74,7 +74,7 @@ class Element_OphTrLaser_Treatment extends SplitEventTypeElement
 			array('id, event_id, eye_id', 'safe', 'on' => 'search'),
 		);
 	}
-	
+
 	/**
 	 * @return array relational rules.
 	 */
@@ -123,7 +123,7 @@ class Element_OphTrLaser_Treatment extends SplitEventTypeElement
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('event_id', $this->event_id, true);
 		$criteria->compare('eye_id', $this->eye_id);
-		
+
 		return new CActiveDataProvider(get_class($this), array(
 				'criteria' => $criteria,
 			));
@@ -154,12 +154,13 @@ class Element_OphTrLaser_Treatment extends SplitEventTypeElement
 	{
 		return parent::beforeValidate();
 	}
-	
+
 	/*
 	 * update procedure assignments to given procedure ids on the given side
-	 * 
+	 *
 	 */
-	public function updateProcedures($proc_ids, $side) {
+	public function updateProcedures($proc_ids, $side)
+	{
 		// get the current procedures
 		$current_ids = array();
 		$current_assignments = array();
@@ -169,7 +170,7 @@ class Element_OphTrLaser_Treatment extends SplitEventTypeElement
 				$current_assignments[] = $proc;
 			}
 		}
-		
+
 		// check for new procedures
 		foreach ($proc_ids as $up_id) {
 			if (!in_array($up_id, $current_ids)) {
@@ -180,10 +181,10 @@ class Element_OphTrLaser_Treatment extends SplitEventTypeElement
 				$ass->procedure_id = $up_id;
 				if (!$ass->save()) {
 					throw new Exception('Unable to save procedure assignment for treatment: '.print_r($ass->getErrors(),true));
-				} 
+				}
 			}
 		}
-		
+
 		// delete removed
 		foreach ($current_assignments as $curr) {
 			if (!in_array($curr->procedure_id, $proc_ids)) {
@@ -194,18 +195,20 @@ class Element_OphTrLaser_Treatment extends SplitEventTypeElement
 			}
 		}
 	}
-	
+
 	/*
 	 * wrapper function to update the procedures for this treatment on the right eye
 	 */
-	public function updateRightProcedures($data) {
+	public function updateRightProcedures($data)
+	{
 		$this->updateProcedures($data, self::RIGHT_EYE_ID);
 	}
-	
+
 	/*
 	 * wrapper function to update the procedures for this treatment on the left eye
 	*/
-	public function updateLeftProcedures($data) {
+	public function updateLeftProcedures($data)
+	{
 		$this->updateProcedures($data, self::LEFT_EYE_ID);
 	}
 }

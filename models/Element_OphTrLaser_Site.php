@@ -42,7 +42,7 @@ class Element_OphTrLaser_Site extends BaseEventTypeElement
 {
 	public $service;
 	public $surgeonlist;
-	
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return the static model class
@@ -76,7 +76,7 @@ class Element_OphTrLaser_Site extends BaseEventTypeElement
 			array('id, event_id, site_id, laser_id, surgeon_id, ', 'safe', 'on' => 'search'),
 		);
 	}
-	
+
 	/**
 	 * @return array relational rules.
 	 */
@@ -127,7 +127,7 @@ class Element_OphTrLaser_Site extends BaseEventTypeElement
 		$criteria->compare('site_id', $this->site_id);
 		$criteria->compare('laser_id', $this->laser_id);
 		$criteria->compare('surgeon_id', $this->surgeon_id);
-				
+
 		return new CActiveDataProvider(get_class($this), array(
 				'criteria' => $criteria,
 			));
@@ -140,7 +140,7 @@ class Element_OphTrLaser_Site extends BaseEventTypeElement
 	{
 		if (Yii::app()->getController()->getAction()->id == 'create') {
 			$user = Yii::app()->session['user'];
-			
+
 			if ($user->is_doctor) {
 				$this->surgeon_id = $user->id;
 			}
@@ -162,23 +162,25 @@ class Element_OphTrLaser_Site extends BaseEventTypeElement
 	{
 		return parent::beforeValidate();
 	}
-	
-	public function getSurgeons() {
+
+	public function getSurgeons()
+	{
 		if (!$this->surgeonlist) {
 			$criteria = new CDbCriteria;
 			$criteria->compare('is_doctor',1);
 			$criteria->order = 'last_name,first_name asc';
-	
+
 			$this->surgeonlist = User::model()->findAll($criteria);
 		}
-	
+
 		return $this->surgeonlist;
 	}
-	
+
 	/*
 	 * validation to ensure that the selected laser is on the selected site
 	 */
-	public function laserBelongsToSite($attribute) {
+	public function laserBelongsToSite($attribute)
+	{
 		if ($this->site_id && $this->laser && $this->site_id != $this->laser->site_id) {
 			$this->addError($attribute, "Selected laser must be on the selected site");
 		}
