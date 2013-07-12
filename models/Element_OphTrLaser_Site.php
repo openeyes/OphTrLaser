@@ -34,7 +34,7 @@
  * @property User $user
  * @property User $usermodified
  * @property Element_OphTrLaser_Site_Site $site
- * @property Element_OphTrLaser_Site_Laser $laser
+ * @property OphTrLaser_Site_Laser $laser
  * @property User $surgeon
  */
 
@@ -91,7 +91,7 @@ class Element_OphTrLaser_Site extends BaseEventTypeElement
 			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 			'site' => array(self::BELONGS_TO, 'Site', 'site_id'),
-			'laser' => array(self::BELONGS_TO, 'Element_OphTrLaser_Site_Laser', 'laser_id'),
+			'laser' => array(self::BELONGS_TO, 'OphTrLaser_Site_Laser', 'laser_id'),
 			'surgeon' => array(self::BELONGS_TO, 'User', 'surgeon_id'),
 		);
 	}

@@ -18,7 +18,7 @@
  ?>
 
 <?php
-$lasers = Element_OphTrLaser_Site_Laser::model()->with(array('site'))->findAll(array('order' => 'site.short_name asc, t.name asc'));
+$lasers = OphTrLaser_Site_Laser::model()->with(array('site'))->findAll(array('order' => 'site.short_name asc, t.name asc'));
 $sites  = array();
 $laser_options = array();
 

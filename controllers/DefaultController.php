@@ -11,7 +11,7 @@ class DefaultController extends NestedElementsEventTypeController
 	protected function _jsCreate()
 	{
 		$l_by_s = array();
-		foreach (Element_OphTrLaser_Site_Laser::model()->findAll() as $slaser) {
+		foreach (OphTrLaser_Site_Laser::model()->findAll() as $slaser) {
 			$l_by_s[$slaser->site_id][] = array('id' => $slaser->id, 'name' => $slaser->name);
 		}
 		Yii::app()->getClientScript()->registerScript('OphTrLaserJS', 'var lasersBySite = ' . CJavaScript::encode($l_by_s) . ';', CClientScript::POS_HEAD);
