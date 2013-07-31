@@ -72,6 +72,16 @@ class Element_OphTrLaser_Fundus extends SplitEventTypeElement
 	}
 
 	/**
+	 * (non-PHPdoc)
+	 * @see SplitEventTypeElement::sidedFields()
+	 */
+	public function sidedFields()
+	{
+		return array('eyedraw');
+	}
+	
+	
+	/**
 	 * @return array relational rules.
 	 */
 	public function relations()

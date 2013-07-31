@@ -72,6 +72,15 @@ class Element_OphTrLaser_PosteriorPole extends SplitEventTypeElement
 	}
 
 	/**
+	 * (non-PHPdoc)
+	 * @see SplitEventTypeElement::sidedFields()
+	 */
+	public function sidedFields()
+	{
+		return array('eyedraw');
+	}
+	
+	/**
 	 * @return array relational rules.
 	 */
 	public function relations()

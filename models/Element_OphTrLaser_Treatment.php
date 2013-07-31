@@ -76,6 +76,15 @@ class Element_OphTrLaser_Treatment extends SplitEventTypeElement
 	}
 
 	/**
+	 * (non-PHPdoc)
+	 * @see SplitEventTypeElement::sidedFields()
+	 */
+	public function sidedFields()
+	{
+		return array('procedures');
+	}
+	
+	/**
 	 * @return array relational rules.
 	 */
 	public function relations()
