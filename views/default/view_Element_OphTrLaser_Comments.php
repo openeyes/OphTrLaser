@@ -5,7 +5,7 @@
 	<tbody>
 		<tr>
 			<td width="30%"><?php echo CHtml::encode($element->getAttributeLabel('comments'))?></td>
-			<td><span class="big"><?php echo CHtml::encode($element->comments)?></span></td>
+			<td><span class="big"><?php echo CHtml::encode($element->textWithLineBreaks('comments'))?></span></td>
 		</tr>
 	</tbody>
 </table>
