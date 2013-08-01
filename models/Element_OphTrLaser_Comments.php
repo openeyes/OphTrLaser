@@ -69,7 +69,7 @@ class Element_OphTrLaser_Comments extends BaseEventTypeElement
 			array('id, event_id, comments, ', 'safe', 'on' => 'search'),
 		);
 	}
-	
+
 	/**
 	 * @return array relational rules.
 	 */
@@ -113,7 +113,7 @@ class Element_OphTrLaser_Comments extends BaseEventTypeElement
 		$criteria->compare('event_id', $this->event_id, true);
 
 $criteria->compare('comments', $this->comments);
-		
+
 		return new CActiveDataProvider(get_class($this), array(
 				'criteria' => $criteria,
 			));
@@ -146,4 +146,3 @@ $criteria->compare('comments', $this->comments);
 		return parent::beforeValidate();
 	}
 }
-?>

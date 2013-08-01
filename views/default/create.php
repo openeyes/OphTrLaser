@@ -24,7 +24,7 @@
 </h3>
 
 <div id="event_<?php echo $this->module->name?>">
-	<?php 		
+	<?php
 		$form = $this->beginWidget('BaseEventTypeCActiveForm', array(
 				'id'=>'clinical-create',
 				'enableAjaxValidation'=>false,

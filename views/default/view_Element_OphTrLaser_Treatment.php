@@ -3,11 +3,10 @@
 <div class="cols2 clearfix">
 	<div class="left eventDetail">
 		<h4>Right</h4>
-		<?php if($element->hasRight()) {
+		<?php if ($element->hasRight()) {
 			if (!$element->right_procedures) {
 				echo "None";
-			}
-			else {
+			} else {
 				echo "<ul>";
 				foreach ($element->right_procedures as $proc) {
 					echo "<li>" . $proc->term . "</li>";
@@ -20,11 +19,10 @@
 	</div>
 	<div class="right eventDetail">
 		<h4>Left</h4>
-		<?php if($element->hasLeft()) {
+		<?php if ($element->hasLeft()) {
 			if (!$element->left_procedures) {
 				echo "None";
-			}
-			else {
+			} else {
 				foreach ($element->left_procedures as $proc) {
 					echo $proc->term . "<br />";
 				}

@@ -70,6 +70,16 @@ class Element_OphTrLaser_Fundus extends SplitEventTypeElement
 			array('id, event_id, eye_id, left_eyedraw, right_eyedraw, ', 'safe', 'on' => 'search'),
 		);
 	}
+
+	/**
+	 * (non-PHPdoc)
+	 * @see SplitEventTypeElement::sidedFields()
+	 */
+	public function sidedFields()
+	{
+		return array('eyedraw');
+	}
+	
 	
 	/**
 	 * @return array relational rules.
@@ -119,7 +129,7 @@ class Element_OphTrLaser_Fundus extends SplitEventTypeElement
 $criteria->compare('eye_id', $this->eye_id);
 $criteria->compare('left_eyedraw', $this->left_eyedraw);
 $criteria->compare('right_eyedraw', $this->right_eyedraw);
-		
+
 		return new CActiveDataProvider(get_class($this), array(
 				'criteria' => $criteria,
 			));
@@ -134,7 +144,8 @@ $criteria->compare('right_eyedraw', $this->right_eyedraw);
 		}
 	}
 
-	public function getSelectedEye() {
+	public function getSelectedEye()
+	{
 		if (Yii::app()->getController()->getAction()->id == 'create') {
 			// Get the procedure list and eye from the most recent booking for the episode of the current user's subspecialty
 			if (!$patient = Patient::model()->findByPk(@$_GET['patient_id'])) {
@@ -155,7 +166,8 @@ $criteria->compare('right_eyedraw', $this->right_eyedraw);
 		return new Eye;
 	}
 
-	public function getEye() {
+	public function getEye()
+	{
 		// Insert your code to retrieve the current eye here
 		return new Eye;
 	}
@@ -177,4 +189,3 @@ $criteria->compare('right_eyedraw', $this->right_eyedraw);
 		return parent::beforeValidate();
 	}
 }
-?>

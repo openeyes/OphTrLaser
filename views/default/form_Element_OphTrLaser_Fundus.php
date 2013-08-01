@@ -19,7 +19,7 @@
 <div class="cols2 clearfix">
 	<?php echo $form->hiddenInput($element, 'eye_id', false, array('class' => 'sideField')); ?>
 	<div
-		class="side left eventDetail<?php if(!$element->hasRight()) { ?> inactive<?php } ?>"
+		class="side left eventDetail<?php if (!$element->hasRight()) { ?> inactive<?php } ?>"
 		data-side="right">
 		<h4>Right</h4>
 		<div class="activeForm">
@@ -32,7 +32,7 @@
 		</div>
 	</div>
 	<div
-		class="side right eventDetail<?php if(!$element->hasLeft()) { ?> inactive<?php } ?>"
+		class="side right eventDetail<?php if (!$element->hasLeft()) { ?> inactive<?php } ?>"
 		data-side="left">
 		<h4>Left</h4>
 		<div class="activeForm">

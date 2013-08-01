@@ -3,7 +3,7 @@
 	<div class="cols2 clearfix">
 		<div class="left eventDetail">
 			<h4>Right</h4>
-			<?php if($element->hasRight()) {
+			<?php if ($element->hasRight()) {
 			$this->widget('application.modules.eyedraw.OEEyeDrawWidget', array(
 					'idSuffix' => 'right_'.$element->elementType->id,
 					'side' => 'R',
@@ -19,7 +19,7 @@
 		</div>
 		<div class="right eventDetail">
 			<h4>Left</h4>
-			<?php if($element->hasLeft()) {
+			<?php if ($element->hasLeft()) {
 				$this->widget('application.modules.eyedraw.OEEyeDrawWidget', array(
 						'idSuffix' => 'left_'.$element->elementType->id,
 						'side' => 'L',

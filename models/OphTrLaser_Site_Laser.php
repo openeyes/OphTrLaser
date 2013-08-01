@@ -66,7 +66,7 @@ class OphTrLaser_Site_Laser extends BaseActiveRecord
 			array('id, name', 'safe', 'on' => 'search'),
 		);
 	}
-	
+
 	/**
 	 * @return array relational rules.
 	 */
@@ -136,4 +136,3 @@ class OphTrLaser_Site_Laser extends BaseActiveRecord
 		return parent::beforeValidate();
 	}
 }
-?>
