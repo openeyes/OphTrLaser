@@ -44,10 +44,10 @@
 		<div class="optionals-header clearfix">
 			<h4>Optional Elements</h4>
 			<div>
-				<span class="allButton"><a id="add-all" href="#">Add all</a><img
+				<span class="allButton"><a class="add-all" href="#">Add all</a><img
 					src="<?php echo Yii::app()->createUrl('img/_elements/icons/event-optional/element-added.png')?>"
 					alt="extra-element_added" width="30" height="20" /></span> <span
-					class="allButton"><a id="remove-all" href="#">Remove all</a><img
+					class="allButton"><a class="remove-all" href="#">Remove all</a><img
 					src="<?php echo Yii::app()->createUrl('img/_elements/icons/event-optional/element-remove.png')?>"
 					alt="extra-element_remove" width="30" height="20" /></span>
 			</div>
