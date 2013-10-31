@@ -63,7 +63,7 @@ $(document).ready(function() {
 
 	/*
 	// side adding and removing
-	$(this).delegate('#event-content .side .activeForm a.removeSide', 'click', function(e) {
+	$(this).delegate('#event-content .side .active-form a.remove-side', 'click', function(e) {
 
 		// Update side field to indicate other side
 		var side = $(this).closest('.side');
@@ -91,7 +91,7 @@ $(document).ready(function() {
 		e.preventDefault();
 	});
 
-	$(this).delegate('#event-content .side .inactiveForm a', 'click', function(e) {
+	$(this).delegate('#event-content .side .inactive-form a', 'click', function(e) {
 		var element = $(this).closest('.element');
 		element.find('input.sideField').each(function() {
 			$(this).val(3); // Both eyes
