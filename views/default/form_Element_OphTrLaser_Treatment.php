@@ -1,4 +1,3 @@
-<?php /* DEPRECATED */ ?>
 <?php /**
  * OpenEyes
  *
@@ -16,48 +15,53 @@
  * @copyright Copyright (c) 2011-2012, OpenEyes Foundation
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
- ?>
 
-<div class="cols2 clearfix">
-	<?php echo $form->hiddenInput($element, 'eye_id', false, array('class' => 'sideField'));
-		$lprocs = OphTrLaser_LaserProcedure::model()->with(array('procedure'))->findAll(array('order'=>'procedure.term asc'));
-		$procs = array();
-		foreach ($lprocs as $lproc) {
-			$procs[] = $lproc->procedure;
-		}
-	?>
-	<div
-		class="side left eventDetail<?php if (!$element->hasRight()) { ?> inactive<?php } ?>"
-		data-side="right">
-		<h4>Right</h4>
-		<div class="activeForm">
-			<a href="#" class="removeSide">-</a>
+echo $form->hiddenInput($element, 'eye_id', false, array('class' => 'sideField'));
+$lprocs = OphTrLaser_LaserProcedure::model()->with(array('procedure'))->findAll(array('order'=>'procedure.term asc'));
+$procs = array();
+foreach ($lprocs as $lproc) {
+	$procs[] = $lproc->procedure;
+}
+$layoutColumns = array(
+	'label' => 4,
+	'field' => 8
+);
+?>
+
+<div class="element-fields element-eyes row">
+	<div class="element-eye right-eye column side left" data-side="right">
+		<a href="#" class="icon-remove-side remove-side">Remove eye</a>
+		<div class="active-form">
 			<?php
 			$form->multiSelectList(
 				$element,
 				'treatment_right_procedures',
-				'right_procedures', 'id', CHtml::listData($procs, 'id', 'term'), array(), array('empty' => '- Procedures -', 'label' => $element->getAttributeLabel('procedures')));
-			?>
+				'right_procedures', 'id', CHtml::listData($procs, 'id', 'term'), array(),array('empty' => '- Procedures -', 'label' => $element->getAttributeLabel('procedures')), false,	false, null, false, false, $layoutColumns);?>
 		</div>
-		<div class="inactiveForm">
-			<a href="#">Add right side</a>
+		<div class="inactive-form">
+			<div class="add-side">
+				<a href="#">
+					Add right side <span class="icon-add-side"></span>
+				</a>
+			</div>
 		</div>
 	</div>
-	<div
-		class="side right eventDetail<?php if (!$element->hasLeft()) { ?> inactive<?php } ?>"
-		data-side="left">
-		<h4>Left</h4>
-		<div class="activeForm">
-			<a href="#" class="removeSide">-</a>
+	<div class="element-eye left-eye column side right" data-side="left">
+		<a href="#" class="icon-remove-side remove-side">Remove eye</a>
+		<div class="active-form">
 			<?php
 			$form->multiSelectList(
 				$element,
 				'treatment_left_procedures',
-				'left_procedures', 'id', CHtml::listData($procs, 'id', 'term'), array(), array('empty' => '- Procedures -', 'label' => $element->getAttributeLabel('procedures')));
+				'left_procedures', 'id', CHtml::listData($procs, 'id', 'term'), array(), array('empty' => '- Procedures -', 'label' => $element->getAttributeLabel('procedures')), false, false, null, false, false, $layoutColumns);
 			?>
 		</div>
-		<div class="inactiveForm">
-			<a href="#">Add left side</a>
+		<div class="inactive-form">
+			<div class="add-side">
+				<a href="#">
+					Add left side <span class="icon-add-side"></span>
+				</a>
+			</div>
 		</div>
 	</div>
 </div>

@@ -1,4 +1,3 @@
-<?php /* DEPRECATED */ ?>
 <?php /**
  * OpenEyes
  *
@@ -16,11 +15,9 @@
  * @copyright Copyright (c) 2011-2012, OpenEyes Foundation
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
- ?>
 
-<?php
 $lasers = OphTrLaser_Site_Laser::model()->with(array('site'))->findAll(array('order' => 'site.short_name asc, t.name asc'));
-$sites  = array();
+$sites	= array();
 $site_ids = array();
 $laser_options = array();
 
@@ -33,7 +30,14 @@ foreach ($lasers as $laser) {
 		$laser_options[] = $laser;
 	}
 }
-echo $form->dropDownList($element, 'site_id', CHtml::listData($sites,'id','short_name'),array('empty'=>'- Please select -'))?>
-<?php echo $form->dropDownList($element, 'laser_id', CHtml::listData($laser_options,'id','name'),array('empty'=>'- Please select -'))?>
-<div class="eventDetail" id="laser_select_hint"  style="display:none;"><span class="hint">Please select a site to see the list of available lasers</span></div>
-<?php echo $form->dropDownList($element, 'surgeon_id', CHtml::listData($element->surgeons, 'id', 'ReversedFullName'),array('empty'=>'- Please select -'))?>
+?>
+<div class="element-fields">
+	<?php echo $form->dropDownList($element, 'site_id', CHtml::listData($sites,'id','short_name'),array('empty'=>'- Please select -'),false,array('label' => 2, 'field' => 10))?>
+	<?php echo $form->dropDownList($element, 'laser_id', CHtml::listData($laser_options,'id','name'),array('empty'=>'- Please select -'),false,array('label' => 2, 'field' => 10))?>
+	<div class="field-row">
+		<div class="field-info">
+			<em>Please select a site to see the list of available lasers.</em>
+		</div>
+	</div>
+	<?php echo $form->dropDownList($element, 'surgeon_id', CHtml::listData($element->surgeons, 'id', 'ReversedFullName'),array('empty'=>'- Please select -'),false,array('label' => 2, 'field' => 10))?>
+</div>

@@ -1,5 +1,5 @@
-<?php /* DEPRECATED */ ?>
-<?php /**
+<?php
+/**
  * OpenEyes
  *
  * (C) Moorfields Eye Hospital NHS Foundation Trust, 2008-2011
@@ -16,34 +16,33 @@
  * @copyright Copyright (c) 2011-2012, OpenEyes Foundation
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
- ?>
-
-<div class="cols2 clearfix">
-	<?php echo $form->hiddenInput($element, 'eye_id', false, array('class' => 'sideField')); ?>
-	<div
-		class="side left eventDetail<?php if (!$element->hasRight()) { ?> inactive<?php } ?>"
-		data-side="right">
-		<h4>Right</h4>
-		<div class="activeForm">
-			<a href="#" class="removeSide">-</a>
-			<?php $this->renderPartial('form_' . get_class($element) . '_OEEyeDraw',
-				array('side' => 'right', 'element' => $element)); ?>
+?>
+<?php echo $form->hiddenInput($element, 'eye_id', false, array('class' => 'sideField'))?>
+<div class="sub-element-fields element-eyes row">
+	<div class="element-eye right-eye column side left<?php if (!$element->hasRight()) {?> inactive<?php }?>" data-side="right">
+		<div class="active-form">
+			<a href="#" class="icon-remove-side remove-side">Remove eye</a>
+			<?php $this->renderPartial('form_' . get_class($element) . '_OEEyeDraw', array('side' => 'right', 'element' => $element))?>
 		</div>
-		<div class="inactiveForm">
-			<a href="#">Add right side</a>
+		<div class="inactive-form">
+			<div class="add-side">
+				<a href="#">
+					Add right side <span class="icon-add-side"></span>
+				</a>
+			</div>
 		</div>
 	</div>
-	<div
-		class="side right eventDetail<?php if (!$element->hasLeft()) { ?> inactive<?php } ?>"
-		data-side="left">
-		<h4>Left</h4>
-		<div class="activeForm">
-			<a href="#" class="removeSide">-</a>
-			<?php $this->renderPartial('form_' . get_class($element) . '_OEEyeDraw',
-				array('side' => 'left', 'element' => $element)); ?>
+	<div class="element-eye left-eye column side right<?php if (!$element->hasLeft()) {?> inactive<?php }?>" data-side="left">
+		<div class="active-form">
+			<a href="#" class="icon-remove-side remove-side">Remove eye</a>
+			<?php $this->renderPartial('form_' . get_class($element) . '_OEEyeDraw', array('side' => 'left', 'element' => $element))?>
 		</div>
-		<div class="inactiveForm">
-			<a href="#">Add left side</a>
+		<div class="inactive-form">
+			<div class="add-side">
+				<a href="#">
+					Add left side <span class="icon-add-side"></span>
+				</a>
+			</div>
 		</div>
 	</div>
 </div>
