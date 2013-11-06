@@ -1,3 +1,4 @@
+<?php /* DEPRECATED */ ?>
 
 <h4 class="elementTypeName"><?php  echo $element->elementType->name ?></h4>
 

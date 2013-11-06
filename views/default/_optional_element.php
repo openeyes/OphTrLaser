@@ -1,3 +1,4 @@
+<?php /* DEPRECATED */ ?>
 <div class="element <?php echo $element->elementType->class_name ?>"
 	data-element-type-class="<?php echo $element->elementType->class_name ?>"
 	data-element-type-id="<?php echo $element->elementType->id ?>"

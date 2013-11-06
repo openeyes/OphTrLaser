@@ -1,3 +1,4 @@
+<?php /* DEPRECATED */ ?>
 <?php 	$this->breadcrumbs=array($this->module->id);
 	$this->header();
 ?>
