@@ -20,7 +20,6 @@ class DefaultController extends NestedElementsEventTypeController
 	protected function beforeAction($action)
 	{
 		if (!Yii::app()->getRequest()->getIsAjaxRequest() && !(in_array($action->id,$this->printActions())) ) {
-			$this->registerCssFile('spliteventtype.css', Yii::app()->createUrl('css/spliteventtype.css'));
 			Yii::app()->getClientScript()->registerScriptFile(Yii::app()->createUrl('js/spliteventtype.js'));
 		}
 
@@ -118,7 +117,7 @@ class DefaultController extends NestedElementsEventTypeController
 				}
 			}
 			$element->right_procedures = $right_procedures;
-			
+
 			$left_procedures = array();
 			if (isset($_POST['treatment_left_procedures'])) {
 				foreach ($_POST['treatment_left_procedures'] as $proc_id) {
