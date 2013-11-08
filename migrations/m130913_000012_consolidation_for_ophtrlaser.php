@@ -36,6 +36,19 @@ class m130913_000012_consolidation_for_ophtrlaser extends OEMigration
 
 	public function up()
 	{
+		if (!$this->consolidate(
+			array(
+				"m130408_140240_event_type_OphTrLaser",
+				"m130712_113449_site_laser_table_isnt_element",
+			)
+		)
+		) {
+			$this->createTables();
+		}
+	}
+
+	public function createTables()
+	{
 		$this->setData();
 		//disable foreign keys check
 		$this->execute("SET foreign_key_checks = 0");
