@@ -18,35 +18,30 @@
  */
 ?>
 
-<div class="element <?php echo $element->elementType->class_name ?>"
-	data-element-type-id="<?php echo $element->elementType->id ?>"
-	data-element-type-class="<?php echo $element->elementType->class_name ?>"
-	data-element-type-name="<?php echo $element->elementType->name ?>"
-	data-element-display-order="<?php echo $element->elementType->display_order ?>">
-	<div class="elementActions">
-		<?php if (@$child) { ?>
-		<button title="Remove <?php echo $element->elementType->name ?>" class="removeElement classy blue nano">
-			<span class="button-span icon-only"><img
-				src="<?php echo Yii::app()->createUrl('img/_elements/btns/mini-cross.png')?>"
-				alt="+" width="21" height="19"> </span>
-		</button>
-		<?php } else {
-			$event_id = ($element->id) ? $element->event_id : null;
-			if ($this->canCopy($element->elementType->class_name, $event_id)) { ?>
-				<a href="#" title="View Previous" class="viewPrevious"><img src="<?php echo Yii::app()->createUrl('img/_elements/btns/load.png')?>" /></a>
-			<?php } ?>
-			<?php if (!$element->elementType->required) {?>
-				<button title="Remove <?php echo $element->elementType->name ?>" class="removeElement classy blue mini">
-					<span class="button-span icon-only"><img
-						src="<?php echo Yii::app()->createUrl('img/_elements/btns/mini-cross.png')?>"
-						alt="+" width="24" height="22"> </span>
-				</button>
-			<?php } ?>
-		<?php } ?>
-	</div>
-	<h4 class="elementTypeName">
-		<?php echo $element->elementType->name; ?>
-	</h4>
+<section class="<?php if (@$child) {?>sub-<?php }?>element" data-element-type-id="<?php echo $element->elementType->id?>" data-element-type-name="<?php echo $element->elementType->name?>" data-element-display-order="<?php echo $element->elementType->display_order?>">
+	<header class="<?php if (@$child) {?>sub-<?php }?>element-header">
+		<?php if (!@$child) {?>
+			<h3 class="element-title"><?php echo $element->elementType->name?></h3>
+		<?php }else{?>
+			<h4 class="sub-element-title"><?php echo $element->elementType->name?></h4>
+		<?php }?>
+		<div class="<?php if (@$child) {?>sub-<?php }?>element-actions">
+			<?php if (!@$child && !$element->elementType->required) {?>
+				<a href="#" class="button button-icon small js-remove-element">
+					<span class="icon-button-small-mini-cross"></span>
+					<span class="hide-offscreen">Remove element</span>
+				</a>
+			<?php }?>
+			<?php if (@$child) {?>
+				<div class="sub-element-actions">
+					<a href="#" class="button button-icon small js-remove-child-element">
+						<span class="icon-button-small-mini-cross"></span>
+						<span class="hide-offscreen">Remove sub-element</span>
+					</a>
+				</div>
+			<?php }?>
+		</div>
+	</header>
 
 	<?php
 	$this->renderPartial(
@@ -56,17 +51,14 @@
 	);
 	?>
 
-	<?php if (!@$child) { ?>
-	<div class="active_child_elements clearfix">
-		<?php
-		$this->renderChildDefaultElements($element, $this->action->id, $form, $data);
-		?>
-	</div>
-	<div class="inactive_child_elements">
-		<?php
-		$this->renderChildOptionalElements($element, $this->action->id, $form, $data);
-		?>
-	</div>
-	<?php } ?>
-
-</div>
+	<?php if (!@$child) {?>
+		<div class="sub-elements active">
+			<?php $this->renderChildDefaultElements($element, $this->action->id, $form, $data)?>
+		</div>
+		<div class="sub-elements inactive">
+			<ul class="sub-elements-list">
+				<?php $this->renderChildOptionalElements($element, $this->action->id, $form, $data)?>
+			</ul>
+		</div>
+	<?php }?>
+</section>
