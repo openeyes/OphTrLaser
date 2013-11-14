@@ -57,7 +57,7 @@
 
 	<?php if (!@$child) {?>
 		<div class="sub-elements active">
-			<?php $this->renderChildDefaultElements($element, $this->action->id, $form, $data)?>
+			<?php $this->renderChildOpenElements($element, $this->action->id, $form, $data)?>
 		</div>
 		<div class="sub-elements inactive">
 			<ul class="sub-elements-list">
