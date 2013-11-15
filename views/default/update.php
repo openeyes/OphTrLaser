@@ -21,7 +21,7 @@
 <?php $this->beginContent('//patient/event_container'); ?>
 	<?php
 		$this->breadcrumbs=array($this->module->id);
-		$this->event_actions[] = EventAction::button('Save', 'save', array('level' => 'secondary'), array('class'=>'button small', 'form'=>'laser-create'));
+		$this->event_actions[] = EventAction::button('Save', 'save', array('level' => 'save'), array('form'=>'laser-create'));
 	?>
 
 	<h2 class="event-title"><?php echo $this->event_type->name ?></h2>
