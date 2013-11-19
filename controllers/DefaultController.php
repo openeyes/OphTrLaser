@@ -106,9 +106,6 @@ class DefaultController extends BaseEventTypeController
 				$previous = $this->episode->getElementsOfType($import_model::model()->getElementType());
 				if (count($previous)) {
 					$import = $previous[0];
-				}
-
-				if ($import) {
 					$element->left_eyedraw = $import->left_eyedraw;
 					$element->right_eyedraw = $import->right_eyedraw;
 					$element->eye_id = $import->eye_id;
