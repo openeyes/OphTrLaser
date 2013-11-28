@@ -24,7 +24,7 @@ foreach ($lprocs as $lproc) {
 }
 $layoutColumns = array(
 	'label' => 4,
-	'field' => 8
+	'field' => 6
 );
 ?>
 

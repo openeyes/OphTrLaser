@@ -32,12 +32,12 @@ foreach ($lasers as $laser) {
 }
 ?>
 <div class="element-fields">
-	<?php echo $form->dropDownList($element, 'site_id', CHtml::listData($sites,'id','short_name'),array('empty'=>'- Please select -'),false,array('label' => 2, 'field' => 10))?>
-	<?php echo $form->dropDownList($element, 'laser_id', CHtml::listData($laser_options,'id','name'),array('empty'=>'- Please select -'),false,array('label' => 2, 'field' => 10))?>
+	<?php echo $form->dropDownList($element, 'site_id', CHtml::listData($sites,'id','short_name'),array('empty'=>'- Please select -'),false,array('label' => 2, 'field' => 3))?>
+	<?php echo $form->dropDownList($element, 'laser_id', CHtml::listData($laser_options,'id','name'),array('empty'=>'- Please select -'),false,array('label' => 2, 'field' => 3))?>
 	<div class="field-row">
 		<div class="field-info">
 			<em>Please select a site to see the list of available lasers.</em>
 		</div>
 	</div>
-	<?php echo $form->dropDownList($element, 'surgeon_id', CHtml::listData($element->surgeons, 'id', 'ReversedFullName'),array('empty'=>'- Please select -'),false,array('label' => 2, 'field' => 10))?>
+	<?php echo $form->dropDownList($element, 'surgeon_id', CHtml::listData($element->surgeons, 'id', 'ReversedFullName'),array('empty'=>'- Please select -'),false,array('label' => 2, 'field' => 3))?>
 </div>
