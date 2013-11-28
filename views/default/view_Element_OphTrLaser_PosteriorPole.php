@@ -23,7 +23,7 @@
 	</header>
 	<div class="element-data element-eyes row">
 		<div class="element-eye right-eye column">
-			<div class="eyedraw-image">
+			<div class="eyedraw-row">
 				<?php if ($element->hasRight()) {
 					$this->widget('application.modules.eyedraw.OEEyeDrawWidget', array(
 						'idSuffix' => 'right_'.$element->elementType->id,
@@ -40,7 +40,7 @@
 			</div>
 		</div>
 		<div class="element-eye left-eye column">
-			<div class="eyedraw-image">
+			<div class="eyedraw-row">
 				<?php if ($element->hasLeft()) {
 					$this->widget('application.modules.eyedraw.OEEyeDrawWidget', array(
 						'idSuffix' => 'left_'.$element->elementType->id,

@@ -18,17 +18,17 @@
  ?>
 <?php
 $widget = $this->widget('application.modules.eyedraw.OEEyeDrawWidget', array(
-		'doodleToolBarArray' => array(
-				array('LaserSpot', 'FocalLaser', 'MacularGrid', 'SectorPRPPostPole', 'PRPPostPole'),
-				),
-		'onReadyCommandArray' => array(
-				array('addDoodle', array('PostPole')),
-				array('deselectDoodles', array()),
-		),
-		'idSuffix' => $side.'_'.$element->elementType->id,
-		'side' => ($side == 'right') ? 'R' : 'L',
-		'mode' => 'edit',
-		'model' => $element,
-		'attribute' => $side.'_eyedraw',
+	'doodleToolBarArray' => array(
+		array('LaserSpot', 'FocalLaser', 'MacularGrid', 'SectorPRPPostPole', 'PRPPostPole'),
+	),
+	'onReadyCommandArray' => array(
+		array('addDoodle', array('PostPole')),
+		array('deselectDoodles', array()),
+	),
+	'idSuffix' => $side.'_'.$element->elementType->id,
+	'side' => ($side == 'right') ? 'R' : 'L',
+	'mode' => 'edit',
+	'model' => $element,
+	'attribute' => $side.'_eyedraw',
 ));
 ?>
