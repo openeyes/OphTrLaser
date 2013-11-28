@@ -23,34 +23,38 @@
 	</header>
 	<div class="element-data element-eyes data-row">
 		<div class="element-eye right-eye column">
-			<?php if ($element->hasRight()) {
-				if (!$element->right_procedures) {?>
-					None
-				<?php } else {?>
-					<ul class="data-value">
-						<?php foreach ($element->right_procedures as $proc) {?>
-							<li><?php echo $proc->term?></li>
-						<?php }?>
-					</ul>
+			<div class="data-row">
+				<?php if ($element->hasRight()) {
+					if (!$element->right_procedures) {?>
+						None
+					<?php } else {?>
+						<ul class="data-value">
+							<?php foreach ($element->right_procedures as $proc) {?>
+								<li><?php echo $proc->term?></li>
+							<?php }?>
+						</ul>
+					<?php }?>
+				<?php }else{?>
+					<div class="data-value">Not recorded</div>
 				<?php }?>
-			<?php }else{?>
-				<div class="data-value">Not recorded</div>
-			<?php }?>
+			</div>
 		</div>
 		<div class="element-eye left-eye column">
-			<?php if ($element->hasLeft()) {
-				if (!$element->left_procedures) {?>
-					None
-				<?php } else {?>
-					<ul class="data-value">
-						<?php foreach ($element->left_procedures as $proc) {?>
-							<li><?php echo $proc->term?></li>
-						<?php }?>
-					</ul>
+			<div class="data-row">
+				<?php if ($element->hasLeft()) {
+					if (!$element->left_procedures) {?>
+						None
+					<?php } else {?>
+						<ul class="data-value">
+							<?php foreach ($element->left_procedures as $proc) {?>
+								<li><?php echo $proc->term?></li>
+							<?php }?>
+						</ul>
+					<?php }?>
+				<?php }else{?>
+					<div class="data-value">Not recorded</div>
 				<?php }?>
-			<?php }else{?>
-				<div class="data-value">Not recorded</div>
-			<?php }?>
+			</div>
 		</div>
 	</div>
 	<?php $this->renderChildDefaultElements($element, $this->action->id, $form, $data)?>

@@ -30,7 +30,7 @@
 			</div>
 			<div class="large-10 column">
 				<div class="data-value">
-					<?php echo CHtml::encode($element->textWithLineBreaks('comments'))?>
+					<?php echo $element->textWithLineBreaks('comments')?>
 				</div>
 			</div>
 		</div>
