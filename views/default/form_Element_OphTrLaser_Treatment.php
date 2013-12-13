@@ -29,7 +29,7 @@ $layoutColumns = array(
 ?>
 
 <div class="element-fields element-eyes row">
-	<div class="element-eye right-eye column side left" data-side="right">
+	<div class="element-eye right-eye column side left<?php if (!$element->hasRight()) { ?> inactive<?php } ?>" data-side="right">
 		<a href="#" class="icon-remove-side remove-side">Remove eye</a>
 		<div class="active-form">
 			<?php
@@ -46,7 +46,7 @@ $layoutColumns = array(
 			</div>
 		</div>
 	</div>
-	<div class="element-eye left-eye column side right" data-side="left">
+	<div class="element-eye left-eye column side right<?php if (!$element->hasLeft()) { ?> inactive<?php } ?>" data-side="left">
 		<a href="#" class="icon-remove-side remove-side">Remove eye</a>
 		<div class="active-form">
 			<?php

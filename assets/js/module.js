@@ -61,48 +61,6 @@ $(document).ready(function() {
 		}
 	});
 
-	/*
-	// side adding and removing
-	$(this).delegate('#event-content .side .active-form a.remove-side', 'click', function(e) {
-
-		// Update side field to indicate other side
-		var side = $(this).closest('.side');
-
-		var remove_physical_side = 'left';
-		var show_physical_side = 'right';
-
-		var eye_side = 1;
-		if(side.attr('data-side') == 'left') {
-			eye_side = 2; // Right
-			remove_physical_side = 'right';
-			show_physical_side = 'left';
-		}
-
-		$(this).closest('.element').find('input.sideField').each(function() {
-			$(this).val(eye_side);
-		});
-
-		// If other side is already inactive, then activate it (can't have both sides inactive)
-		$(this).closest('.element').find('.side.'+show_physical_side).removeClass('inactive');
-
-		// Make this side inactive
-		$(this).closest('.element').find('.side.'+remove_physical_side).addClass('inactive');
-
-		e.preventDefault();
-	});
-
-	$(this).delegate('#event-content .side .inactive-form a', 'click', function(e) {
-		var element = $(this).closest('.element');
-		element.find('input.sideField').each(function() {
-			$(this).val(3); // Both eyes
-		});
-
-		element.find('.side').removeClass('inactive');
-
-		e.preventDefault();
-	});
-	*/
-
 	// populate laser drop down when the site is changed
 	$(this).delegate('#Element_OphTrLaser_Site_site_id', 'change', function(e) {
 		populateLaserList($(this).val());

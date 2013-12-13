@@ -192,4 +192,8 @@ class DefaultController extends NestedElementsEventTypeController
 		return true;
 	}
 
+	public function canPrint()
+	{
+		return false;
+	}
 }
