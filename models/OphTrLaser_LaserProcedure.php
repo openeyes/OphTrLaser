@@ -26,7 +26,7 @@
  * @property integer $display_order
 
  */
-class OphTrLaser_LaserProcedure extends BaseActiveRecord
+class OphTrLaser_LaserProcedure extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.

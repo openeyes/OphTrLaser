@@ -32,7 +32,7 @@
  * @property User $usermodified
  */
 
-class OphTrLaser_Site_Laser extends BaseActiveRecord
+class OphTrLaser_Site_Laser extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
