@@ -57,5 +57,5 @@
 			</div>
 		</div>
 	</div>
-	<?php $this->renderChildDefaultElements($element, $this->action->id, $form, $data)?>
+	<?php $this->renderChildOpenElements($element, $this->action->id, $form, $data)?>
 </section>
