@@ -38,9 +38,10 @@ class AdminController extends ModuleAdminController
 	public function actionAddLaser()
 	{
 		$model = new OphTrLaser_Site_Laser();
+		$request = Yii::app()->getRequest();
 
-		if (isset($_POST['OphTrLaser_Site_Laser'])) {
-			$model->attributes = $_POST['OphTrLaser_Site_Laser'];
+		if ( $request->getPost('OphTrLaser_Site_Laser') ) {
+			$model->attributes = $request->getPost('OphTrLaser_Site_Laser');
 
 			if ($bottom_laser = OphTrLaser_Site_Laser::model()->find(array('order'=>'display_order desc'))) {
 				$display_order = $bottom_laser->display_order+1;
