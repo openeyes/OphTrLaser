@@ -35,37 +35,37 @@ class AdminController extends ModuleAdminController
 		));
 	}
 
-	/*public function actionAddTreatmentDrug()
+	public function actionAddLaser()
 	{
-		$model = new OphTrIntravitrealinjection_Treatment_Drug();
+		$model = new OphTrLaser_Site_Laser();
 
-		if (isset($_POST['OphTrIntravitrealinjection_Treatment_Drug'])) {
-			$model->attributes = $_POST['OphTrIntravitrealinjection_Treatment_Drug'];
+		if (isset($_POST['OphTrLaser_Site_Laser'])) {
+			$model->attributes = $_POST['OphTrLaser_Site_Laser'];
 
-			if ($bottom_drug = OphTrIntravitrealinjection_Treatment_Drug::model()->find(array('order'=>'display_order desc'))) {
-				$display_order = $bottom_drug->display_order+1;
+			if ($bottom_laser = OphTrLaser_Site_Laser::model()->find(array('order'=>'display_order desc'))) {
+				$display_order = $bottom_laser->display_order+1;
 			} else {
 				$display_order = 1;
 			}
 			$model->display_order = $display_order;
 
 			if ($model->save()) {
-				Audit::add('admin','create',serialize($model->attributes),false,array('module'=>'OphTrIntravitrealinjection','model'=>'OphTrIntravitrealinjection_Treatment_Drug'));
-				Yii::app()->user->setFlash('success', 'Treatment drug created');
+				Audit::add('admin','create',serialize($model->attributes),false,array('module'=>'OphTrLaser','model'=>'OphTrLaser_Site_Laser'));
+				Yii::app()->user->setFlash('success', 'Laser created');
 
-				$this->redirect(array('ViewTreatmentDrugs'));
+				$this->redirect(array('ManageLasers'));
 			}
 		}
 
-		$this->render('create', array(
+		 $this->render('create', array(
 			'model' => $model,
-			'title' => 'Treatment Drug',
-			'cancel_uri' => '/OphTrIntravitrealinjection/admin/viewTreatmentDrugs',
+			'title' => 'Laser',
+			'cancel_uri' => '/OphTrLaser/admin/manageLasers',
 		));
 	}
 
 
-	public function actionEditTreatmentDrug($id)
+	/* public function actionEditTreatmentDrug($id)
 	{
 		if (!$model = OphTrIntravitrealinjection_Treatment_Drug::model()->findByPk((int) $id)) {
 			throw new Exception('Treatment drug not found with id ' . $id);

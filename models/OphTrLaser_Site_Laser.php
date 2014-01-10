@@ -87,6 +87,7 @@ class OphTrLaser_Site_Laser extends BaseActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Name',
+			'site_id' => "Site"
 		);
 	}
 

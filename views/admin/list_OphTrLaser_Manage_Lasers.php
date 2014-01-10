@@ -37,7 +37,9 @@
 			<tr>
 				<th><input type="checkbox" name="selectall" id="selectall" /></th>
 				<th>Name</th>
-				<th>Available</th>
+				<th>Type</th>
+				<th>Wavelength</th>
+				<th>Site</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -48,8 +50,13 @@
 						<?php echo $model->name?>
 					</td>
 					<td>
-						<?php //echo $model->available ? 'Yes' : 'No'
-							?>
+						<?php echo $model->type?>
+					</td>
+					<td>
+						<?php echo $model->wavelength?>
+					</td>
+					<td>
+						<?php echo $model->site->name ?>
 					</td>
 				</tr>
 			<?php }?>
@@ -58,7 +65,7 @@
 			<tr>
 				<td colspan="2">
 					<?php echo EventAction::button('Add', 'add', null, array('class' => 'small', 'data-uri' => '/OphTrLaser/admin/addLaser'))->toHtml()?>
-					<?php echo EventAction::button('Delete', 'delete', null, array('class' => 'small', 'data-uri' => '/OphTrLaser/admin/deleteLaser', 'data-object' => 'lasers'))->toHtml()?>
+					<?php //echo EventAction::button('Delete', 'delete', null, array('class' => 'small', 'data-uri' => '/OphTrLaser/admin/deleteLaser', 'data-object' => 'lasers'))->toHtml() ?>
 				</td>
 			</tr>
 			</tfoot>
