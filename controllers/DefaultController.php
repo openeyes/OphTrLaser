@@ -104,6 +104,7 @@ class DefaultController extends BaseEventTypeController
 			if (array_key_exists($el_class, self::$IMPORT_ELEMENTS)) {
 				$import_model = self::$IMPORT_ELEMENTS[$el_class];
 				$previous = $this->episode->getElementsOfType($import_model::model()->getElementType());
+				$import = false;
 				if (count($previous)) {
 					$import = $previous[0];
 				}
