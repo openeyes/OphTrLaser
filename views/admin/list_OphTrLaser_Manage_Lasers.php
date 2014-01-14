@@ -40,6 +40,7 @@
 				<th>Type</th>
 				<th>Wavelength</th>
 				<th>Site</th>
+				<th>Available</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -57,6 +58,9 @@
 					</td>
 					<td>
 						<?php echo $model->site->name ?>
+					</td>
+					<td>
+						<?php echo $model->available?'Yes':'No' ?>
 					</td>
 				</tr>
 			<?php }?>
