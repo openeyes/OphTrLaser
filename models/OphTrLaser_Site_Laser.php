@@ -59,7 +59,7 @@ class OphTrLaser_Site_Laser extends BaseActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, site_id, wavelength, type', 'safe'),
+			array('name, site_id, wavelength, type, available', 'safe'),
 			array('name, site_id', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -108,6 +108,19 @@ class OphTrLaser_Site_Laser extends BaseActiveRecord
 		return new CActiveDataProvider(get_class($this), array(
 				'criteria' => $criteria,
 			));
+	}
+
+	/*
+	 * scope to get all records set available
+	 */
+	public function availableScope()
+	{
+		$alias = $this->getTableAlias(false);
+		$availableScope = array(
+			'order' => $alias . '.display_order ASC',
+			'condition' => $alias . '.available = true',
+		);
+		return $availableScope;
 	}
 
 	/**
