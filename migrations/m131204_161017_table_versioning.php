@@ -8,8 +8,8 @@ class m131204_161017_table_versioning extends CDbMigration
 CREATE TABLE `et_ophtrlaser_anteriorseg_version` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 	`event_id` int(10) unsigned NOT NULL,
-	`left_eyedraw` varchar(4096) COLLATE utf8_bin NOT NULL,
-	`right_eyedraw` varchar(4096) COLLATE utf8_bin NOT NULL,
+	`left_eyedraw` varchar(4096) NOT NULL,
+	`right_eyedraw` varchar(4096) NOT NULL,
 	`eye_id` int(10) unsigned NOT NULL DEFAULT '3',
 	`last_modified_user_id` int(10) unsigned NOT NULL DEFAULT '1',
 	`last_modified_date` datetime NOT NULL DEFAULT '1901-01-01 00:00:00',
@@ -24,7 +24,7 @@ CREATE TABLE `et_ophtrlaser_anteriorseg_version` (
 	CONSTRAINT `acv_et_ophtrlaser_anteriorseg_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_et_ophtrlaser_anteriorseg_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
 	CONSTRAINT `acv_et_ophtrlaser_anteriorseg_eye_id_fk` FOREIGN KEY (`eye_id`) REFERENCES `eye` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('et_ophtrlaser_anteriorseg_version','id','int(10) unsigned NOT NULL');
@@ -43,7 +43,7 @@ CREATE TABLE `et_ophtrlaser_anteriorseg_version` (
 CREATE TABLE `et_ophtrlaser_comments_version` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 	`event_id` int(10) unsigned NOT NULL,
-	`comments` text COLLATE utf8_bin,
+	`comments` text,
 	`last_modified_user_id` int(10) unsigned NOT NULL DEFAULT '1',
 	`last_modified_date` datetime NOT NULL DEFAULT '1901-01-01 00:00:00',
 	`created_user_id` int(10) unsigned NOT NULL DEFAULT '1',
@@ -55,7 +55,7 @@ CREATE TABLE `et_ophtrlaser_comments_version` (
 	CONSTRAINT `acv_et_ophtrlaser_comments_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_et_ophtrlaser_comments_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_et_ophtrlaser_comments_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('et_ophtrlaser_comments_version','id','int(10) unsigned NOT NULL');
@@ -75,8 +75,8 @@ CREATE TABLE `et_ophtrlaser_fundus_version` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 	`event_id` int(10) unsigned NOT NULL,
 	`eye_id` int(10) unsigned NOT NULL DEFAULT '3',
-	`left_eyedraw` varchar(4096) COLLATE utf8_bin NOT NULL,
-	`right_eyedraw` varchar(4096) COLLATE utf8_bin NOT NULL,
+	`left_eyedraw` varchar(4096) NOT NULL,
+	`right_eyedraw` varchar(4096) NOT NULL,
 	`last_modified_user_id` int(10) unsigned NOT NULL DEFAULT '1',
 	`last_modified_date` datetime NOT NULL DEFAULT '1901-01-01 00:00:00',
 	`created_user_id` int(10) unsigned NOT NULL DEFAULT '1',
@@ -90,7 +90,7 @@ CREATE TABLE `et_ophtrlaser_fundus_version` (
 	CONSTRAINT `acv_et_ophtrlaser_fundus_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_et_ophtrlaser_fundus_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
 	CONSTRAINT `acv_et_ophtrlaser_fundus_eye_id_fk` FOREIGN KEY (`eye_id`) REFERENCES `eye` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('et_ophtrlaser_fundus_version','id','int(10) unsigned NOT NULL');
@@ -110,8 +110,8 @@ CREATE TABLE `et_ophtrlaser_posteriorpo_version` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 	`event_id` int(10) unsigned NOT NULL,
 	`eye_id` int(10) unsigned NOT NULL DEFAULT '3',
-	`left_eyedraw` varchar(4096) COLLATE utf8_bin NOT NULL,
-	`right_eyedraw` varchar(4096) COLLATE utf8_bin NOT NULL,
+	`left_eyedraw` varchar(4096) NOT NULL,
+	`right_eyedraw` varchar(4096) NOT NULL,
 	`last_modified_user_id` int(10) unsigned NOT NULL DEFAULT '1',
 	`last_modified_date` datetime NOT NULL DEFAULT '1901-01-01 00:00:00',
 	`created_user_id` int(10) unsigned NOT NULL DEFAULT '1',
@@ -125,7 +125,7 @@ CREATE TABLE `et_ophtrlaser_posteriorpo_version` (
 	CONSTRAINT `acv_et_ophtrlaser_posteriorpo_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_et_ophtrlaser_posteriorpo_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
 	CONSTRAINT `acv_et_ophtrlaser_posteriorpo_eye_id_fk` FOREIGN KEY (`eye_id`) REFERENCES `eye` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('et_ophtrlaser_posteriorpo_version','id','int(10) unsigned NOT NULL');
@@ -164,7 +164,7 @@ CREATE TABLE `et_ophtrlaser_site_version` (
 	CONSTRAINT `acv_et_ophtrlaser_site_site_fk` FOREIGN KEY (`site_id`) REFERENCES `site` (`id`),
 	CONSTRAINT `acv_et_ophtrlaser_site_laser_fk` FOREIGN KEY (`laser_id`) REFERENCES `ophtrlaser_site_laser` (`id`),
 	CONSTRAINT `acv_et_ophtrlaser_site_surgeon_id_fk` FOREIGN KEY (`surgeon_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('et_ophtrlaser_site_version','id','int(10) unsigned NOT NULL');
@@ -197,7 +197,7 @@ CREATE TABLE `et_ophtrlaser_treatment_version` (
 	CONSTRAINT `acv_et_ophtrlaser_treatment_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_et_ophtrlaser_treatment_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
 	CONSTRAINT `acv_et_ophtrlaser_treatment_eye_id_fk` FOREIGN KEY (`eye_id`) REFERENCES `eye` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('et_ophtrlaser_treatment_version','id','int(10) unsigned NOT NULL');
@@ -227,7 +227,7 @@ CREATE TABLE `ophtrlaser_laserprocedure_version` (
 	CONSTRAINT `acv_ophtrlaser_laserprocedure_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophtrlaser_laserprocedure_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophtrlaser_laserprocedure_proc_fk` FOREIGN KEY (`procedure_id`) REFERENCES `proc` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('ophtrlaser_laserprocedure_version','id','int(10) unsigned NOT NULL');
@@ -264,7 +264,7 @@ CREATE TABLE `ophtrlaser_laserprocedure_assignment_version` (
 	CONSTRAINT `acv_ophtrlaser_laserprocedure_assignment_proc_fk` FOREIGN KEY (`procedure_id`) REFERENCES `proc` (`id`),
 	CONSTRAINT `acv_ophtrlaser_laserprocedure_assignment_tr_fk` FOREIGN KEY (`treatment_id`) REFERENCES `et_ophtrlaser_treatment` (`id`),
 	CONSTRAINT `acv_ophtrlaser_laserprocedure_assignment_eye_id_fk` FOREIGN KEY (`eye_id`) REFERENCES `eye` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('ophtrlaser_laserprocedure_assignment_version','id','int(10) unsigned NOT NULL');
@@ -282,8 +282,8 @@ CREATE TABLE `ophtrlaser_laserprocedure_assignment_version` (
 		$this->execute("
 CREATE TABLE `ophtrlaser_site_laser_version` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-	`name` varchar(128) COLLATE utf8_bin NOT NULL,
-	`type` varchar(128) COLLATE utf8_bin DEFAULT NULL,
+	`name` varchar(128) NOT NULL,
+	`type` varchar(128) DEFAULT NULL,
 	`wavelength` int(10) unsigned DEFAULT NULL,
 	`display_order` int(10) unsigned NOT NULL DEFAULT '1',
 	`site_id` int(10) unsigned NOT NULL,
@@ -298,7 +298,7 @@ CREATE TABLE `ophtrlaser_site_laser_version` (
 	CONSTRAINT `acv_ophtrlaser_site_laser_site_fk` FOREIGN KEY (`site_id`) REFERENCES `site` (`id`),
 	CONSTRAINT `acv_ophtrlaser_site_laser_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 	CONSTRAINT `acv_ophtrlaser_site_laser_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->alterColumn('ophtrlaser_site_laser_version','id','int(10) unsigned NOT NULL');
