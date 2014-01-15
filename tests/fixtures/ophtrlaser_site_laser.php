@@ -32,4 +32,17 @@ return array(
 		'created_date' => '1901-01-01 00:00:00',
 		'available'=>true
 	),
+	'laser2' => array(
+		'id' => 2,
+		'name' => 'TestLaserDisabled',
+		'type' => 'Piercing',
+		'wavelength' => 2,
+		'display_order' => 2,
+		'site_id' => 1,
+		'last_modified_user_id' => 1,
+		'last_modified_date' => '1901-01-01 00:00:00',
+		'created_user_id' => 1,
+		'created_date' => '1901-01-01 00:00:00',
+		'available'=>false
+	),
 );

@@ -34,9 +34,6 @@ class OphTrLaser_Site_LaserTest extends CDbTestCase {
 	protected function setUp() {
 		parent::setUp();
 		$this->model = new OphTrLaser_Site_Laser;
-		$thisLaser = $this->ophtrlaser_site_laser('laser1');
-		//var_dump($thisLaser);
-		var_dump($this->model->getDbConnection()->connectionString );
 	}
 
 	/**
@@ -67,11 +64,28 @@ class OphTrLaser_Site_LaserTest extends CDbTestCase {
 	public function testAvailableScope() {
 
 		$result = $this->model->availableScope();
-		$expected = array(
-			'condition' => $this->model->getTableAlias(false) . '.available = true',
-			'order' => $this->model->getTableAlias(false) . '.display_order ASC'
-		);
-		$this->assertEquals($expected, $result);
+		$this->assertInstanceOf('OphTrLaser_Site_Laser',$result);
+		$this->assertEquals( $this->model->getTableAlias(false) .'.available = true' , $result->getDbCriteria()->condition );
+	}
+
+	/**
+	 * @covers OphTrLaser_Site_Laser::availableScope
+	 */
+	public function testFindAllLasers(){
+		$lasers = $this->ophtrlaser_site_laser('laser1')->with(array('site'))->findAll();
+		$this->assertGreaterThan(1 , count($lasers));
+	}
+
+	/**
+	 * @covers OphTrLaser_Site_Laser::availableScope
+	 */
+	public function testFindAllAvailableLasers(){
+		$lasers = $this->ophtrlaser_site_laser('laser1')->availableScope()->with(array('site'))->findAll();
+		$expected = 1; // make sure all lasers are available, available == true true
+		$this->assertEquals(1 , count($lasers));
+		foreach($lasers as $laser){
+			$this->assertEquals($expected , $laser->available);
+		}
 	}
 
 }

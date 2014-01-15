@@ -116,11 +116,18 @@ class OphTrLaser_Site_Laser extends BaseActiveRecord
 	public function availableScope()
 	{
 		$alias = $this->getTableAlias(false);
+		$this->resetScope()->getDbCriteria()->mergeWith(array(
+			'order' => $alias . '.display_order ASC',
+			'condition' => $alias . '.available = true',
+		));
+		return $this;
+
+		/*$alias = $this->getTableAlias(false);
 		$availableScope = array(
 			'order' => $alias . '.display_order ASC',
 			'condition' => $alias . '.available = true',
 		);
-		return $availableScope;
+		return $availableScope;*/
 	}
 
 	/**
