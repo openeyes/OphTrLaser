@@ -110,16 +110,27 @@ class OphTrLaser_Site_Laser extends BaseActiveRecord
 			));
 	}
 
-	/*
-	 * scope to get all records set available
+	/**
+	 * @description scope to get all records set available and optionally with a specific ID
+	 * @param null|int $default - if specified it must be an integer
+	 * @return $this - BaseActiveRecord
 	 */
-	public function availableScope()
+	public function availableScope($default=null)
 	{
 		$alias = $this->getTableAlias(false);
-		$this->resetScope()->getDbCriteria()->mergeWith(array(
-			'order' => $alias . '.display_order ASC',
-			'condition' => $alias . '.available = true',
-		));
+		if($default && is_int((int)$default)){
+			$this->resetScope()->getDbCriteria()->mergeWith(array(
+				'order' => $alias . '.display_order ASC',
+				'condition' => $alias . '.available = true OR ' . $alias . '.id = ' . $default ,
+			));
+		}
+		else{
+			$this->resetScope()->getDbCriteria()->mergeWith(array(
+				'order' => $alias . '.display_order ASC',
+				'condition' => $alias . '.available = true'
+			));
+		}
+
 		return $this;
 
 		/*$alias = $this->getTableAlias(false);

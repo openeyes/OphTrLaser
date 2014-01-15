@@ -45,4 +45,17 @@ return array(
 		'created_date' => '1901-01-01 00:00:00',
 		'available'=>false
 	),
+	'laser3' => array(
+		'id' => 3,
+		'name' => 'TestLaserEnableAndDisabled',
+		'type' => 'Power',
+		'wavelength' => 300,
+		'display_order' => 3,
+		'site_id' => 1,
+		'last_modified_user_id' => 1,
+		'last_modified_date' => '1901-01-01 00:00:00',
+		'created_user_id' => 1,
+		'created_date' => '1901-01-01 00:00:00',
+		'available'=>false
+	),
 );
