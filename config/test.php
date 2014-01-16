@@ -22,7 +22,7 @@ return array(
 	'components' => array(
 		'fixture' => array(
 			'class' => 'system.test.CDbFixtureManager',
-			'basePath'=> realpath(dirname(__FILE__)) . '/../tests/fixtures'
+			//'basePath'=> realpath(dirname(__FILE__)) . '/../tests/fixtures'
 		),
 		'db' => array(
 			'class'=> 'CDbConnection',
