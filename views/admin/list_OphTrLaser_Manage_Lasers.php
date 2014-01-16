@@ -69,7 +69,7 @@
 			<tr>
 				<td colspan="2">
 					<?php echo EventAction::button('Add', 'add', null, array('class' => 'small', 'data-uri' => '/OphTrLaser/admin/addLaser'))->toHtml()?>
-					<?php //echo EventAction::button('Delete', 'delete', null, array('class' => 'small', 'data-uri' => '/OphTrLaser/admin/deleteLaser', 'data-object' => 'lasers'))->toHtml() ?>
+					<?php echo EventAction::button('Edit', 'edit', null, array('class' => 'small', 'data-uri' => '/OphTrLaser/admin/editLaser/'. $model->id, 'data-object' => 'lasers'))->toHtml() ?>
 				</td>
 			</tr>
 			</tfoot>

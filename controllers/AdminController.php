@@ -65,6 +65,40 @@ class AdminController extends ModuleAdminController
 		));
 	}
 
+	public function actionEditLaser($action)
+	{
+		var_dump($action);
+
+		echo "HERE ";
+
+		$model = new OphTrLaser_Site_Laser();
+		$request = Yii::app()->getRequest();
+
+		if ( $request->getPost('OphTrLaser_Site_Laser') ) {
+			$model->attributes = $request->getPost('OphTrLaser_Site_Laser');
+
+			if ($bottom_laser = OphTrLaser_Site_Laser::model()->find(array('order'=>'display_order desc'))) {
+				$display_order = $bottom_laser->display_order+1;
+			} else {
+				$display_order = 1;
+			}
+			$model->display_order = $display_order;
+
+			if ($model->save()) {
+				Audit::add('admin','create',serialize($model->attributes),false,array('module'=>'OphTrLaser','model'=>'OphTrLaser_Site_Laser'));
+				Yii::app()->user->setFlash('success', 'Laser created');
+
+				$this->redirect(array('ManageLasers'));
+			}
+		}
+
+		$this->render('create', array(
+			'model' => $model,
+			'title' => 'Laser',
+			'cancel_uri' => '/OphTrLaser/admin/manageLasers',
+		));
+	}
+
 
 	/* public function actionEditTreatmentDrug($id)
 	{

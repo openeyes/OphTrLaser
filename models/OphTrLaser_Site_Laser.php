@@ -60,10 +60,11 @@ class OphTrLaser_Site_Laser extends BaseActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, site_id, wavelength, type, available', 'safe'),
-			array('name, site_id', 'required'),
+			array('name, site_id, wavelength, type', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, name', 'safe', 'on' => 'search'),
+			array('wavelength', 'numerical', 'integerOnly'=>true, 'min' => 200, 'max' => 2000, 'message' => 'Wavelength is a number between 200 to 2000 only.')
 		);
 	}
 
