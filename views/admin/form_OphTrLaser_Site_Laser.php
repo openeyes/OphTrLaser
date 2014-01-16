@@ -22,4 +22,4 @@
 <?php echo $form->dropDownList($model,'site_id',Site::model()->getListForCurrentInstitution(),array('empty'=>'- Site -'))?>
 <?php echo $form->textField($model, 'type')?>
 <?php echo $form->textField($model, 'wavelength')?>
-<?php echo $form->radioBoolean($model, 'available')?>
+<?php echo $form->radioBoolean($model, 'deleted')?>

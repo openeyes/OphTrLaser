@@ -16,7 +16,14 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
 
-$lasers = OphTrLaser_Site_Laser::model()->availableScope($element->laser_id)->with(array('site'))->findAll(array('order' => 'site.short_name asc, t.name asc'));
+if($element->laser_id){
+	OphTrLaser_Site_Laser::model()->getDbCriteria()->addCondition( 't.id = ' . $element->laser_id ,'OR');
+	$lasers = OphTrLaser_Site_Laser::model()->with(array('site'))
+			->findAll(array('order' => 'site.short_name asc, t.name asc'));
+}else{
+	$lasers = OphTrLaser_Site_Laser::model()->with(array('site'))->findAll(array('order' => 'site.short_name asc, t.name asc'));
+}
+
 $sites	= array();
 $site_ids = array();
 $laser_options = array();

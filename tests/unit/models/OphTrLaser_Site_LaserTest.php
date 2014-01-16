@@ -66,43 +66,38 @@ class OphTrLaser_Site_LaserTest extends CDbTestCase {
 	}
 
 	/**
-	 * @covers OphTrLaser_Site_Laser::availableScope
+	 * @covers OphTrLaser_Site_Laser::defaultScope
 	 */
-	public function testAvailableScope() {
-		$result = $this->model->availableScope();
-		$this->assertInstanceOf('OphTrLaser_Site_Laser',$result);
-		$this->assertEquals( $this->model->getTableAlias(false) .'.available = true' , $result->getDbCriteria()->condition );
+	public function testFindActiveLasers(){
+		$lasers = $this->ophtrlaser_site_laser('laser1')->with(array('site'))->findAll();
+
+		$this->assertEquals(1 , count($lasers));
+		foreach($lasers as $laser){
+			$this->assertEquals( $laser->getTableAlias(false) .'.deleted = 0' ,
+				$laser->getDbCriteria()->condition );
+			$this->assertEquals( 0, $laser->deleted);
+		}
 	}
 
 	/**
-	 * @covers OphTrLaser_Site_Laser::availableScope
+	 * @covers OphTrLaser_Site_Laser::withDeletedScope
 	 */
-	public function testFindAllLasers(){
-		$lasers = $this->ophtrlaser_site_laser('laser1')->with(array('site'))->findAll();
+	public function testWithDeletedScope() {
+
+		$lasers = $this->ophtrlaser_site_laser('laser1')->withDeletedScope()->findAll();
+		$this->assertEquals( '',	$this->ophtrlaser_site_laser('laser1')->withDeletedScope()->getDbCriteria()->condition );
 		$this->assertGreaterThan(1 , count($lasers));
 	}
 
 	/**
 	 * @covers OphTrLaser_Site_Laser::availableScope
-	 */
-	public function testFindAllAvailableLasers(){
-		$lasers = $this->ophtrlaser_site_laser('laser1')->availableScope()->with(array('site'))->findAll();
-		$expected = 1; // make sure all lasers are available, available == true true
-		$this->assertEquals(1 , count($lasers));
-		foreach($lasers as $laser){
-			$this->assertEquals($expected , $laser->available);
-		}
-	}
 
-	/**
-	 * @covers OphTrLaser_Site_Laser::availableScope
-	 */
 	public function testFindAllAvailableLasersPrepopulated(){
 		$lasers = $this->ophtrlaser_site_laser('laser1')->availableScope(3)->with(array('site'))->findAll();
 		$this->assertEquals(2 , count($lasers));
 
 		$lasers = $this->ophtrlaser_site_laser('laser1')->availableScope("3")->with(array('site'))->findAll();
 		$this->assertEquals(2 , count($lasers));
-	}
+	}*/
 
 }

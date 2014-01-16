@@ -40,7 +40,7 @@
 				<th>Type</th>
 				<th>Wavelength</th>
 				<th>Site</th>
-				<th>Available</th>
+				<th>Deleted</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -60,7 +60,7 @@
 						<?php echo $model->site->name ?>
 					</td>
 					<td>
-						<?php echo $model->available?'Yes':'No' ?>
+						<?php echo $model->deleted?'Yes':'No' ?>
 					</td>
 				</tr>
 			<?php }?>
@@ -69,7 +69,7 @@
 			<tr>
 				<td colspan="2">
 					<?php echo EventAction::button('Add', 'add', null, array('class' => 'small', 'data-uri' => '/OphTrLaser/admin/addLaser'))->toHtml()?>
-					<?php echo EventAction::button('Edit', 'edit', null, array('class' => 'small', 'data-uri' => '/OphTrLaser/admin/editLaser/'. $model->id, 'data-object' => 'lasers'))->toHtml() ?>
+					 <?php //echo EventAction::button('Edit', 'edit', null, array('class' => 'small', 'data-uri' => '/OphTrLaser/admin/editLaser/'. $model->id, 'data-object' => 'lasers'))->toHtml() ?>
 				</td>
 			</tr>
 			</tfoot>

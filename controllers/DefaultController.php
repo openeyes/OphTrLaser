@@ -31,7 +31,7 @@ class DefaultController extends BaseEventTypeController
 	protected function _jsCreate()
 	{
 		$l_by_s = array();
-		$lasers = OphTrLaser_Site_Laser::model()->availableScope()->findAll();
+		$lasers = OphTrLaser_Site_Laser::model()->findAll();
 		foreach ($lasers as $slaser) {
 			$l_by_s[$slaser->site_id][] = array('id' => $slaser->id, 'name' => $slaser->name);
 		}

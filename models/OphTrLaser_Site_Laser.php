@@ -22,6 +22,7 @@
  * The followings are the available columns in table:
  * @property string $id
  * @property string $name
+ * @property string $deleted
  *
  * The followings are the available model relations:
  *
@@ -59,7 +60,7 @@ class OphTrLaser_Site_Laser extends BaseActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, site_id, wavelength, type, available', 'safe'),
+			array('name, site_id, wavelength, type, deleted', 'safe'),
 			array('name, site_id, wavelength, type', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -111,35 +112,26 @@ class OphTrLaser_Site_Laser extends BaseActiveRecord
 			));
 	}
 
+	public function defaultScope()
+	{
+		$table_alias = $this->getTableAlias(false,false);
+		return array(
+			'condition' => $table_alias.'.deleted = 0',
+		);
+	}
+
 	/**
-	 * @description scope to get all records set available and optionally with a specific ID
-	 * @param null|int $default - if specified it must be an integer
+	 * @description scope to get all records including deleted
 	 * @return $this - BaseActiveRecord
 	 */
-	public function availableScope($default=null)
+	public function withDeletedScope()
 	{
 		$alias = $this->getTableAlias(false);
-		if($default && is_int((int)$default)){
-			$this->resetScope()->getDbCriteria()->mergeWith(array(
-				'order' => $alias . '.display_order ASC',
-				'condition' => $alias . '.available = true OR ' . $alias . '.id = ' . $default ,
-			));
-		}
-		else{
-			$this->resetScope()->getDbCriteria()->mergeWith(array(
-				'order' => $alias . '.display_order ASC',
-				'condition' => $alias . '.available = true'
-			));
-		}
+		$this->resetScope()->getDbCriteria()->mergeWith(array(
+			'order' => $alias . '.display_order ASC',
+		));
 
 		return $this;
-
-		/*$alias = $this->getTableAlias(false);
-		$availableScope = array(
-			'order' => $alias . '.display_order ASC',
-			'condition' => $alias . '.available = true',
-		);
-		return $availableScope;*/
 	}
 
 	/**
