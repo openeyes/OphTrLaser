@@ -90,14 +90,14 @@ class OphTrLaser_Site_LaserTest extends CDbTestCase {
 	}
 
 	/**
-	 * @covers OphTrLaser_Site_Laser::availableScope
-
-	public function testFindAllAvailableLasersPrepopulated(){
-		$lasers = $this->ophtrlaser_site_laser('laser1')->availableScope(3)->with(array('site'))->findAll();
+	 * @covers OphTrLaser_Site_Laser::activeWithLaserScope
+	 */
+	public function testFindAllActiveWithLaser(){
+		$lasers = $this->ophtrlaser_site_laser('laser1')->activeWithLaserScope(3)->with(array('site'))->findAll();
 		$this->assertEquals(2 , count($lasers));
 
-		$lasers = $this->ophtrlaser_site_laser('laser1')->availableScope("3")->with(array('site'))->findAll();
+		$lasers = $this->ophtrlaser_site_laser('laser1')->activeWithLaserScope("3")->with(array('site'))->findAll();
 		$this->assertEquals(2 , count($lasers));
-	}*/
+	}
 
 }

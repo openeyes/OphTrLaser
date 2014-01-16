@@ -121,15 +121,33 @@ class OphTrLaser_Site_Laser extends BaseActiveRecord
 	}
 
 	/**
-	 * @description scope to get all records including deleted
-	 * @return $this - BaseActiveRecord
-	 */
+ * @description scope to get all records including deleted
+ * @return $this - BaseActiveRecord
+ */
 	public function withDeletedScope()
 	{
 		$alias = $this->getTableAlias(false);
 		$this->resetScope()->getDbCriteria()->mergeWith(array(
 			'order' => $alias . '.display_order ASC',
 		));
+
+		return $this;
+	}
+
+	/**
+	 * @description get all records including the currently selected one by id
+	 * @return $this - BaseActiveRecord
+	 */
+	public function activeWithLaserScope($laser_id)
+	{
+		if($laser_id && $laser_id >0 ){
+			$alias = $this->getTableAlias(false);
+			$this->getDbCriteria()->mergeWith(array(
+				'order' => $alias . '.display_order ASC',
+				'condition' => $alias . '.id = ' . $laser_id
+			), 'OR');
+		}
+
 
 		return $this;
 	}

@@ -17,8 +17,7 @@
  */
 
 if($element->laser_id){
-	OphTrLaser_Site_Laser::model()->getDbCriteria()->addCondition( 't.id = ' . $element->laser_id ,'OR');
-	$lasers = OphTrLaser_Site_Laser::model()->with(array('site'))
+	$lasers = OphTrLaser_Site_Laser::model()->activeWithLaserScope($element->laser_id)->with(array('site'))
 			->findAll(array('order' => 'site.short_name asc, t.name asc'));
 }else{
 	$lasers = OphTrLaser_Site_Laser::model()->with(array('site'))->findAll(array('order' => 'site.short_name asc, t.name asc'));
