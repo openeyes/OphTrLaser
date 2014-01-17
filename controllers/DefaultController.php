@@ -30,8 +30,16 @@ class DefaultController extends BaseEventTypeController
 	 */
 	protected function _jsCreate()
 	{
+		$eventId = Yii::app()->getRequest()->getQuery('id',null);
+		if($eventId){
+			$eventObj = Element_OphTrLaser_Site::model()->find('event_id = ' . $eventId);
+			$lasers = OphTrLaser_Site_Laser::model()->activeWithLaserScope($eventObj->laser_id)->findAll();
+		}
+		else{
+			$lasers = OphTrLaser_Site_Laser::model()->findAll();
+		}
+
 		$l_by_s = array();
-		$lasers = OphTrLaser_Site_Laser::model()->findAll();
 		foreach ($lasers as $slaser) {
 			$l_by_s[$slaser->site_id][] = array('id' => $slaser->id, 'name' => $slaser->name);
 		}
