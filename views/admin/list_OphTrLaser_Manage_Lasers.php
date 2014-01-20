@@ -19,34 +19,22 @@
 ?>
 <h1><?php echo $title ?></h1>
 <?php $this->renderPartial('//base/_messages')?>
-<div class="hidden" id="add-new-form" style="margin-bottom: 10px">
-	<?php
-	$form = $this->beginWidget('BaseEventTypeCActiveForm', array(
-			'id'=>'laser-create',
-			'enableAjaxValidation'=>false,
-			'action' => Yii::app()->createURL($this->module->getName() . '/admin/addTreatmentDrug')
-	));
-
-	$this->endWidget();
-	?>
-</div>
 <div class="box admin">
 	<form id="admin_manage_lasers">
 		<table class="grid">
 			<thead>
 			<tr>
-				<th><input type="checkbox" name="selectall" id="selectall" /></th>
 				<th>Name</th>
 				<th>Type</th>
 				<th>Wavelength</th>
 				<th>Site</th>
 				<th>Deleted</th>
+				<th>Edit</th>
 			</tr>
 			</thead>
 			<tbody>
 			<?php foreach ($model_list as $i => $model) {?>
 				<tr class="clickable" data-id="<?php echo $model->id?>" data-uri="OphTrLaser/admin/editLaser/<?php echo $model->id?>">
-					<td><input type="checkbox" name="lasers[]" value="<?php echo $model->id?>" /></td>
 					<td>
 						<?php echo $model->name?>
 					</td>
@@ -62,6 +50,9 @@
 					<td>
 						<?php echo $model->deleted?'Yes':'No' ?>
 					</td>
+					<td>
+						<?php echo CHtml::link('Edit', '/OphTrLaser/admin/editLaser/'. $model->id, array('class' => 'small event-action' ))?>
+					</td>
 				</tr>
 			<?php }?>
 			</tbody>
@@ -69,7 +60,6 @@
 			<tr>
 				<td colspan="2">
 					<?php echo EventAction::button('Add', 'add', null, array('class' => 'small', 'data-uri' => '/OphTrLaser/admin/addLaser'))->toHtml()?>
-					 <?php //echo EventAction::button('Edit', 'edit', null, array('class' => 'small', 'data-uri' => '/OphTrLaser/admin/editLaser/'. $model->id, 'data-object' => 'lasers'))->toHtml() ?>
 				</td>
 			</tr>
 			</tfoot>

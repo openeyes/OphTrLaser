@@ -19,11 +19,11 @@
 
 class AdminController extends ModuleAdminController
 {
-	public $defaultAction = "manageLasers";
+	//public $defaultAction = "manageLasers";
 
 	public function actionManageLasers()
 	{
-		$model_list = OphTrLaser_Site_Laser::model()->findAll(array('order' => 'display_order asc'));
+		$model_list = OphTrLaser_Site_Laser::model()->withDeletedScope()->findAll(array('order' => 'display_order asc'));
 		//$this->jsVars['OphTrIntravitrealinjection_sort_url'] = $this->createUrl('sortTreatmentDrugs');
 
 		Audit::add('admin','list',null,false,array('module'=>'OphTrLaser','model'=>'OphTrLaser_Site_Laser'));
@@ -43,7 +43,7 @@ class AdminController extends ModuleAdminController
 		if ( $request->getPost('OphTrLaser_Site_Laser') ) {
 			$model->attributes = $request->getPost('OphTrLaser_Site_Laser');
 
-			if ($bottom_laser = OphTrLaser_Site_Laser::model()->find(array('order'=>'display_order desc'))) {
+			if ($bottom_laser = OphTrLaser_Site_Laser::model()->withDeletedScope()->find(array('order'=>'display_order desc'))) {
 				$display_order = $bottom_laser->display_order+1;
 			} else {
 				$display_order = 1;
@@ -65,92 +65,30 @@ class AdminController extends ModuleAdminController
 		));
 	}
 
-	public function actionEditLaser($action)
+	public function actionEditLaser()
 	{
-		var_dump($action);
-
-		echo "HERE ";
-
-		$model = new OphTrLaser_Site_Laser();
 		$request = Yii::app()->getRequest();
+		if (!$model = OphTrLaser_Site_Laser::model()->withDeletedScope()->findByPk((int) $request->getParam('id'))) {
+			throw new Exception('Laser not found with id ' . $request->getParam('id'));
+		}
 
 		if ( $request->getPost('OphTrLaser_Site_Laser') ) {
 			$model->attributes = $request->getPost('OphTrLaser_Site_Laser');
-
-			if ($bottom_laser = OphTrLaser_Site_Laser::model()->find(array('order'=>'display_order desc'))) {
-				$display_order = $bottom_laser->display_order+1;
-			} else {
-				$display_order = 1;
-			}
-			$model->display_order = $display_order;
-
 			if ($model->save()) {
-				Audit::add('admin','create',serialize($model->attributes),false,array('module'=>'OphTrLaser','model'=>'OphTrLaser_Site_Laser'));
-				Yii::app()->user->setFlash('success', 'Laser created');
+				Audit::add('admin','edit_saved',serialize($model->attributes),false,array('module'=>'OphTrLaser','model'=>'OphTrLaser_Site_Laser'));
+				Yii::app()->user->setFlash('success', 'Laser saved');
 
 				$this->redirect(array('ManageLasers'));
 			}
+			Audit::add('admin','edit_error',serialize($model->attributes),false,array('module'=>'OphTrLaser','model'=>'OphTrLaser_Site_Laser'));
+			Yii::app()->user->setFlash('success', 'Laser: error saving laser');
 		}
+		Audit::add('admin','edit',serialize($model->attributes),false,array('module'=>'OphTrLaser','model'=>'OphTrLaser_Site_Laser'));
 
-		$this->render('create', array(
+		$this->render('edit', array(
 			'model' => $model,
 			'title' => 'Laser',
 			'cancel_uri' => '/OphTrLaser/admin/manageLasers',
 		));
 	}
-
-
-	/* public function actionEditTreatmentDrug($id)
-	{
-		if (!$model = OphTrIntravitrealinjection_Treatment_Drug::model()->findByPk((int) $id)) {
-			throw new Exception('Treatment drug not found with id ' . $id);
-		}
-
-		if (isset($_POST['OphTrIntravitrealinjection_Treatment_Drug'])) {
-			$model->attributes = $_POST['OphTrIntravitrealinjection_Treatment_Drug'];
-
-			if ($model->save()) {
-				Audit::add('admin','update',serialize($model->attributes),false,array('module'=>'OphTrIntravitrealinjection','model'=>'OphTrIntravitrealinjection_Treatment_Drug'));
-				Yii::app()->user->setFlash('success', 'Treatment drug updated');
-
-				$this->redirect(array('ViewTreatmentDrugs'));
-			}
-		}
-
-		$this->render('update', array(
-			'model' => $model,
-			'title' => 'Treatment Drug',
-			'cancel_uri' => '/OphTrIntravitrealinjection/admin/viewTreatmentDrugs',
-		));
-	}*/
-
-	/*
-	 * sorts the drugs into the provided order (NOTE does not support a paginated list of drugs)
-	 */
-	/* public function actionSortTreatmentDrugs()
-	{
-		if (!empty($_POST['order'])) {
-			foreach ($_POST['order'] as $i => $id) {
-				if ($drug = OphTrIntravitrealinjection_Treatment_Drug::model()->findByPk($id)) {
-					$drug->display_order = $i+1;
-					if (!$drug->save()) {
-						throw new Exception("Unable to save drug: ".print_r($drug->getErrors(),true));
-					}
-				}
-			}
-		}
-	}
-
-	public function actionDeleteTreatmentDrugs()
-	{
-		$result = 1;
-
-		foreach (OphTrIntravitrealinjection_Treatment_Drug::model()->findAllByPk($_POST['treatment_drugs']) as $drug) {
-			if (!$drug->delete()) {
-				$result = 0;
-			}
-		}
-
-		echo $result;
-	}*/
 }
