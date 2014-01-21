@@ -77,7 +77,7 @@ class m130913_000012_consolidation_for_ophtrlaser extends OEMigration
 			  CONSTRAINT `et_ophtrlaser_anteriorseg_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 			  CONSTRAINT `et_ophtrlaser_anteriorseg_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
 			  CONSTRAINT `et_ophtrlaser_anteriorseg_eye_id_fk` FOREIGN KEY (`eye_id`) REFERENCES `eye` (`id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->execute("CREATE TABLE `et_ophtrlaser_comments` (
@@ -95,7 +95,7 @@ class m130913_000012_consolidation_for_ophtrlaser extends OEMigration
 			  CONSTRAINT `et_ophtrlaser_comments_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`),
 			  CONSTRAINT `et_ophtrlaser_comments_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 			  CONSTRAINT `et_ophtrlaser_comments_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->execute("CREATE TABLE `et_ophtrlaser_fundus` (
@@ -117,7 +117,7 @@ class m130913_000012_consolidation_for_ophtrlaser extends OEMigration
 			  CONSTRAINT `et_ophtrlaser_fundus_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 			  CONSTRAINT `et_ophtrlaser_fundus_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
 			  CONSTRAINT `et_ophtrlaser_fundus_eye_id_fk` FOREIGN KEY (`eye_id`) REFERENCES `eye` (`id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->execute("CREATE TABLE `et_ophtrlaser_posteriorpo` (
@@ -139,7 +139,7 @@ class m130913_000012_consolidation_for_ophtrlaser extends OEMigration
 			  CONSTRAINT `et_ophtrlaser_posteriorpo_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 			  CONSTRAINT `et_ophtrlaser_posteriorpo_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
 			  CONSTRAINT `et_ophtrlaser_posteriorpo_eye_id_fk` FOREIGN KEY (`eye_id`) REFERENCES `eye` (`id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->execute("CREATE TABLE `et_ophtrlaser_site` (
@@ -165,7 +165,7 @@ class m130913_000012_consolidation_for_ophtrlaser extends OEMigration
 			  CONSTRAINT `et_ophtrlaser_site_site_fk` FOREIGN KEY (`site_id`) REFERENCES `site` (`id`),
 			  CONSTRAINT `et_ophtrlaser_site_laser_fk` FOREIGN KEY (`laser_id`) REFERENCES `ophtrlaser_site_laser` (`id`),
 			  CONSTRAINT `et_ophtrlaser_site_surgeon_id_fk` FOREIGN KEY (`surgeon_id`) REFERENCES `user` (`id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->execute("CREATE TABLE `et_ophtrlaser_treatment` (
@@ -185,7 +185,7 @@ class m130913_000012_consolidation_for_ophtrlaser extends OEMigration
 			  CONSTRAINT `et_ophtrlaser_treatment_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 			  CONSTRAINT `et_ophtrlaser_treatment_ev_fk` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
 			  CONSTRAINT `et_ophtrlaser_treatment_eye_id_fk` FOREIGN KEY (`eye_id`) REFERENCES `eye` (`id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->execute("CREATE TABLE `ophtrlaser_laserprocedure` (
@@ -202,7 +202,7 @@ class m130913_000012_consolidation_for_ophtrlaser extends OEMigration
 			  CONSTRAINT `ophtrlaser_laserprocedure_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`),
 			  CONSTRAINT `ophtrlaser_laserprocedure_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 			  CONSTRAINT `ophtrlaser_laserprocedure_proc_fk` FOREIGN KEY (`procedure_id`) REFERENCES `proc` (`id`)
-			) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+			) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->execute("CREATE TABLE `ophtrlaser_laserprocedure_assignment` (
@@ -226,7 +226,7 @@ class m130913_000012_consolidation_for_ophtrlaser extends OEMigration
 			  CONSTRAINT `ophtrlaser_laserprocedure_assignment_proc_fk` FOREIGN KEY (`procedure_id`) REFERENCES `proc` (`id`),
 			  CONSTRAINT `ophtrlaser_laserprocedure_assignment_tr_fk` FOREIGN KEY (`treatment_id`) REFERENCES `et_ophtrlaser_treatment` (`id`),
 			  CONSTRAINT `ophtrlaser_laserprocedure_assignment_eye_id_fk` FOREIGN KEY (`eye_id`) REFERENCES `eye` (`id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$this->execute("CREATE TABLE `ophtrlaser_site_laser` (
@@ -247,7 +247,7 @@ class m130913_000012_consolidation_for_ophtrlaser extends OEMigration
 			  CONSTRAINT `ophtrlaser_site_laser_site_fk` FOREIGN KEY (`site_id`) REFERENCES `site` (`id`),
 			  CONSTRAINT `ophtrlaser_site_laser_cui_fk` FOREIGN KEY (`created_user_id`) REFERENCES `user` (`id`),
 			  CONSTRAINT `ophtrlaser_site_laser_lmui_fk` FOREIGN KEY (`last_modified_user_id`) REFERENCES `user` (`id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 		");
 
 		$migrations_path = dirname(__FILE__);
