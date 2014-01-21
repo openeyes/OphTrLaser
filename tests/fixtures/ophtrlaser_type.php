@@ -19,43 +19,44 @@
 
  */
 return array(
-	'laser1' => array(
+	'type1' => array(
 		'id' => 1,
-		'name' => 'TestLaser',
-		'type' => 'Military',
-		'wavelength' => 11,
-		'display_order' => 1,
-		'site_id' => 1,
+		'name' => 'Unknown',
 		'last_modified_user_id' => 1,
 		'last_modified_date' => '1901-01-01 00:00:00',
 		'created_user_id' => 1,
 		'created_date' => '1901-01-01 00:00:00',
-		'deleted'=>false
 	),
-	'laser2' => array(
+	'type2' => array(
 		'id' => 2,
-		'name' => 'TestLaserDisabled',
-		'type' => 'Piercing',
-		'wavelength' => 2,
-		'display_order' => 2,
-		'site_id' => 1,
+		'name' => 'Argon',
 		'last_modified_user_id' => 1,
 		'last_modified_date' => '1901-01-01 00:00:00',
 		'created_user_id' => 1,
 		'created_date' => '1901-01-01 00:00:00',
-		'deleted'=>true
 	),
-	'laser3' => array(
+	'type3' => array(
 		'id' => 3,
-		'name' => 'TestLaserEnableAndDisabled',
-		'type' => 'Power',
-		'wavelength' => 300,
-		'display_order' => 3,
-		'site_id' => 1,
+		'name' => 'Diode',
 		'last_modified_user_id' => 1,
 		'last_modified_date' => '1901-01-01 00:00:00',
 		'created_user_id' => 1,
 		'created_date' => '1901-01-01 00:00:00',
-		'deleted'=>true
+	),
+	'type4' => array(
+		'id' => 4,
+		'name' => 'Excimer',
+		'last_modified_user_id' => 1,
+		'last_modified_date' => '1901-01-01 00:00:00',
+		'created_user_id' => 1,
+		'created_date' => '1901-01-01 00:00:00',
+	),
+	'type5' => array(
+		'id' => 5,
+		'name' => 'YAG',
+		'last_modified_user_id' => 1,
+		'last_modified_date' => '1901-01-01 00:00:00',
+		'created_user_id' => 1,
+		'created_date' => '1901-01-01 00:00:00',
 	),
 );

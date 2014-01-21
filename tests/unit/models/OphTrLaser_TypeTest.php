@@ -17,14 +17,14 @@
  * @copyright Copyright (c) 2011-2013, OpenEyes Foundation
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
-class OphTrLaser_Site_LaserTest extends CDbTestCase {
+class OphTrLaser_TypeTest extends CDbTestCase {
 
 	/**
 	 * @var OphTrLaser_Site_Laser
 	 */
 	protected $model;
 	public $fixtures = array(
-		'ophtrlaser_site_laser' => 'OphTrLaser_Site_Laser',
+		'ophtrlaser_type' => 'OphTrLaser_Type',
 	);
 
 	public static function setUpBeforeClass(){
@@ -37,7 +37,7 @@ class OphTrLaser_Site_LaserTest extends CDbTestCase {
 	 */
 	protected function setUp() {
 		parent::setUp();
-		$this->model = new OphTrLaser_Site_Laser;
+		$this->model = new OphTrLaser_Type;
 	}
 
 	/**
@@ -55,49 +55,28 @@ class OphTrLaser_Site_LaserTest extends CDbTestCase {
 	 * @covers OphTrLaser_Site_Laser::model
 	 */
 	public function testModel() {
-		$this->assertEquals('OphTrLaser_Site_Laser', get_class($this->model), 'Class name should match model.');
+		$this->assertEquals('OphTrLaser_Type', get_class($this->model), 'Class name should match model.');
 	}
 
 	/**
-	 * @covers OphTrLaser_Site_Laser::tableName
+	 * @covers OphTrLaser_Type::tableName
 	 */
 	public function testTableName() {
-		$this->assertEquals('ophtrlaser_site_laser', $this->model->tableName());
+		$this->assertEquals('ophtrlaser_type', $this->model->tableName());
 	}
 
 	/**
-	 * @covers OphTrLaser_Site_Laser::defaultScope
+	 * @covers OphTrLaser_Type::defaultScope
 	 */
 	public function testFindActiveLasers(){
-		$lasers = $this->ophtrlaser_site_laser('laser1')->with(array('site'))->findAll();
+		$types = $this->ophtrlaser_type('type1')->findAll();
 
-		$this->assertEquals(1 , count($lasers));
-		foreach($lasers as $laser){
-			$this->assertEquals( $laser->getTableAlias(false) .'.deleted = 0' ,
-				$laser->getDbCriteria()->condition );
-			$this->assertEquals( 0, $laser->deleted);
+		$this->assertEquals(5 , count($types));
+		foreach($types as $type){
+			$this->assertInternalType( 'string', $type->name );
+			$this->assertInternalType( 'int', (int) $type->id );
+			$this->assertGreaterThan( 0, strlen($type->name) );
 		}
-	}
-
-	/**
-	 * @covers OphTrLaser_Site_Laser::withDeletedScope
-	 */
-	public function testWithDeletedScope() {
-
-		$lasers = $this->ophtrlaser_site_laser('laser1')->withDeletedScope()->findAll();
-		$this->assertEquals( '',	$this->ophtrlaser_site_laser('laser1')->withDeletedScope()->getDbCriteria()->condition );
-		$this->assertGreaterThan(1 , count($lasers));
-	}
-
-	/**
-	 * @covers OphTrLaser_Site_Laser::activeWithLaserScope
-	 */
-	public function testFindAllActiveWithLaser(){
-		$lasers = $this->ophtrlaser_site_laser('laser1')->activeWithLaserScope(3)->with(array('site'))->findAll();
-		$this->assertEquals(2 , count($lasers));
-
-		$lasers = $this->ophtrlaser_site_laser('laser1')->activeWithLaserScope("3")->with(array('site'))->findAll();
-		$this->assertEquals(2 , count($lasers));
 	}
 
 }

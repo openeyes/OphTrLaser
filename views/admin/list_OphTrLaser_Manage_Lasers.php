@@ -39,7 +39,7 @@
 						<?php echo $model->name?>
 					</td>
 					<td>
-						<?php echo $model->type?>
+						<?php echo $model->type->name?>
 					</td>
 					<td>
 						<?php echo $model->wavelength?>

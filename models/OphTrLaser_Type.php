@@ -33,7 +33,7 @@
  * @property User $usermodified
  */
 
-class OphTrLaser_Site_Laser extends BaseActiveRecord
+class OphTrLaser_Type extends BaseActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -49,7 +49,7 @@ class OphTrLaser_Site_Laser extends BaseActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'ophtrlaser_site_laser';
+		return 'ophtrlaser_type';
 	}
 
 	/**
@@ -60,12 +60,12 @@ class OphTrLaser_Site_Laser extends BaseActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, site_id, wavelength, type, deleted', 'safe'),
-			array('name, site_id, wavelength, type', 'required'),
+			array('name,', 'safe'),
+			array('name', 'required', 'max' => 85),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, name', 'safe', 'on' => 'search'),
-			array('wavelength', 'numerical', 'integerOnly'=>true, 'min' => 200, 'max' => 2000, 'message' => 'Wavelength is a number between 200 to 2000 only.')
+			//array('name', 'numerical', 'integerOnly'=>true, 'min' => 200, 'max' => 2000, 'message' => 'Wavelength is a number between 200 to 2000 only.')
 		);
 	}
 
@@ -75,9 +75,9 @@ class OphTrLaser_Site_Laser extends BaseActiveRecord
 	public function relations()
 	{
 		return array(
-			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
-			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'site' => array(self::BELONGS_TO, 'Site', 'site_id'),
+			//'type' => array(self::BELONGS_TO, 'OphTrLaser_Site_Laser', 'id'),
+			//'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
+			//'site' => array(self::BELONGS_TO, 'Site', 'site_id'),
 		);
 	}
 
@@ -89,7 +89,6 @@ class OphTrLaser_Site_Laser extends BaseActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Name',
-			'site_id' => "Site"
 		);
 	}
 
@@ -111,47 +110,6 @@ class OphTrLaser_Site_Laser extends BaseActiveRecord
 				'criteria' => $criteria,
 			));
 	}
-
-	public function defaultScope()
-	{
-		$table_alias = $this->getTableAlias(false,false);
-		return array(
-			'condition' => $table_alias.'.deleted = 0',
-		);
-	}
-
-	/**
- * @description scope to get all records including deleted
- * @return $this - BaseActiveRecord
- */
-	public function withDeletedScope()
-	{
-		$alias = $this->getTableAlias(false);
-		$this->resetScope()->getDbCriteria()->mergeWith(array(
-			'order' => $alias . '.display_order ASC',
-		));
-
-		return $this;
-	}
-
-	/**
-	 * @description get all records including the currently selected one by id
-	 * @return $this - BaseActiveRecord
-	 */
-	public function activeWithLaserScope($laser_id)
-	{
-		if($laser_id && $laser_id >0 ){
-			$alias = $this->getTableAlias(false);
-			$this->getDbCriteria()->mergeWith(array(
-				'order' => $alias . '.display_order ASC',
-				'condition' => $alias . '.id = ' . $laser_id
-			), 'OR');
-		}
-
-
-		return $this;
-	}
-
 	/**
 	 * Set default values for forms on create
 	 */

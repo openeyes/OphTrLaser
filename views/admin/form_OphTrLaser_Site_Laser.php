@@ -20,6 +20,7 @@
 
 <?php echo $form->textField($model, 'name')?>
 <?php echo $form->dropDownList($model,'site_id',Site::model()->getListForCurrentInstitution(),array('empty'=>'- Site -'))?>
-<?php echo $form->textField($model, 'type')?>
+<?php //echo $form->textField($model, 'type')?>
+<?php echo $form->dropDownList($model, 'type', OphTrLaser_Type::model()->findAll())?>
 <?php echo $form->textField($model, 'wavelength')?>
 <?php echo $form->radioBoolean($model, 'deleted')?>

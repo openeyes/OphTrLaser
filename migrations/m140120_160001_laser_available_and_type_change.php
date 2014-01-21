@@ -7,12 +7,12 @@ class m140120_160001_laser_available_and_type_change extends OEMigration
 		$this->addColumn('ophtrlaser_site_laser','deleted','boolean default false');
 		$this->createOETable("ophtrlaser_type",
 			array(
-				'id' => 'int unsigned not null auto_increment primary key',
+				'id' => 'tinyint unsigned not null auto_increment primary key',
 				'name' => 'varchar(85) not null',
 				'unique (name)'
 			)
 		);
-		$this->alterColumn('ophtrlaser_site_laser','type','tinyint unsigned default 0 not null');
+		$this->alterColumn('ophtrlaser_site_laser','type','tinyint unsigned default 1 not null');
 		$this->addForeignKey('ophtrlaser_type_fk', 'ophtrlaser_site_laser', 'type', 'ophtrlaser_type', 'id');
 
 		$migrations_path = dirname(__FILE__);
