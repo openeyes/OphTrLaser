@@ -20,10 +20,6 @@
 return array(
 	'name' => 'OpenEyes Test',
 	'components' => array(
-		'fixture' => array(
-			'class' => 'system.test.CDbFixtureManager',
-			//'basePath'=> realpath(dirname(__FILE__)) . '/../tests/fixtures'
-		),
 		'db' => array(
 			'class'=> 'CDbConnection',
 			'connectionString' => 'mysql:host=localhost;dbname=openeyestest',

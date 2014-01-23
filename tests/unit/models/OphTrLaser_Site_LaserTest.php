@@ -27,10 +27,6 @@ class OphTrLaser_Site_LaserTest extends CDbTestCase {
 		'ophtrlaser_site_laser' => 'OphTrLaser_Site_Laser',
 	);
 
-	public static function setUpBeforeClass(){
-		self::getFixtureManager()->basePath = Yii::getPathOfAlias( 'application.modules.ophtrlaser.tests.fixtures' );
-	}
-
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
@@ -45,10 +41,6 @@ class OphTrLaser_Site_LaserTest extends CDbTestCase {
 	 * This method is called after a test is executed.
 	 */
 	protected function tearDown() {
-	}
-
-	static function tearDownAfterClass(){
-		self::getFixtureManager()->basePath = Yii::getPathOfAlias( 'application.tests.fixtures' );
 	}
 
 	/**
