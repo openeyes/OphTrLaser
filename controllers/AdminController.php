@@ -23,7 +23,7 @@ class AdminController extends ModuleAdminController
 
 	public function actionManageLasers()
 	{
-		$model_list = OphTrLaser_Site_Laser::model()->withDeletedScope()->findAll(array('order' => 'display_order asc'));
+		$model_list = OphTrLaser_Site_Laser::model()->withDeletedScope()->with('type')->findAll(array('order' => 'display_order asc'));
 		//$this->jsVars['OphTrIntravitrealinjection_sort_url'] = $this->createUrl('sortTreatmentDrugs');
 
 		Audit::add('admin','list',null,false,array('module'=>'OphTrLaser','model'=>'OphTrLaser_Site_Laser'));

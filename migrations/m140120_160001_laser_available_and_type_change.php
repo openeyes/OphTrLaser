@@ -12,8 +12,9 @@ class m140120_160001_laser_available_and_type_change extends OEMigration
 				'unique (name)'
 			)
 		);
-		$this->alterColumn('ophtrlaser_site_laser','type','tinyint unsigned default 1 not null');
-		$this->addForeignKey('ophtrlaser_type_fk', 'ophtrlaser_site_laser', 'type', 'ophtrlaser_type', 'id');
+		$this->renameColumn('ophtrlaser_site_laser','type','type_id');
+		$this->alterColumn('ophtrlaser_site_laser','type_id','tinyint unsigned default 1 not null');
+		$this->addForeignKey('ophtrlaser_type_fk', 'ophtrlaser_site_laser', 'type_id', 'ophtrlaser_type', 'id');
 
 		$migrations_path = dirname(__FILE__);
 		$this->initialiseData($migrations_path);
@@ -24,6 +25,7 @@ class m140120_160001_laser_available_and_type_change extends OEMigration
 		$this->dropColumn('ophtrlaser_site_laser','deleted');
 		$this->dropForeignKey('laseritem_type_fk' , 'ophtrlaser_site_laser');
 		$this->dropTable("ophtrlaser_type");
-		$this->alterColumn('ophtrlaser_site_laser','type','varchar(128) DEFAULT NULL');
+		$this->alterColumn('ophtrlaser_site_laser','type_id','varchar(128) DEFAULT NULL');
+		$this->renameColumn('ophtrlaser_site_laser','type_id','type');
 	}
 }

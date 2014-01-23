@@ -17,20 +17,11 @@
  */
 
 /**
- * This is the model class for table "ophtrlaser_site_laser".
+ * This is the model class for table "ophtrlaser_type".
  *
  * The followings are the available columns in table:
  * @property string $id
  * @property string $name
- * @property string $deleted
- *
- * The followings are the available model relations:
- *
- * @property ElementType $element_type
- * @property EventType $eventType
- * @property Event $event
- * @property User $user
- * @property User $usermodified
  */
 
 class OphTrLaser_Type extends BaseActiveRecord
