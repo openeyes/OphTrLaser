@@ -30,8 +30,17 @@ class DefaultController extends BaseEventTypeController
 	 */
 	protected function _jsCreate()
 	{
+		$eventId = Yii::app()->getRequest()->getQuery('id',null);
+		if($eventId){
+			$eventObj = Element_OphTrLaser_Site::model()->find('event_id = ' . $eventId);
+			$lasers = OphTrLaser_Site_Laser::model()->activeWithLaserScope($eventObj->laser_id)->findAll();
+		}
+		else{
+			$lasers = OphTrLaser_Site_Laser::model()->findAll();
+		}
+
 		$l_by_s = array();
-		foreach (OphTrLaser_Site_Laser::model()->findAll() as $slaser) {
+		foreach ($lasers as $slaser) {
 			$l_by_s[$slaser->site_id][] = array('id' => $slaser->id, 'name' => $slaser->name);
 		}
 		Yii::app()->getClientScript()->registerScript('OphTrLaserJS', 'var lasersBySite = ' . CJavaScript::encode($l_by_s) . ';', CClientScript::POS_HEAD);
@@ -45,10 +54,7 @@ class DefaultController extends BaseEventTypeController
 	 */
 	protected function beforeAction($action)
 	{
-		if (!Yii::app()->getRequest()->getIsAjaxRequest() && !$this->isPrintAction($action->id)) {
-			Yii::app()->getClientScript()->registerScriptFile(Yii::app()->createUrl('js/spliteventtype.js'));
-		}
-
+		Yii::app()->assetManager->registerScriptFile('js/spliteventtype.js', null, null, AssetManager::OUTPUT_SCREEN);
 		return parent::beforeAction($action);
 	}
 
@@ -104,6 +110,7 @@ class DefaultController extends BaseEventTypeController
 			if (array_key_exists($el_class, self::$IMPORT_ELEMENTS)) {
 				$import_model = self::$IMPORT_ELEMENTS[$el_class];
 				$previous = $this->episode->getElementsOfType($import_model::model()->getElementType());
+				$import = false;
 				if (count($previous)) {
 					$import = $previous[0];
 				}

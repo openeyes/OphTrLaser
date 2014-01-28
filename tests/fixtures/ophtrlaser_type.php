@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OpenEyes
  *
@@ -15,32 +16,47 @@
  * @copyright Copyright (c) 2008-2011, Moorfields Eye Hospital NHS Foundation Trust
  * @copyright Copyright (c) 2011-2013, OpenEyes Foundation
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
+
  */
- ?>
-
-<?php $this->beginContent('//patient/event_container'); ?>
-
-	<h2 class="event-title"><?php echo $this->event_type->name ?></h2>
-
-	<div id="delete_event">
-		<h3>Delete event</h3>
-		<div class="alert-box alert with-icon">
-			<strong>WARNING: This will permanently delete the event and remove it from view.<br><br>THIS ACTION CANNOT BE UNDONE.</strong>
-		</div>
-		<p>
-			<strong>Are you sure you want to proceed?</strong>
-		</p>
-		<?php
-		echo CHtml::form(array('Default/delete/'.$this->event->id), 'post', array('id' => 'deleteForm'));
-			echo CHtml::hiddenField('event_id', $this->event->id); ?>
-			<button type="submit" class="warning" id="et_deleteevent" name="et_deleteevent">
-				Delete event
-			</button>
-			<button type="submit" class="secondary" id="et_canceldelete" name="et_canceldelete">
-				Cancel
-			</button>
-			<img class="loader" src="<?php echo Yii::app()->assetManager->createUrl('img/ajax-loader.gif')?>" alt="loading..." style="display: none;" />
-		<?php echo CHtml::endForm(); ?>
-	</div>
-
-<?php $this->endContent() ?>
+return array(
+	'type1' => array(
+		'id' => 1,
+		'name' => 'Unknown',
+		'last_modified_user_id' => 1,
+		'last_modified_date' => '1901-01-01 00:00:00',
+		'created_user_id' => 1,
+		'created_date' => '1901-01-01 00:00:00',
+	),
+	'type2' => array(
+		'id' => 2,
+		'name' => 'Argon',
+		'last_modified_user_id' => 1,
+		'last_modified_date' => '1901-01-01 00:00:00',
+		'created_user_id' => 1,
+		'created_date' => '1901-01-01 00:00:00',
+	),
+	'type3' => array(
+		'id' => 3,
+		'name' => 'Diode',
+		'last_modified_user_id' => 1,
+		'last_modified_date' => '1901-01-01 00:00:00',
+		'created_user_id' => 1,
+		'created_date' => '1901-01-01 00:00:00',
+	),
+	'type4' => array(
+		'id' => 4,
+		'name' => 'Excimer',
+		'last_modified_user_id' => 1,
+		'last_modified_date' => '1901-01-01 00:00:00',
+		'created_user_id' => 1,
+		'created_date' => '1901-01-01 00:00:00',
+	),
+	'type5' => array(
+		'id' => 5,
+		'name' => 'YAG',
+		'last_modified_user_id' => 1,
+		'last_modified_date' => '1901-01-01 00:00:00',
+		'created_user_id' => 1,
+		'created_date' => '1901-01-01 00:00:00',
+	),
+);
