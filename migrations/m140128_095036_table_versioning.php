@@ -321,9 +321,7 @@ CREATE TABLE `ophtrlaser_site_laser_version` (
 		$this->addColumn('et_ophtrlaser_fundus_version','deleted','tinyint(1) unsigned not null');
 		$this->addColumn('et_ophtrlaser_posteriorpo','deleted','tinyint(1) unsigned not null');
 		$this->addColumn('et_ophtrlaser_posteriorpo_version','deleted','tinyint(1) unsigned not null');
-
-		$this->alterColumn('et_ophtrlaser_site','deleted','tinyint(1) unsigned not null');
-
+		$this->addColumn('et_ophtrlaser_site','deleted','tinyint(1) unsigned not null');
 		$this->addColumn('et_ophtrlaser_site_version','deleted','tinyint(1) unsigned not null');
 		$this->addColumn('et_ophtrlaser_treatment','deleted','tinyint(1) unsigned not null');
 		$this->addColumn('et_ophtrlaser_treatment_version','deleted','tinyint(1) unsigned not null');
@@ -332,7 +330,7 @@ CREATE TABLE `ophtrlaser_site_laser_version` (
 		$this->addColumn('ophtrlaser_laserprocedure_version','deleted','tinyint(1) unsigned not null');
 		$this->addColumn('ophtrlaser_laserprocedure_assignment','deleted','tinyint(1) unsigned not null');
 		$this->addColumn('ophtrlaser_laserprocedure_assignment_version','deleted','tinyint(1) unsigned not null');
-		$this->addColumn('ophtrlaser_site_laser','deleted','tinyint(1) unsigned not null');
+		$this->alterColumn('ophtrlaser_site_laser','deleted','tinyint(1) unsigned not null');
 		$this->addColumn('ophtrlaser_site_laser_version','deleted','tinyint(1) unsigned not null');
 	}
 
@@ -342,12 +340,12 @@ CREATE TABLE `ophtrlaser_site_laser_version` (
 		$this->dropColumn('et_ophtrlaser_comments','deleted');
 		$this->dropColumn('et_ophtrlaser_fundus','deleted');
 		$this->dropColumn('et_ophtrlaser_posteriorpo','deleted');
-		$this->alterColumn('et_ophtrlaser_site','deleted','boolean default false');
+		$this->dropColumn('et_ophtrlaser_site','deleted');
 		$this->dropColumn('et_ophtrlaser_treatment','deleted');
 
 		$this->dropColumn('ophtrlaser_laserprocedure','deleted');
 		$this->dropColumn('ophtrlaser_laserprocedure_assignment','deleted');
-		$this->dropColumn('ophtrlaser_site_laser','deleted');
+		$this->alterColumn('ophtrlaser_site_laser','deleted','boolean default false');
 
 		$this->dropTable('et_ophtrlaser_anteriorseg_version');
 		$this->dropTable('et_ophtrlaser_comments_version');
