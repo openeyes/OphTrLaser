@@ -1,6 +1,6 @@
 <?php
 
-class m131204_161017_table_versioning extends CDbMigration
+class m140128_095036_table_versioning extends CDbMigration
 {
 	public function up()
 	{
@@ -321,7 +321,9 @@ CREATE TABLE `ophtrlaser_site_laser_version` (
 		$this->addColumn('et_ophtrlaser_fundus_version','deleted','tinyint(1) unsigned not null');
 		$this->addColumn('et_ophtrlaser_posteriorpo','deleted','tinyint(1) unsigned not null');
 		$this->addColumn('et_ophtrlaser_posteriorpo_version','deleted','tinyint(1) unsigned not null');
-		$this->addColumn('et_ophtrlaser_site','deleted','tinyint(1) unsigned not null');
+
+		$this->alterColumn('et_ophtrlaser_site','deleted','tinyint(1) unsigned not null');
+
 		$this->addColumn('et_ophtrlaser_site_version','deleted','tinyint(1) unsigned not null');
 		$this->addColumn('et_ophtrlaser_treatment','deleted','tinyint(1) unsigned not null');
 		$this->addColumn('et_ophtrlaser_treatment_version','deleted','tinyint(1) unsigned not null');
@@ -340,7 +342,7 @@ CREATE TABLE `ophtrlaser_site_laser_version` (
 		$this->dropColumn('et_ophtrlaser_comments','deleted');
 		$this->dropColumn('et_ophtrlaser_fundus','deleted');
 		$this->dropColumn('et_ophtrlaser_posteriorpo','deleted');
-		$this->dropColumn('et_ophtrlaser_site','deleted');
+		$this->alterColumn('et_ophtrlaser_site','deleted','boolean default false');
 		$this->dropColumn('et_ophtrlaser_treatment','deleted');
 
 		$this->dropColumn('ophtrlaser_laserprocedure','deleted');
