@@ -22,8 +22,8 @@ return array(
 	'laser1' => array(
 		'id' => 1,
 		'name' => 'TestLaser',
-		'type' => 'Military',
-		'wavelength' => 11,
+		'type_id' => 1,
+		'wavelength' => 200,
 		'display_order' => 1,
 		'site_id' => 1,
 		'last_modified_user_id' => 1,
@@ -35,8 +35,8 @@ return array(
 	'laser2' => array(
 		'id' => 2,
 		'name' => 'TestLaserDisabled',
-		'type' => 'Piercing',
-		'wavelength' => 2,
+		'type_id' => 2,
+		'wavelength' => 222,
 		'display_order' => 2,
 		'site_id' => 1,
 		'last_modified_user_id' => 1,
@@ -48,7 +48,7 @@ return array(
 	'laser3' => array(
 		'id' => 3,
 		'name' => 'TestLaserEnableAndDisabled',
-		'type' => 'Power',
+		'type_id' => 3,
 		'wavelength' => 300,
 		'display_order' => 3,
 		'site_id' => 1,

@@ -33,7 +33,9 @@
  * @property User $usermodified
  */
 
-class OphTrLaser_Site_Laser extends BaseActiveRecordVersioned
+// todo - when switching to BaseActiveRecordVersioned please test to avoid problems with the deleted records
+
+class OphTrLaser_Site_Laser extends BaseActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -131,6 +133,8 @@ class OphTrLaser_Site_Laser extends BaseActiveRecordVersioned
 		$this->resetScope()->getDbCriteria()->mergeWith(array(
 			'order' => $alias . '.display_order ASC',
 		));
+		// todo - when switching to BaseActiveRecordVersioned deleted can be included like this as apparently resetting scope defaults to active only despite DbCriteria set in models
+		//$this->includeDeleted();
 
 		return $this;
 	}
@@ -141,6 +145,7 @@ class OphTrLaser_Site_Laser extends BaseActiveRecordVersioned
 	 */
 	public function activeWithLaserScope($laser_id)
 	{
+		// todo - when switching to BaseActiveRecordVersioned make sure you can still all active lasers and the previously selected either deleted or not
 		if($laser_id && $laser_id >0 ){
 			$alias = $this->getTableAlias(false);
 			$this->getDbCriteria()->mergeWith(array(
@@ -148,8 +153,6 @@ class OphTrLaser_Site_Laser extends BaseActiveRecordVersioned
 				'condition' => $alias . '.id = ' . $laser_id
 			), 'OR');
 		}
-
-
 		return $this;
 	}
 

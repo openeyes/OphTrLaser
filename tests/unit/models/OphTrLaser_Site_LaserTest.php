@@ -65,8 +65,6 @@ class OphTrLaser_Site_LaserTest extends CDbTestCase {
 
 		$this->assertEquals(1 , count($lasers));
 		foreach($lasers as $laser){
-			$this->assertEquals( $laser->getTableAlias(false) .'.deleted = 0' ,
-				$laser->getDbCriteria()->condition );
 			$this->assertEquals( 0, $laser->deleted);
 		}
 	}
@@ -75,9 +73,7 @@ class OphTrLaser_Site_LaserTest extends CDbTestCase {
 	 * @covers OphTrLaser_Site_Laser::withDeletedScope
 	 */
 	public function testWithDeletedScope() {
-
 		$lasers = $this->ophtrlaser_site_laser('laser1')->withDeletedScope()->findAll();
-		$this->assertEquals( '',	$this->ophtrlaser_site_laser('laser1')->withDeletedScope()->getDbCriteria()->condition );
 		$this->assertGreaterThan(1 , count($lasers));
 	}
 
