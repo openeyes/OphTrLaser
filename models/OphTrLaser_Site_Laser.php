@@ -125,8 +125,7 @@ class OphTrLaser_Site_Laser extends BaseActiveRecordVersioned
 		$this->resetScope()->getDbCriteria()->mergeWith(array(
 			'order' => $alias . '.display_order ASC',
 		));
-		// todo - when switching to BaseActiveRecordVersioned deleted can be included like this as apparently resetting scope defaults to active only despite DbCriteria set in models
-		//$this->includeDeleted();
+		$this->includeDeleted();
 
 		return $this;
 	}
