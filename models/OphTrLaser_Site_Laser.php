@@ -35,7 +35,7 @@
 
 // todo - when switching to BaseActiveRecordVersioned please test to avoid problems with the deleted records
 
-class OphTrLaser_Site_Laser extends BaseActiveRecord
+class OphTrLaser_Site_Laser extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -115,14 +115,6 @@ class OphTrLaser_Site_Laser extends BaseActiveRecord
 			));
 	}
 
-	public function defaultScope()
-	{
-		$table_alias = $this->getTableAlias(false,false);
-		return array(
-			'condition' => $table_alias.'.deleted = 0',
-		);
-	}
-
 	/**
  * @description scope to get all records including deleted
  * @return $this - BaseActiveRecord
@@ -137,44 +129,5 @@ class OphTrLaser_Site_Laser extends BaseActiveRecord
 		//$this->includeDeleted();
 
 		return $this;
-	}
-
-	/**
-	 * @description get all records including the currently selected one by id
-	 * @return $this - BaseActiveRecord
-	 */
-	public function activeWithLaserScope($laser_id)
-	{
-		// todo - when switching to BaseActiveRecordVersioned make sure you can still all active lasers and the previously selected either deleted or not
-		if($laser_id && $laser_id >0 ){
-			$alias = $this->getTableAlias(false);
-			$this->getDbCriteria()->mergeWith(array(
-				'order' => $alias . '.display_order ASC',
-				'condition' => $alias . '.id = ' . $laser_id
-			), 'OR');
-		}
-		return $this;
-	}
-
-	/**
-	 * Set default values for forms on create
-	 */
-	public function setDefaultOptions()
-	{
-	}
-
-	protected function beforeSave()
-	{
-		return parent::beforeSave();
-	}
-
-	protected function afterSave()
-	{
-		return parent::afterSave();
-	}
-
-	protected function beforeValidate()
-	{
-		return parent::beforeValidate();
 	}
 }
