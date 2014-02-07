@@ -27,7 +27,7 @@
  * @property integer $eye_id
  *
  */
-class OphTrLaser_LaserProcedureAssignment extends BaseEventTypeElement
+class OphTrLaser_LaserProcedureAssignment extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.

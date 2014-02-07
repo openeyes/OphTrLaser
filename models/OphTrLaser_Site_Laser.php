@@ -33,9 +33,9 @@
  * @property User $usermodified
  */
 
-// todo - when switching to BaseActiveRecordVersioned please test to avoid problems with the deleted records
+// todo - when switching to BaseActiveRecordVersionedSoftDelete please test to avoid problems with the deleted records
 
-class OphTrLaser_Site_Laser extends BaseActiveRecordVersioned
+class OphTrLaser_Site_Laser extends BaseActiveRecordVersionedSoftDelete
 {
 	/**
 	 * Returns the static model of the specified AR class.
