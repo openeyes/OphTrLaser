@@ -16,35 +16,18 @@
  * @copyright Copyright (c) 2011-2012, OpenEyes Foundation
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
-?>
-<section class="element">
-	<header class="element-header">
-		<h3 class="element-title"><?php echo $element->elementType->name?></h3>
-	</header>
-	<div class="element-data">
-		<div class="row data-row">
-			<div class="large-2 column">
-				<div class="data-label"><?php echo $element->getAttributeLabel('site_id')?></div>
-			</div>
-			<div class="large-10 column">
-				<div class="data-value"><?php echo $element->site ? $element->site->name : 'None'?></div>
-			</div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column">
-				<div class="data-label"><?php echo $element->getAttributeLabel('laser_id')?></div>
-			</div>
-			<div class="large-10 column">
-				<div class="data-value"><?php echo $element->laser ? $element->laser->name : 'None'?></div>
-			</div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column">
-				<div class="data-label"><?php echo $element->getAttributeLabel('operator_id')?></div>
-			</div>
-			<div class="large-10 column">
-				<div class="data-value"><?php echo $element->surgeon ? $element->surgeon->ReversedFullName : 'None'?></div>
-			</div>
-		</div>
-	</div>
-</section>
+
+// display pagination
+if(isset($pagination)){
+	$this->widget('CLinkPager', array(
+		'pages' => $pagination,
+		'maxButtonCount' => 13,
+		'cssFile' => false,
+		'selectedPageCssClass' => 'current',
+		'hiddenPageCssClass' => 'unavailable',
+		'header' => false,
+		'htmlOptions' => array(
+			'class' => 'pagination'
+		)
+	));
+}

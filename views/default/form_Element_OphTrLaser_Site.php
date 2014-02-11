@@ -39,5 +39,5 @@ foreach ($lasers as $laser) {
 			<em>Please select a site to see the list of available lasers.</em>
 		</div>
 	</div>
-	<?php echo $form->dropDownList($element, 'surgeon_id', CHtml::listData($element->surgeons, 'id', 'ReversedFullName'),array('empty'=>'- Please select -'),false,array('label' => 2, 'field' => 3))?>
+	<?php echo $form->dropDownList($element, 'operator_id', CHtml::listData($element->surgeons, 'id', 'ReversedFullName'),array('empty'=>'- Please select -'),false,array('label' => 2, 'field' => 3))?>
 </div>
