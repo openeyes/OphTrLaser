@@ -170,7 +170,7 @@ class Element_OphTrLaser_Site extends BaseEventTypeElement
 			$criteria->compare('is_doctor',1);
 			$criteria->order = 'last_name,first_name asc';
 
-			$this->surgeonlist = User::model()->findAll($criteria);
+			$this->surgeonlist = User::model()->active()->findAll($criteria);
 		}
 
 		return $this->surgeonlist;
