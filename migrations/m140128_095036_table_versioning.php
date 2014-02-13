@@ -31,7 +31,6 @@ CREATE TABLE `et_ophtrlaser_anteriorseg_version` (
 		$this->dropPrimaryKey('id','et_ophtrlaser_anteriorseg_version');
 
 		$this->createIndex('et_ophtrlaser_anteriorseg_aid_fk','et_ophtrlaser_anteriorseg_version','id');
-		$this->addForeignKey('et_ophtrlaser_anteriorseg_aid_fk','et_ophtrlaser_anteriorseg_version','id','et_ophtrlaser_anteriorseg','id');
 
 		$this->addColumn('et_ophtrlaser_anteriorseg_version','version_date',"datetime not null default '1900-01-01 00:00:00'");
 
@@ -62,7 +61,6 @@ CREATE TABLE `et_ophtrlaser_comments_version` (
 		$this->dropPrimaryKey('id','et_ophtrlaser_comments_version');
 
 		$this->createIndex('et_ophtrlaser_comments_aid_fk','et_ophtrlaser_comments_version','id');
-		$this->addForeignKey('et_ophtrlaser_comments_aid_fk','et_ophtrlaser_comments_version','id','et_ophtrlaser_comments','id');
 
 		$this->addColumn('et_ophtrlaser_comments_version','version_date',"datetime not null default '1900-01-01 00:00:00'");
 
@@ -97,7 +95,6 @@ CREATE TABLE `et_ophtrlaser_fundus_version` (
 		$this->dropPrimaryKey('id','et_ophtrlaser_fundus_version');
 
 		$this->createIndex('et_ophtrlaser_fundus_aid_fk','et_ophtrlaser_fundus_version','id');
-		$this->addForeignKey('et_ophtrlaser_fundus_aid_fk','et_ophtrlaser_fundus_version','id','et_ophtrlaser_fundus','id');
 
 		$this->addColumn('et_ophtrlaser_fundus_version','version_date',"datetime not null default '1900-01-01 00:00:00'");
 
@@ -132,7 +129,6 @@ CREATE TABLE `et_ophtrlaser_posteriorpo_version` (
 		$this->dropPrimaryKey('id','et_ophtrlaser_posteriorpo_version');
 
 		$this->createIndex('et_ophtrlaser_posteriorpo_aid_fk','et_ophtrlaser_posteriorpo_version','id');
-		$this->addForeignKey('et_ophtrlaser_posteriorpo_aid_fk','et_ophtrlaser_posteriorpo_version','id','et_ophtrlaser_posteriorpo','id');
 
 		$this->addColumn('et_ophtrlaser_posteriorpo_version','version_date',"datetime not null default '1900-01-01 00:00:00'");
 
@@ -171,7 +167,6 @@ CREATE TABLE `et_ophtrlaser_site_version` (
 		$this->dropPrimaryKey('id','et_ophtrlaser_site_version');
 
 		$this->createIndex('et_ophtrlaser_site_aid_fk','et_ophtrlaser_site_version','id');
-		$this->addForeignKey('et_ophtrlaser_site_aid_fk','et_ophtrlaser_site_version','id','et_ophtrlaser_site','id');
 
 		$this->addColumn('et_ophtrlaser_site_version','version_date',"datetime not null default '1900-01-01 00:00:00'");
 
@@ -204,7 +199,6 @@ CREATE TABLE `et_ophtrlaser_treatment_version` (
 		$this->dropPrimaryKey('id','et_ophtrlaser_treatment_version');
 
 		$this->createIndex('et_ophtrlaser_treatment_aid_fk','et_ophtrlaser_treatment_version','id');
-		$this->addForeignKey('et_ophtrlaser_treatment_aid_fk','et_ophtrlaser_treatment_version','id','et_ophtrlaser_treatment','id');
 
 		$this->addColumn('et_ophtrlaser_treatment_version','version_date',"datetime not null default '1900-01-01 00:00:00'");
 
@@ -234,7 +228,6 @@ CREATE TABLE `ophtrlaser_laserprocedure_version` (
 		$this->dropPrimaryKey('id','ophtrlaser_laserprocedure_version');
 
 		$this->createIndex('ophtrlaser_laserprocedure_aid_fk','ophtrlaser_laserprocedure_version','id');
-		$this->addForeignKey('ophtrlaser_laserprocedure_aid_fk','ophtrlaser_laserprocedure_version','id','ophtrlaser_laserprocedure','id');
 
 		$this->addColumn('ophtrlaser_laserprocedure_version','version_date',"datetime not null default '1900-01-01 00:00:00'");
 
@@ -271,7 +264,6 @@ CREATE TABLE `ophtrlaser_laserprocedure_assignment_version` (
 		$this->dropPrimaryKey('id','ophtrlaser_laserprocedure_assignment_version');
 
 		$this->createIndex('ophtrlaser_laserprocedure_assignment_aid_fk','ophtrlaser_laserprocedure_assignment_version','id');
-		$this->addForeignKey('ophtrlaser_laserprocedure_assignment_aid_fk','ophtrlaser_laserprocedure_assignment_version','id','ophtrlaser_laserprocedure_assignment','id');
 
 		$this->addColumn('ophtrlaser_laserprocedure_assignment_version','version_date',"datetime not null default '1900-01-01 00:00:00'");
 
@@ -313,38 +305,12 @@ CREATE TABLE `ophtrlaser_site_laser_version` (
 		$this->addPrimaryKey('version_id','ophtrlaser_site_laser_version','version_id');
 		$this->alterColumn('ophtrlaser_site_laser_version','version_id','int(10) unsigned NOT NULL AUTO_INCREMENT');
 
-		$this->addColumn('et_ophtrlaser_anteriorseg','deleted','tinyint(1) unsigned not null');
-		$this->addColumn('et_ophtrlaser_anteriorseg_version','deleted','tinyint(1) unsigned not null');
-		$this->addColumn('et_ophtrlaser_comments','deleted','tinyint(1) unsigned not null');
-		$this->addColumn('et_ophtrlaser_comments_version','deleted','tinyint(1) unsigned not null');
-		$this->addColumn('et_ophtrlaser_fundus','deleted','tinyint(1) unsigned not null');
-		$this->addColumn('et_ophtrlaser_fundus_version','deleted','tinyint(1) unsigned not null');
-		$this->addColumn('et_ophtrlaser_posteriorpo','deleted','tinyint(1) unsigned not null');
-		$this->addColumn('et_ophtrlaser_posteriorpo_version','deleted','tinyint(1) unsigned not null');
-		$this->addColumn('et_ophtrlaser_site','deleted','tinyint(1) unsigned not null');
-		$this->addColumn('et_ophtrlaser_site_version','deleted','tinyint(1) unsigned not null');
-		$this->addColumn('et_ophtrlaser_treatment','deleted','tinyint(1) unsigned not null');
-		$this->addColumn('et_ophtrlaser_treatment_version','deleted','tinyint(1) unsigned not null');
-
-		$this->addColumn('ophtrlaser_laserprocedure','deleted','tinyint(1) unsigned not null');
-		$this->addColumn('ophtrlaser_laserprocedure_version','deleted','tinyint(1) unsigned not null');
-		$this->addColumn('ophtrlaser_laserprocedure_assignment','deleted','tinyint(1) unsigned not null');
-		$this->addColumn('ophtrlaser_laserprocedure_assignment_version','deleted','tinyint(1) unsigned not null');
 		$this->alterColumn('ophtrlaser_site_laser','deleted','tinyint(1) unsigned not null');
 		$this->addColumn('ophtrlaser_site_laser_version','deleted','tinyint(1) unsigned not null');
 	}
 
 	public function down()
 	{
-		$this->dropColumn('et_ophtrlaser_anteriorseg','deleted');
-		$this->dropColumn('et_ophtrlaser_comments','deleted');
-		$this->dropColumn('et_ophtrlaser_fundus','deleted');
-		$this->dropColumn('et_ophtrlaser_posteriorpo','deleted');
-		$this->dropColumn('et_ophtrlaser_site','deleted');
-		$this->dropColumn('et_ophtrlaser_treatment','deleted');
-
-		$this->dropColumn('ophtrlaser_laserprocedure','deleted');
-		$this->dropColumn('ophtrlaser_laserprocedure_assignment','deleted');
 		$this->alterColumn('ophtrlaser_site_laser','deleted','boolean default false');
 
 		$this->dropTable('et_ophtrlaser_anteriorseg_version');
