@@ -12,7 +12,6 @@ class m140128_101053_new_table_versioning_changes extends OEMigration
 				'version_date' => "datetime NOT NULL DEFAULT '1900-01-01 00:00:00'",
 				'version_id' => 'int(10) unsigned NOT NULL AUTO_INCREMENT primary key',
 				'deleted' => 'tinyint(1) unsigned not null',
-				'unique (name)',
 			)
 		);
 		$this->renameColumn('ophtrlaser_site_laser_version','type','type_id');
