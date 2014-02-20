@@ -33,7 +33,7 @@ class DefaultController extends BaseEventTypeController
 		$eventId = Yii::app()->getRequest()->getQuery('id',null);
 		if($eventId){
 			$eventObj = Element_OphTrLaser_Site::model()->find('event_id = ' . $eventId);
-			$lasers = OphTrLaser_Site_Laser::model()->activeWithItem($eventObj->laser_id)->findAll();
+			$lasers = OphTrLaser_Site_Laser::model()->activeOrPk($eventObj->laser_id)->findAll();
 		}
 		else{
 			$lasers = OphTrLaser_Site_Laser::model()->findAll();

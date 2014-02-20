@@ -17,7 +17,7 @@
  */
 
 if($element->laser_id){
-	$lasers = OphTrLaser_Site_Laser::model()->activeWithItem($element->laser_id)->with(array('site'))
+	$lasers = OphTrLaser_Site_Laser::model()->activeOrPk($element->laser_id)->with(array('site'))
 			->findAll(array('order' => 'site.short_name asc, t.name asc'));
 }else{
 	$lasers = OphTrLaser_Site_Laser::model()->with(array('site'))->findAll(array('order' => 'site.short_name asc, t.name asc'));

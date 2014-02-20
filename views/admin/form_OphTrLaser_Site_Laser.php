@@ -21,7 +21,7 @@
 <?php echo $form->textField($model, 'name')?>
 <?php echo $form->dropDownList($model,'site_id',Site::model()->getListForCurrentInstitution(),array('empty'=>'- Site -'))?>
 <?php
-	$types = OphTrLaser_Type::model()->findAll();
+	$types = OphTrLaser_Type::model()->notDeletedOrPk($model->type_id)->findAll();
 	$typesArray = array();
 	foreach($types as $type){
 		$typesArray[$type->id] = $type->name;

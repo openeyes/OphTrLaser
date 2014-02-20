@@ -23,7 +23,7 @@ class AdminController extends ModuleAdminController
 
 	public function actionManageLasers()
 	{
-		$model_list = OphTrLaser_Site_Laser::model()->withDeletedScope()->with('type')->findAll(array('order' => 'display_order asc'));
+		$model_list = OphTrLaser_Site_Laser::model()->with('type')->active()->findAll(array('order' => 'display_order asc'));
 		//$this->jsVars['OphTrIntravitrealinjection_sort_url'] = $this->createUrl('sortTreatmentDrugs');
 
 		Audit::add('admin','list',null,false,array('module'=>'OphTrLaser','model'=>'OphTrLaser_Site_Laser'));
@@ -43,7 +43,7 @@ class AdminController extends ModuleAdminController
 		if ( $request->getPost('OphTrLaser_Site_Laser') ) {
 			$model->attributes = $request->getPost('OphTrLaser_Site_Laser');
 
-			if ($bottom_laser = OphTrLaser_Site_Laser::model()->withDeletedScope()->find(array('order'=>'display_order desc'))) {
+			if ($bottom_laser = OphTrLaser_Site_Laser::model()->find(array('order'=>'display_order desc'))) {
 				$display_order = $bottom_laser->display_order+1;
 			} else {
 				$display_order = 1;
@@ -68,7 +68,7 @@ class AdminController extends ModuleAdminController
 	public function actionEditLaser()
 	{
 		$request = Yii::app()->getRequest();
-		if (!$model = OphTrLaser_Site_Laser::model()->withDeletedScope()->findByPk((int) $request->getParam('id'))) {
+		if (!$model = OphTrLaser_Site_Laser::model()->findByPk((int) $request->getParam('id'))) {
 			throw new Exception('Laser not found with id ' . $request->getParam('id'));
 		}
 

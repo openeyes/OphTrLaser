@@ -114,19 +114,4 @@ class OphTrLaser_Site_Laser extends BaseActiveRecordVersionedSoftDelete
 				'criteria' => $criteria,
 			));
 	}
-
-	/**
- * @description scope to get all records including deleted
- * @return $this - BaseActiveRecord
- */
-	public function withDeletedScope()
-	{
-		$alias = $this->getTableAlias(false);
-		$this->resetScope()->getDbCriteria()->mergeWith(array(
-			'order' => $alias . '.display_order ASC',
-		));
-		$this->includeDeleted();
-
-		return $this;
-	}
 }

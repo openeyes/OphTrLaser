@@ -68,12 +68,4 @@ class OphTrLaser_Site_LaserTest extends CDbTestCase {
 			$this->assertEquals( 0, $laser->deleted);
 		}
 	}
-
-	/**
-	 * @covers OphTrLaser_Site_Laser::withDeletedScope
-	 */
-	public function testWithDeletedScope() {
-		$lasers = $this->ophtrlaser_site_laser('laser1')->withDeletedScope()->findAll();
-		$this->assertGreaterThan(1 , count($lasers));
-	}
 }
