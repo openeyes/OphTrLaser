@@ -61,7 +61,7 @@ class OphTrLaser_Site_LaserTest extends CDbTestCase {
 	 * @covers OphTrLaser_Site_Laser::defaultScope
 	 */
 	public function testFindActiveLasers(){
-		$lasers = $this->ophtrlaser_site_laser('laser1')->with(array('site'))->findAll();
+		$lasers = $this->ophtrlaser_site_laser('laser1')->active()->with(array('site'))->findAll();
 
 		$this->assertEquals(1 , count($lasers));
 		foreach($lasers as $laser){
