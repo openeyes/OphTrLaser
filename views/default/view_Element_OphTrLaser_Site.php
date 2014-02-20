@@ -16,6 +16,10 @@
  * @copyright Copyright (c) 2011-2012, OpenEyes Foundation
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
+$laser = null;
+if($element->laser_id){
+	$laser = OphTrLaser_Site_Laser::model()->activeWithLaserScope($element->laser_id)->findByPk($element->laser_id);
+}
 ?>
 <section class="element">
 	<header class="element-header">
@@ -35,7 +39,7 @@
 				<div class="data-label"><?php echo $element->getAttributeLabel('laser_id')?></div>
 			</div>
 			<div class="large-10 column">
-				<div class="data-value"><?php echo $element->laser ? $element->laser->name : 'None'?></div>
+				<div class="data-value"><?php echo $laser ? $laser->name : 'None'?></div>
 			</div>
 		</div>
 		<div class="row data-row">
