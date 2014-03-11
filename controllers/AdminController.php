@@ -26,7 +26,11 @@ class AdminController extends ModuleAdminController
 		$model_list = OphTrLaser_Site_Laser::model()->with('type')->findAll(array('order' => 'display_order asc'));
 		//$this->jsVars['OphTrIntravitrealinjection_sort_url'] = $this->createUrl('sortTreatmentDrugs');
 
+		$transaction = Yii::app()->db->beginTransaction('List','Lasers');
+
 		Audit::add('admin','list',null,false,array('module'=>'OphTrLaser','model'=>'OphTrLaser_Site_Laser'));
+
+		$transaction->commit();
 
 		$this->render('list_OphTrLaser_Manage_Lasers',array(
 			'model_list' => $model_list,
@@ -41,6 +45,8 @@ class AdminController extends ModuleAdminController
 		$request = Yii::app()->getRequest();
 
 		if ( $request->getPost('OphTrLaser_Site_Laser') ) {
+			$transaction = Yii::app()->db->beginTransaction('Create','Laser');
+
 			$model->attributes = $request->getPost('OphTrLaser_Site_Laser');
 
 			if ($bottom_laser = OphTrLaser_Site_Laser::model()->find(array('order'=>'display_order desc'))) {
@@ -52,9 +58,14 @@ class AdminController extends ModuleAdminController
 
 			if ($model->save()) {
 				Audit::add('admin','create',serialize($model->attributes),false,array('module'=>'OphTrLaser','model'=>'OphTrLaser_Site_Laser'));
+
+				$transaction->commit();
+
 				Yii::app()->user->setFlash('success', 'Laser created');
 
 				$this->redirect(array('ManageLasers'));
+			} else {
+				$transaction->rollback();
 			}
 		}
 
@@ -72,18 +83,28 @@ class AdminController extends ModuleAdminController
 			throw new Exception('Laser not found with id ' . $request->getParam('id'));
 		}
 
-		if ( $request->getPost('OphTrLaser_Site_Laser') ) {
+		if ($request->getPost('OphTrLaser_Site_Laser') ) {
+			$transaction = Yii::app()->db->beginTransaction('Edit','Laser');
+
 			$model->attributes = $request->getPost('OphTrLaser_Site_Laser');
 			if ($model->save()) {
 				Audit::add('admin','edit_saved',serialize($model->attributes),false,array('module'=>'OphTrLaser','model'=>'OphTrLaser_Site_Laser'));
+
+				$transaction->commit();
+
 				Yii::app()->user->setFlash('success', 'Laser saved');
 
 				$this->redirect(array('ManageLasers'));
 			}
-			Audit::add('admin','edit_error',serialize($model->attributes),false,array('module'=>'OphTrLaser','model'=>'OphTrLaser_Site_Laser'));
+
 			Yii::app()->user->setFlash('success', 'Laser: error saving laser');
 		}
-		Audit::add('admin','edit',serialize($model->attributes),false,array('module'=>'OphTrLaser','model'=>'OphTrLaser_Site_Laser'));
+
+		$transaction = Yii::app()->db->beginTransaction('View','Laser');
+
+		Audit::add('admin','view',$model->id,false,array('module'=>'OphTrLaser','model'=>'OphTrLaser_Site_Laser'));
+
+		$transaction->commit();
 
 		$this->render('edit', array(
 			'model' => $model,
