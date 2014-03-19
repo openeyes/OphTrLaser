@@ -30,7 +30,7 @@ return array(
 		'last_modified_date' => '1901-01-01 00:00:00',
 		'created_user_id' => 1,
 		'created_date' => '1901-01-01 00:00:00',
-		'deleted'=>false
+		'active'=>true
 	),
 	'laser2' => array(
 		'id' => 2,
@@ -43,7 +43,7 @@ return array(
 		'last_modified_date' => '1901-01-01 00:00:00',
 		'created_user_id' => 1,
 		'created_date' => '1901-01-01 00:00:00',
-		'deleted'=>true
+		'active'=>false
 	),
 	'laser3' => array(
 		'id' => 3,
@@ -56,6 +56,6 @@ return array(
 		'last_modified_date' => '1901-01-01 00:00:00',
 		'created_user_id' => 1,
 		'created_date' => '1901-01-01 00:00:00',
-		'deleted'=>true
+		'active'=>false
 	),
 );

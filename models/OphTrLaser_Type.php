@@ -24,7 +24,7 @@
  * @property string $name
  */
 
-class OphTrLaser_Type extends BaseActiveRecordVersionedSoftDelete
+class OphTrLaser_Type extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.

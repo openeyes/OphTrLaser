@@ -168,9 +168,10 @@ class Element_OphTrLaser_Site extends BaseEventTypeElement
 		if (!$this->surgeonlist) {
 			$criteria = new CDbCriteria;
 			$criteria->compare('is_doctor',1);
+			$criteria->compare('active',1);
 			$criteria->order = 'last_name,first_name asc';
 
-			$this->surgeonlist = User::model()->active()->findAll($criteria);
+			$this->surgeonlist = User::model()->findAll($criteria);
 		}
 
 		return $this->surgeonlist;

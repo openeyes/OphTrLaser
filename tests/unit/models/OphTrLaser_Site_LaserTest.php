@@ -65,7 +65,7 @@ class OphTrLaser_Site_LaserTest extends CDbTestCase {
 
 		$this->assertEquals(1 , count($lasers));
 		foreach($lasers as $laser){
-			$this->assertEquals( 0, $laser->deleted);
+			$this->assertEquals(true, $laser->active);
 		}
 	}
 }
