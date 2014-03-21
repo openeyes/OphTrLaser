@@ -79,20 +79,20 @@ class DefaultController extends BaseEventTypeController
 	}
 
 	/**
-	 * Applies workflow and filtering to the element retrieval
+	 * Override to support importing the eyedraw elements
 	 *
 	 * @return BaseEventTypeElement[]
 	 */
 	protected function getEventElements()
 	{
-		if ($this->event) {
-			$elements = $this->event->getElements();
-		}
-		else {
+		if (!$this->event || $this->event->isNewRecord) {
 			$elements = $this->event_type->getDefaultElements();
 			foreach ($elements as $el) {
 				$this->importElementEyeDraw($el);
 			}
+		}
+		else {
+			$elements = $this->event->getElements();
 		}
 
 		return $elements;
