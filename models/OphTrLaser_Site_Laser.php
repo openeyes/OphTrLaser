@@ -22,7 +22,7 @@
  * The followings are the available columns in table:
  * @property string $id
  * @property string $name
- * @property string $deleted
+ * @property string $active
  *
  * The followings are the available model relations:
  *
@@ -33,9 +33,7 @@
  * @property User $usermodified
  */
 
-// todo - when switching to BaseActiveRecordVersionedSoftDelete please test to avoid problems with the deleted records
-
-class OphTrLaser_Site_Laser extends BaseActiveRecordVersionedSoftDelete
+class OphTrLaser_Site_Laser extends BaseActiveRecordVersioned
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -54,6 +52,11 @@ class OphTrLaser_Site_Laser extends BaseActiveRecordVersionedSoftDelete
 		return 'ophtrlaser_site_laser';
 	}
 
+	public function defaultScope()
+	{
+		return array('order' => $this->getTableAlias(true, false) . '.display_order');
+	}
+
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -62,7 +65,7 @@ class OphTrLaser_Site_Laser extends BaseActiveRecordVersionedSoftDelete
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, site_id, wavelength, type_id, deleted', 'safe'),
+			array('name, site_id, wavelength, type_id, active', 'safe'),
 			array('name, site_id, wavelength, type_id', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -92,7 +95,8 @@ class OphTrLaser_Site_Laser extends BaseActiveRecordVersionedSoftDelete
 		return array(
 			'id' => 'ID',
 			'name' => 'Name',
-			'site_id' => "Site"
+			'site_id' => "Site",
+			'type_id' => "Type",
 		);
 	}
 
@@ -113,5 +117,12 @@ class OphTrLaser_Site_Laser extends BaseActiveRecordVersionedSoftDelete
 		return new CActiveDataProvider(get_class($this), array(
 				'criteria' => $criteria,
 			));
+	}
+
+	public function behaviors()
+	{
+		return array(
+			'LookupTable' => 'LookupTable',
+		);
 	}
 }

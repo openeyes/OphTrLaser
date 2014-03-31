@@ -28,7 +28,7 @@
 				<th>Type</th>
 				<th>Wavelength</th>
 				<th>Site</th>
-				<th>Deleted</th>
+				<th>Active</th>
 				<th>Edit</th>
 			</tr>
 			</thead>
@@ -48,7 +48,7 @@
 						<?php echo $model->site->name ?>
 					</td>
 					<td>
-						<?php echo $model->deleted?'Yes':'No' ?>
+						<?php echo $model->active?'Yes':'No' ?>
 					</td>
 					<td>
 						<?php echo CHtml::link('Edit', '/OphTrLaser/admin/editLaser/'. $model->id, array('class' => 'small event-action' ))?>
