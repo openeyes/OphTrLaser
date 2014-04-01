@@ -17,10 +17,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
 ?>
-<section class="element">
-	<header class="element-header">
-		<h3 class="element-title"><?php echo $element->elementType->name?></h3>
-	</header>
 	<div class="element-data element-eyes data-row">
 		<div class="element-eye right-eye column">
 			<div class="data-row">
@@ -57,5 +53,3 @@
 			</div>
 		</div>
 	</div>
-	<?php $this->renderChildOpenElements($element, $this->action->id, $form, $data)?>
-</section>
