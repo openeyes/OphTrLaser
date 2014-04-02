@@ -1,0 +1,2 @@
+id,patient_id,firm_id,start_date,episode_status_id,legacy,deleted,eye_id,disorder_id,support_services
+1,19434,1,"2014-03-31 13:40:33",1,0,0,NULL,NULL,0
