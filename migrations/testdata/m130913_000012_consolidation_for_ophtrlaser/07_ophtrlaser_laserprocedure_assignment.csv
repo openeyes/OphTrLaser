@@ -1,0 +1,3 @@
+procedure_id,treatment_id,eye_id => eye.name,display_order
+62,1,Right,NULL
+62,1,Left,NULL

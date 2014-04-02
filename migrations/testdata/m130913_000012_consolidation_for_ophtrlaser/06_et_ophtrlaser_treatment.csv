@@ -1,0 +1,2 @@
+id,event_id => event.id,eye_id => eye.name
+1,1,Both

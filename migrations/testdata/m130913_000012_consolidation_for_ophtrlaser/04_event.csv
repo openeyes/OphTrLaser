@@ -1,0 +1,2 @@
+episode_id => episode.id,created_user_id => user.username,event_type_id => event_type.name,info,deleted,delete_reason,delete_pending
+1,admin,Laser,,0,NULL,0

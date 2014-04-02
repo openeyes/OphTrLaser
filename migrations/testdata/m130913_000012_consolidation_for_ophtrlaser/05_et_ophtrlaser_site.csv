@@ -1,0 +1,2 @@
+event_id => event.id,site_id => site.name,laser_id => ophtrlaser_site_laser.name,surgeon_id => user.username
+1,"Queens Hospital",TestLaser,admin
