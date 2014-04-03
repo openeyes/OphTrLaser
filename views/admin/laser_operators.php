@@ -24,19 +24,6 @@
 			<h2>Laser operators</h2>
 		</div>
 		<div class="large-4 column">
-			<?php
-			$form = $this->beginWidget('BaseEventTypeCActiveForm',array(
-				'id' => 'searchform',
-				'enableAjaxValidation' => false,
-				'focus' => '#search',
-				'action' => Yii::app()->createUrl('/admin/users'),
-			))?>
-				<div class="row">
-					<div class="large-12 column">
-						<input type="text" name="search" id="search" placeholder="Enter search query..." value="<?php echo strip_tags(@$_POST['search'])?>" />
-					</div>
-				</div>
-			<?php $this->endWidget()?>
 		</div>
 	</div>
 	<form id="admin_users">
