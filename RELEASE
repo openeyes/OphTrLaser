@@ -8,6 +8,10 @@ Release History
 + Asset refactoring
 + Rationalise db character set and collation
 
+1.5.2
+-----
++ Add support for laser operator list separate from surgeons/doctors
+
 1.5.1
 -----
 + Support event locking and delete reason/request

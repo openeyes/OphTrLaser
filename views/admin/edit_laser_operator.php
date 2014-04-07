@@ -16,30 +16,35 @@
  * @copyright Copyright (c) 2011-2012, OpenEyes Foundation
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
+
 ?>
-	<div class="element-data">
-		<div class="row data-row">
-			<div class="large-2 column">
-				<div class="data-label"><?php echo $element->getAttributeLabel('site_id')?></div>
-			</div>
-			<div class="large-10 column">
-				<div class="data-value"><?php echo $element->site ? $element->site->name : 'None'?></div>
-			</div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column">
-				<div class="data-label"><?php echo $element->getAttributeLabel('laser_id')?></div>
-			</div>
-			<div class="large-10 column">
-				<div class="data-value"><?php echo $element->laser ? $element->laser->name : 'None'?></div>
-			</div>
-		</div>
-		<div class="row data-row">
-			<div class="large-2 column">
-				<div class="data-label"><?php echo $element->getAttributeLabel('operator_id')?></div>
-			</div>
-			<div class="large-10 column">
-				<div class="data-value"><?php echo $element->surgeon ? $element->surgeon->ReversedFullName : 'None'?></div>
-			</div>
-		</div>
-	</div>
+<div class="box admin">
+	<h2><?php echo $laser_operator->id ? 'Edit' : 'Add'?> laser operator</h2>
+	<?php
+	$form = $this->beginWidget('BaseEventTypeCActiveForm', array(
+		'id'=>'adminform',
+		'enableAjaxValidation'=>false,
+		'focus'=>'#username',
+		'layoutColumns' => array(
+			'label' => 2,
+			'field' => 5
+		)
+	))?>
+	<?php echo $this->renderPartial('//admin/_form_errors',array('errors' => $errors))?>
+	<?php echo $form->dropDownList($laser_operator,'user_id',CHtml::listData(User::model()->findAll(array('condition' => 'active = 1','order' => 'last_name, first_name')),'id','reversedFullName'),array('empty' => '- Select -'))?>
+	<?php echo $form->formActions(array(
+		'delete' => $laser_operator->id ? 'Delete' : false
+	));?>
+	<?php $this->endWidget()?>
+</div>
+
+<script type="text/javascript">
+	handleButton($('#et_cancel'),function(e) {
+		e.preventDefault();
+		window.location.href = baseUrl+'/OphTrLaser/admin/viewLaserOperators';
+	});
+
+	handleButton($('#et_save'),function(e) {
+		$('#adminform').submit();
+	});
+</script>
