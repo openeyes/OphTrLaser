@@ -36,9 +36,15 @@
 
 class Element_OphTrLaser_Treatment extends SplitEventTypeElement
 {
-	public $service;
-	const RIGHT_EYE_ID = 2;
-	const LEFT_EYE_ID = 1;
+	protected $auto_update_relations = true;
+	protected $relation_defaults = array(
+		'right_procedures' => array(
+			'eye_id' => Eye::RIGHT,
+		),
+		'left_procedures' => array(
+			'eye_id' => Eye::LEFT,
+		),
+	);
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -65,7 +71,7 @@ class Element_OphTrLaser_Treatment extends SplitEventTypeElement
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, eye_id, ', 'safe'),
+			array('event_id, eye_id, left_procedures, right_procedures', 'safe'),
 			array('eye_id,', 'required'),
 			array('left_procedures', 'requiredIfSide', 'side' => 'left'),
 			array('right_procedures', 'requiredIfSide', 'side' => 'right'),
@@ -99,8 +105,8 @@ class Element_OphTrLaser_Treatment extends SplitEventTypeElement
 			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 			'eye' => array(self::BELONGS_TO, 'Eye', 'eye_id'),
 			'procedure_assignments' => array(self::HAS_MANY, 'OphTrLaser_LaserProcedureAssignment', 'treatment_id', 'order' => 'display_order ASC'),
-			'right_procedures' => array(self::HAS_MANY, 'Procedure', 'procedure_id', 'order' => 'display_order ASC', 'through' => 'procedure_assignments', 'on' => 'procedure_assignments.eye_id = ' . self::RIGHT_EYE_ID),
-			'left_procedures' => array(self::HAS_MANY, 'Procedure', 'procedure_id', 'order' => 'display_order ASC', 'through' => 'procedure_assignments', 'on' => 'procedure_assignments.eye_id = ' . self::LEFT_EYE_ID),
+			'right_procedures' => array(self::HAS_MANY, 'Procedure', 'procedure_id', 'order' => 'display_order ASC', 'through' => 'procedure_assignments', 'on' => 'procedure_assignments.eye_id = ' . Eye::RIGHT),
+			'left_procedures' => array(self::HAS_MANY, 'Procedure', 'procedure_id', 'order' => 'display_order ASC', 'through' => 'procedure_assignments', 'on' => 'procedure_assignments.eye_id = ' . Eye::LEFT),
 		);
 	}
 
@@ -136,88 +142,5 @@ class Element_OphTrLaser_Treatment extends SplitEventTypeElement
 		return new CActiveDataProvider(get_class($this), array(
 				'criteria' => $criteria,
 			));
-	}
-
-	/**
-	 * Set default values for forms on create
-	 */
-	public function setDefaultOptions()
-	{
-		if (Yii::app()->getController()->getAction()->id == 'create') {
-		}
-	}
-
-
-
-	protected function beforeSave()
-	{
-		return parent::beforeSave();
-	}
-
-	protected function afterSave()
-	{
-		return parent::afterSave();
-	}
-
-	protected function beforeValidate()
-	{
-		return parent::beforeValidate();
-	}
-
-	/*
-	 * update procedure assignments to given procedure ids on the given side
-	 *
-	 */
-	public function updateProcedures($proc_ids, $side)
-	{
-		// get the current procedures
-		$current_ids = array();
-		$current_assignments = array();
-		foreach ($this->procedure_assignments as $proc) {
-			if ($proc->eye_id == $side) {
-				$current_ids[] = $proc->procedure_id;
-				$current_assignments[] = $proc;
-			}
-		}
-
-		// check for new procedures
-		foreach ($proc_ids as $up_id) {
-			if (!in_array($up_id, $current_ids)) {
-				// create new procedure assignment
-				$ass = new OphTrLaser_LaserProcedureAssignment();
-				$ass->eye_id = $side;
-				$ass->treatment_id = $this->id;
-				$ass->procedure_id = $up_id;
-				if (!$ass->save()) {
-					throw new Exception('Unable to save procedure assignment for treatment: '.print_r($ass->getErrors(),true));
-				}
-			}
-		}
-
-		// delete removed
-		foreach ($current_assignments as $curr) {
-			if (!in_array($curr->procedure_id, $proc_ids)) {
-				// delete it
-				if (!$curr->delete()) {
-					throw new Exception('Unable to delete procedure assignment for treatment: '.print_r($curr->getErrors(),true));
-				}
-			}
-		}
-	}
-
-	/*
-	 * wrapper function to update the procedures for this treatment on the right eye
-	 */
-	public function updateRightProcedures($data)
-	{
-		$this->updateProcedures($data, self::RIGHT_EYE_ID);
-	}
-
-	/*
-	 * wrapper function to update the procedures for this treatment on the left eye
-	*/
-	public function updateLeftProcedures($data)
-	{
-		$this->updateProcedures($data, self::LEFT_EYE_ID);
 	}
 }

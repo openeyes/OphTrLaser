@@ -35,7 +35,7 @@ $layoutColumns = array(
 			<?php
 			$form->multiSelectList(
 				$element,
-				'treatment_right_procedures',
+				'right_procedures',
 				'right_procedures', 'id', CHtml::listData($procs, 'id', 'term'), array(),array('empty' => '- Procedures -', 'label' => $element->getAttributeLabel('procedures')), false,	false, null, false, false, $layoutColumns);?>
 		</div>
 		<div class="inactive-form">
@@ -52,7 +52,7 @@ $layoutColumns = array(
 			<?php
 			$form->multiSelectList(
 				$element,
-				'treatment_left_procedures',
+				'left_procedures',
 				'left_procedures', 'id', CHtml::listData($procs, 'id', 'term'), array(), array('empty' => '- Procedures -', 'label' => $element->getAttributeLabel('procedures')), false, false, null, false, false, $layoutColumns);
 			?>
 		</div>
