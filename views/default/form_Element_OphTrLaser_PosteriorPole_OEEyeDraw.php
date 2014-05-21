@@ -29,6 +29,7 @@ $widget = $this->widget('application.modules.eyedraw.OEEyeDrawWidget', array(
 	'side' => ($side == 'right') ? 'R' : 'L',
 	'mode' => 'edit',
 	'model' => $element,
+	'template' => 'OEEyeDrawWidget_InlineToolbar',
 	'attribute' => $side.'_eyedraw',
 ));
 ?>
