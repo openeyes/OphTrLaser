@@ -29,6 +29,7 @@ $this->widget('application.modules.eyedraw.OEEyeDrawWidget', array(
 	'width' => 300,
 	'height' => 300,
 	'model' => $element,
+	'template' => 'OEEyeDrawWidget_InlineToolbar',
 	'attribute' => $side.'_eyedraw',
 ));
 ?>
