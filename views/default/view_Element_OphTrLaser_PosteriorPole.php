@@ -40,7 +40,7 @@
 				<?php if ($element->hasLeft()) {
 					$this->widget('application.modules.eyedraw.OEEyeDrawWidget', array(
 						'idSuffix' => 'left_'.$element->elementType->id,
-						'side' => 'R',
+						'side' => 'L',
 						'mode' => 'view',
 						'width' => 200,
 						'height' => 200,
