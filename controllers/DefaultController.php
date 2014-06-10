@@ -139,6 +139,32 @@ class DefaultController extends BaseEventTypeController
 	}
 
 	/**
+	 * Custom validation for Treatment child elements
+	 *
+	 * @param array $data
+	 * @return array $errors
+	 */
+	protected function setAndValidateElementsFromData($data)
+	{
+		$errors = parent::setAndValidateElementsFromData($data);
+
+		foreach ($this->open_elements as $element) {
+			if ($element->elementTypeName == 'Treatment') break;
+		}
+
+		foreach ($this->getChildElements($element->elementType) as $child) {
+			if ($child->hasRight() && !$element->hasRight()) {
+				$errors[$child->elementTypeName][] = "Can't have right side without procedures on right eye";
+			}
+			if ($child->hasLeft() && !$element->hasLeft()) {
+				$errors[$child->elementTypeName][] = "Can't have left side without procedures on left eye";
+			}
+		}
+
+		return $errors;
+	}
+
+	/**
 	 * Sets Laser Procedures
 	 *
 	 * @param BaseEventTypeElement $element
