@@ -19,22 +19,25 @@
 ?>
 
 <?php $this->beginContent('//patient/event_container'); ?>
-	<?php
-		$this->event_actions[] = EventAction::button('Save', 'save', array('level' => 'save'), array('form'=>'laser-create'));
-	?>
+<?php
+$this->event_actions[] = EventAction::button('Save', 'save', array('level' => 'save'), array('form'=>'laser-create'));
+?>
 
-	<?php $form = $this->beginWidget('BaseEventTypeCActiveForm', array(
-		'id'=>'laser-create',
-		'enableAjaxValidation'=>false,
-		'layoutColumns' => array(
-			'label' => 4,
-			'field' => 8
-		)
-	));
-	?>
-		<?php $this->displayErrors($errors)?>
-		<?php $this->renderPartial('//patient/event_elements', array('form' => $form));?>
-		<?php $this->displayErrors($errors, true)?>
+<?php $form = $this->beginWidget('BaseEventTypeCActiveForm', array(
+'id'=>'laser-create',
+'enableAjaxValidation'=>false,
+'layoutColumns' => array(
+	'label' => 4,
+	'field' => 8
+)
+));
+?>
+<?php $this->displayErrors($errors)?>
+<?php $this->renderPartial('//patient/event_elements', array(
+	'form' => $form,
+	'disableOptionalElementActions' => true
+));?>
+<?php $this->displayErrors($errors, true)?>
 
-	<?php $this->endWidget()?>
+<?php $this->endWidget()?>
 <?php $this->endContent() ;?>
