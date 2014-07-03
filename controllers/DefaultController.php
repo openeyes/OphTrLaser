@@ -138,6 +138,83 @@ class DefaultController extends BaseEventTypeController
 		return $element;
 	}
 
+	/**
+	 * Custom validation for Treatment child elements
+	 *
+	 * @param array $data
+	 * @return array $errors
+	 */
+	protected function setAndValidateElementsFromData($data)
+	{
+		$errors = parent::setAndValidateElementsFromData($data);
+
+		foreach ($this->open_elements as $element) {
+			if ($element->elementTypeName == 'Treatment') break;
+		}
+
+		foreach ($this->getChildElements($element->elementType) as $child) {
+			if ($child->hasRight() && !$element->hasRight()) {
+				$errors[$child->elementTypeName][] = "Can't have right side without procedures on right eye";
+			}
+			if ($child->hasLeft() && !$element->hasLeft()) {
+				$errors[$child->elementTypeName][] = "Can't have left side without procedures on left eye";
+			}
+		}
+
+		return $errors;
+	}
+
+	/**
+	 * Sets Laser Procedures
+	 *
+	 * @param BaseEventTypeElement $element
+	 * @param array $data
+	 * @param null $index
+	 */
+	protected function setElementComplexAttributesFromData($element, $data, $index=null)
+	{
+		if (get_class($element) == 'Element_OphTrLaser_Treatment') {
+			$right_procedures = array();
+			if (isset($data['treatment_right_procedures'])) {
+				foreach ($data['treatment_right_procedures'] as $proc_id) {
+					$right_procedures[] = Procedure::model()->findByPk($proc_id);
+				}
+			}
+			$element->right_procedures = $right_procedures;
+
+			$left_procedures = array();
+			if (isset($data['treatment_left_procedures'])) {
+				foreach ($data['treatment_left_procedures'] as $proc_id) {
+					$left_procedures[] = Procedure::model()->findByPk($proc_id);
+				}
+			}
+			$element->left_procedures = $left_procedures;
+		}
+	}
+
+	/**
+	 * Saves the Laser Procedures
+	 *
+	 * @param array $data
+	 */
+	protected function saveEventComplexAttributesFromData($data)
+	{
+		foreach ($this->open_elements as $el) {
+			if (get_class($el) == 'Element_OphTrLaser_Treatment') {
+				$rprocs = array();
+				$lprocs = array();
+				if ($el->hasRight() && isset($data['treatment_right_procedures']) ) {
+					$rprocs =  $data['treatment_right_procedures'];
+				}
+				$el->updateRightProcedures($rprocs);
+				if ($el->hasLeft() && isset($data['treatment_left_procedures']) ) {
+					$lprocs =  $data['treatment_left_procedures'];
+				}
+				$el->updateLeftProcedures($lprocs);
+			}
+		}
+	}
+
 	public function checkPrintAccess()
 	{
 		return false;

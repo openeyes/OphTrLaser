@@ -16,7 +16,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html The GNU General Public License V3.0
  */
 
-echo $form->hiddenInput($element, 'eye_id', false, array('class' => 'sideField'));
 $lprocs = OphTrLaser_LaserProcedure::model()->with(array('procedure'))->findAll(array('order'=>'procedure.term asc'));
 $procs = array();
 foreach ($lprocs as $lproc) {
@@ -29,9 +28,10 @@ $layoutColumns = array(
 ?>
 
 <div class="element-fields element-eyes row">
+	<?= $form->hiddenInput($element, 'eye_id', false, array('class' => 'sideField')) ?>
 	<div class="element-eye right-eye column side left<?php if (!$element->hasRight()) { ?> inactive<?php } ?>" data-side="right">
-		<a href="#" class="icon-remove-side remove-side">Remove eye</a>
 		<div class="active-form">
+			<a href="#" class="icon-remove-side remove-side">Remove eye</a>
 			<?php
 			$form->multiSelectList(
 				$element,
@@ -47,8 +47,8 @@ $layoutColumns = array(
 		</div>
 	</div>
 	<div class="element-eye left-eye column side right<?php if (!$element->hasLeft()) { ?> inactive<?php } ?>" data-side="left">
-		<a href="#" class="icon-remove-side remove-side">Remove eye</a>
 		<div class="active-form">
+			<a href="#" class="icon-remove-side remove-side">Remove eye</a>
 			<?php
 			$form->multiSelectList(
 				$element,

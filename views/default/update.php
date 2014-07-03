@@ -19,45 +19,26 @@
 ?>
 
 <?php $this->beginContent('//patient/event_container'); ?>
-	<?php
-		$this->breadcrumbs=array($this->module->id);
-		$this->event_actions[] = EventAction::button('Save', 'save', array('level' => 'save'), array('form'=>'laser-create'));
-	?>
+<?php
+$this->breadcrumbs=array($this->module->id);
+$this->event_actions[] = EventAction::button('Save', 'save', array('level' => 'save'), array('form'=>'laser-create'));
+?>
 
-	<?php $form = $this->beginWidget('BaseEventTypeCActiveForm', array(
-		'id'=>'laser-create',
-		'enableAjaxValidation'=>false,
-		'layoutColumns' => array(
-			'label' => 4,
-			'field' => 8
-		)
-	));
-	?>
-		<?php $this->displayErrors($errors)?>
+<?php $form = $this->beginWidget('BaseEventTypeCActiveForm', array(
+'id'=>'laser-create',
+'enableAjaxValidation'=>false,
+'layoutColumns' => array(
+	'label' => 4,
+	'field' => 8
+)
+));
+?>
+<?php $this->displayErrors($errors)?>
+<?php $this->renderPartial('//patient/event_elements', array(
+	'form' => $form,
+	'disableOptionalElementActions' => true
+));?>
+<?php $this->displayErrors($errors, true)?>
 
-		<div class="js-active-elements">
-			<?php $this->renderOpenElements($this->action->id, $form)?>
-		</div>
-		<section class="optional-elements">
-			<header class="optional-elements-header">
-				<h3 class="optional-elements-title">Optional Elements</h3>
-				<div class="optional-elements-actions">
-					<a href="#" class="add-all">
-						<span>Add all</span>
-						<img src="<?php echo Yii::app()->assetManager->createUrl('img/_elements/icons/event-optional/element-added.png');?>" alt="Add all" />
-					</a>
-					<a href="#" class="remove-all">
-						<span>Remove all</span>
-						<img src="<?php echo Yii::app()->assetManager->createUrl('img/_elements/icons/event-optional/element-remove.png');?>" alt="Remove all" />
-					</a>
-				</div>
-			</header>
-			<ul class="optional-elements-list">
-				<?php $this->renderOptionalElements($this->action->id, $form)?>
-			</ul>
-		</section>
-
-		<?php $this->displayErrors($errors, true)?>
-
-	<?php $this->endWidget()?>
+<?php $this->endWidget()?>
 <?php $this->endContent() ;?>
