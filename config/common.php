@@ -24,4 +24,13 @@ return array(
 			'Laser operators' => '/OphTrLaser/admin/viewLaserOperators',
 		),
 	),
+	'components' => array(
+		'clientScript' => array(
+			'packages' => array(
+				'OphTrLaser' => array(
+					'depends' => array('split_event')
+				)
+			)
+		)
+	)
 );
