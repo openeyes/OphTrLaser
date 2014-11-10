@@ -36,7 +36,7 @@ class DefaultController extends BaseEventTypeController
 			$lasers = OphTrLaser_Site_Laser::model()->activeOrPk($eventObj->laser_id)->findAll();
 		}
 		else{
-			$lasers = OphTrLaser_Site_Laser::model()->findAll();
+			$lasers = OphTrLaser_Site_Laser::model()->active()->findAll();
 		}
 
 		$l_by_s = array();
