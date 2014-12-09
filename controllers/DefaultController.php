@@ -176,16 +176,16 @@ class DefaultController extends BaseEventTypeController
 		if (get_class($element) == 'Element_OphTrLaser_Treatment') {
 			$right_procedures = array();
 			if (isset($data['treatment_right_procedures'])) {
-				foreach ($data['treatment_right_procedures'] as $proc_id) {
-					$right_procedures[] = Procedure::model()->findByPk($proc_id);
+				foreach ($data['treatment_right_procedures'] as $proc) {
+					$right_procedures[] = Procedure::model()->findByPk($proc['id']);
 				}
 			}
 			$element->right_procedures = $right_procedures;
 
 			$left_procedures = array();
 			if (isset($data['treatment_left_procedures'])) {
-				foreach ($data['treatment_left_procedures'] as $proc_id) {
-					$left_procedures[] = Procedure::model()->findByPk($proc_id);
+				foreach ($data['treatment_left_procedures'] as $proc) {
+					$left_procedures[] = Procedure::model()->findByPk($proc['id']);
 				}
 			}
 			$element->left_procedures = $left_procedures;
@@ -203,11 +203,11 @@ class DefaultController extends BaseEventTypeController
 			if (get_class($el) == 'Element_OphTrLaser_Treatment') {
 				$rprocs = array();
 				$lprocs = array();
-				if ($el->hasRight() && isset($data['treatment_right_procedures']) ) {
+				if ($el->hasRight() && !empty($data['treatment_right_procedures']) ) {
 					$rprocs =  $data['treatment_right_procedures'];
 				}
 				$el->updateRightProcedures($rprocs);
-				if ($el->hasLeft() && isset($data['treatment_left_procedures']) ) {
+				if ($el->hasLeft() && !empty($data['treatment_left_procedures']) ) {
 					$lprocs =  $data['treatment_left_procedures'];
 				}
 				$el->updateLeftProcedures($lprocs);

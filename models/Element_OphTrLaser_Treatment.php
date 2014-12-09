@@ -181,13 +181,13 @@ class Element_OphTrLaser_Treatment extends SplitEventTypeElement
 		}
 
 		// check for new procedures
-		foreach ($proc_ids as $up_id) {
-			if (!in_array($up_id, $current_ids)) {
+		foreach ($proc_ids as $up) {
+			if (!in_array($up['id'], $current_ids)) {
 				// create new procedure assignment
 				$ass = new OphTrLaser_LaserProcedureAssignment();
 				$ass->eye_id = $side;
 				$ass->treatment_id = $this->id;
-				$ass->procedure_id = $up_id;
+				$ass->procedure_id = $up['id'];
 				if (!$ass->save()) {
 					throw new Exception('Unable to save procedure assignment for treatment: '.print_r($ass->getErrors(),true));
 				}
