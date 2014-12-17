@@ -175,7 +175,7 @@ class DefaultController extends BaseEventTypeController
 	{
 		if (get_class($element) == 'Element_OphTrLaser_Treatment') {
 			$right_procedures = array();
-			if (isset($data['treatment_right_procedures'])) {
+			if (!empty($data['treatment_right_procedures'])) {
 				foreach ($data['treatment_right_procedures'] as $proc_id) {
 					$right_procedures[] = Procedure::model()->findByPk($proc_id);
 				}
@@ -183,7 +183,7 @@ class DefaultController extends BaseEventTypeController
 			$element->right_procedures = $right_procedures;
 
 			$left_procedures = array();
-			if (isset($data['treatment_left_procedures'])) {
+			if (!empty($data['treatment_left_procedures'])) {
 				foreach ($data['treatment_left_procedures'] as $proc_id) {
 					$left_procedures[] = Procedure::model()->findByPk($proc_id);
 				}
