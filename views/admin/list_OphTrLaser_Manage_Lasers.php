@@ -33,7 +33,8 @@
 			</tr>
 			</thead>
 			<tbody>
-			<?php foreach ($model_list as $i => $model) {?>
+			<?php foreach ($model_list as $i => $model) {
+    ?>
 				<tr class="clickable" data-id="<?php echo $model->id?>" data-uri="OphTrLaser/admin/editLaser/<?php echo $model->id?>">
 					<td>
 						<?php echo $model->name?>
@@ -54,7 +55,8 @@
 						<?php echo CHtml::link('Edit', '/OphTrLaser/admin/editLaser/'. $model->id, array('class' => 'small event-action' ))?>
 					</td>
 				</tr>
-			<?php }?>
+			<?php 
+}?>
 			</tbody>
 			<tfoot class="pagination-container">
 			<tr>

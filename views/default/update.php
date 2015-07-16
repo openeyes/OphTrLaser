@@ -28,15 +28,15 @@ $this->event_actions[] = EventAction::button('Save', 'save', array('level' => 's
 'id'=>'laser-create',
 'enableAjaxValidation'=>false,
 'layoutColumns' => array(
-	'label' => 4,
-	'field' => 8
+    'label' => 4,
+    'field' => 8
 )
 ));
 ?>
 <?php $this->displayErrors($errors)?>
 <?php $this->renderPartial('//patient/event_elements', array(
-	'form' => $form,
-	'disableOptionalElementActions' => true
+    'form' => $form,
+    'disableOptionalElementActions' => true
 ));?>
 <?php $this->displayErrors($errors, true)?>
 

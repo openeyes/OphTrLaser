@@ -18,16 +18,16 @@
  */
 
 // display pagination
-if(isset($pagination)){
-	$this->widget('CLinkPager', array(
-		'pages' => $pagination,
-		'maxButtonCount' => 13,
-		'cssFile' => false,
-		'selectedPageCssClass' => 'current',
-		'hiddenPageCssClass' => 'unavailable',
-		'header' => false,
-		'htmlOptions' => array(
-			'class' => 'pagination'
-		)
-	));
+if (isset($pagination)) {
+    $this->widget('CLinkPager', array(
+        'pages' => $pagination,
+        'maxButtonCount' => 13,
+        'cssFile' => false,
+        'selectedPageCssClass' => 'current',
+        'hiddenPageCssClass' => 'unavailable',
+        'header' => false,
+        'htmlOptions' => array(
+            'class' => 'pagination'
+        )
+    ));
 }

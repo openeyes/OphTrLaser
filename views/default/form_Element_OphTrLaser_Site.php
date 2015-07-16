@@ -17,29 +17,29 @@
  */
 
 $lasers = OphTrLaser_Site_Laser::model()->activeOrPk($element->laser_id)->with(array('site'))
-	->findAll(array('order' => 'site.short_name asc, t.name asc'));
+    ->findAll(array('order' => 'site.short_name asc, t.name asc'));
 
-$sites	= array();
+$sites    = array();
 $site_ids = array();
 $laser_options = array();
 
 foreach ($lasers as $laser) {
-	if (!in_array($laser->site_id, $site_ids)) {
-		$sites[] = $laser->site;
-		$site_ids[] = $laser->site_id;
-	}
-	if ($element->site_id && $laser->site_id == $element->site_id) {
-		$laser_options[] = $laser;
-	}
+    if (!in_array($laser->site_id, $site_ids)) {
+        $sites[] = $laser->site;
+        $site_ids[] = $laser->site_id;
+    }
+    if ($element->site_id && $laser->site_id == $element->site_id) {
+        $laser_options[] = $laser;
+    }
 }
 ?>
 <div class="element-fields">
-	<?php echo $form->dropDownList($element, 'site_id', CHtml::listData($sites,'id','short_name'),array('empty'=>'- Please select -'),false,array('label' => 2, 'field' => 3))?>
-	<?php echo $form->dropDownList($element, 'laser_id', CHtml::listData($laser_options,'id','name'),array('empty'=>'- Please select -'),false,array('label' => 2, 'field' => 3))?>
+	<?php echo $form->dropDownList($element, 'site_id', CHtml::listData($sites, 'id', 'short_name'), array('empty'=>'- Please select -'), false, array('label' => 2, 'field' => 3))?>
+	<?php echo $form->dropDownList($element, 'laser_id', CHtml::listData($laser_options, 'id', 'name'), array('empty'=>'- Please select -'), false, array('label' => 2, 'field' => 3))?>
 	<div class="field-row">
 		<div class="field-info">
 			<em>Please select a site to see the list of available lasers.</em>
 		</div>
 	</div>
-	<?php echo $form->dropDownList($element, 'operator_id', CHtml::listData($element->surgeons, 'id', 'ReversedFullName'),array('empty'=>'- Please select -'),false,array('label' => 2, 'field' => 3))?>
+	<?php echo $form->dropDownList($element, 'operator_id', CHtml::listData($element->surgeons, 'id', 'ReversedFullName'), array('empty'=>'- Please select -'), false, array('label' => 2, 'field' => 3))?>
 </div>

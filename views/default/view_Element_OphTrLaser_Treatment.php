@@ -21,35 +21,57 @@
 		<div class="element-eye right-eye column">
 			<div class="data-row">
 				<?php if ($element->hasRight()) {
-					if (!$element->right_procedures) {?>
+    if (!$element->right_procedures) {
+        ?>
 						None
-					<?php } else {?>
+					<?php 
+    } else {
+        ?>
 						<ul class="data-value">
-							<?php foreach ($element->right_procedures as $proc) {?>
+							<?php foreach ($element->right_procedures as $proc) {
+    ?>
 								<li><?php echo $proc->term?></li>
-							<?php }?>
+							<?php 
+}
+        ?>
 						</ul>
-					<?php }?>
-				<?php }else{?>
+					<?php 
+    }
+    ?>
+				<?php 
+} else {
+    ?>
 					<div class="data-value">Not recorded</div>
-				<?php }?>
+				<?php 
+}?>
 			</div>
 		</div>
 		<div class="element-eye left-eye column">
 			<div class="data-row">
 				<?php if ($element->hasLeft()) {
-					if (!$element->left_procedures) {?>
+    if (!$element->left_procedures) {
+        ?>
 						None
-					<?php } else {?>
+					<?php 
+    } else {
+        ?>
 						<ul class="data-value">
-							<?php foreach ($element->left_procedures as $proc) {?>
+							<?php foreach ($element->left_procedures as $proc) {
+    ?>
 								<li><?php echo $proc->term?></li>
-							<?php }?>
+							<?php 
+}
+        ?>
 						</ul>
-					<?php }?>
-				<?php }else{?>
+					<?php 
+    }
+    ?>
+				<?php 
+} else {
+    ?>
 					<div class="data-value">Not recorded</div>
-				<?php }?>
+				<?php 
+}?>
 			</div>
 		</div>
 	</div>

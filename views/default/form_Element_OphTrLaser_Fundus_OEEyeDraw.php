@@ -18,18 +18,18 @@
  ?>
 <?php
 $this->widget('application.modules.eyedraw.OEEyeDrawWidget', array(
-	'doodleToolBarArray' => array('LaserSpot','FocalLaser','LaserCircle','LaserDemarcation','SectorPRP'),
-	'onReadyCommandArray' => array(
-		array('addDoodle', array('Fundus')),
-		array('deselectDoodles', array()),
-	),
-	'idSuffix' => $side.'_'.$element->elementType->id,
-	'side' => ($side == 'right') ? 'R' : 'L',
-	'mode' => 'edit',
-	'width' => 300,
-	'height' => 300,
-	'model' => $element,
-	'template' => 'OEEyeDrawWidget_InlineToolbar',
-	'attribute' => $side.'_eyedraw',
+    'doodleToolBarArray' => array('LaserSpot', 'FocalLaser', 'LaserCircle', 'LaserDemarcation', 'SectorPRP'),
+    'onReadyCommandArray' => array(
+        array('addDoodle', array('Fundus')),
+        array('deselectDoodles', array()),
+    ),
+    'idSuffix' => $side.'_'.$element->elementType->id,
+    'side' => ($side == 'right') ? 'R' : 'L',
+    'mode' => 'edit',
+    'width' => 300,
+    'height' => 300,
+    'model' => $element,
+    'template' => 'OEEyeDrawWidget_InlineToolbar',
+    'attribute' => $side.'_eyedraw',
 ));
 ?>

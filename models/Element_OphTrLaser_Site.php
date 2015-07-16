@@ -40,133 +40,133 @@
 
 class Element_OphTrLaser_Site extends BaseEventTypeElement
 {
-	public $service;
-	public $operatorlist;
+    public $service;
+    public $operatorlist;
 
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @return the static model class
-	 */
-	public static function model($className = __CLASS__)
-	{
-		return parent::model($className);
-	}
+    /**
+     * Returns the static model of the specified AR class.
+     * @return the static model class
+     */
+    public static function model($className = __CLASS__)
+    {
+        return parent::model($className);
+    }
 
-	/**
-	 * @return string the associated database table name
-	 */
-	public function tableName()
-	{
-		return 'et_ophtrlaser_site';
-	}
+    /**
+     * @return string the associated database table name
+     */
+    public function tableName()
+    {
+        return 'et_ophtrlaser_site';
+    }
 
-	/**
-	 * @return array validation rules for model attributes.
-	 */
-	public function rules()
-	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
-		return array(
-			array('event_id, site_id, laser_id, operator_id, ', 'safe'),
-			array('site_id, laser_id, operator_id, ', 'required'),
-			array('laser_id', 'laserBelongsToSite'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, event_id, site_id, laser_id, operator_id, ', 'safe', 'on' => 'search'),
-		);
-	}
+    /**
+     * @return array validation rules for model attributes.
+     */
+    public function rules()
+    {
+        // NOTE: you should only define rules for those attributes that
+        // will receive user inputs.
+        return array(
+            array('event_id, site_id, laser_id, operator_id, ', 'safe'),
+            array('site_id, laser_id, operator_id, ', 'required'),
+            array('laser_id', 'laserBelongsToSite'),
+            // The following rule is used by search().
+            // Please remove those attributes that should not be searched.
+            array('id, event_id, site_id, laser_id, operator_id, ', 'safe', 'on' => 'search'),
+        );
+    }
 
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-			'element_type' => array(self::HAS_ONE, 'ElementType', 'id','on' => "element_type.class_name='".get_class($this)."'"),
-			'eventType' => array(self::BELONGS_TO, 'EventType', 'event_type_id'),
-			'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
-			'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
-			'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
-			'site' => array(self::BELONGS_TO, 'Site', 'site_id'),
-			'laser' => array(self::BELONGS_TO, 'OphTrLaser_Site_Laser', 'laser_id'),
-			'surgeon' => array(self::BELONGS_TO, 'User', 'operator_id'),
-		);
-	}
+    /**
+     * @return array relational rules.
+     */
+    public function relations()
+    {
+        // NOTE: you may need to adjust the relation name and the related
+        // class name for the relations automatically generated below.
+        return array(
+            'element_type' => array(self::HAS_ONE, 'ElementType', 'id','on' => "element_type.class_name='".get_class($this)."'"),
+            'eventType' => array(self::BELONGS_TO, 'EventType', 'event_type_id'),
+            'event' => array(self::BELONGS_TO, 'Event', 'event_id'),
+            'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
+            'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
+            'site' => array(self::BELONGS_TO, 'Site', 'site_id'),
+            'laser' => array(self::BELONGS_TO, 'OphTrLaser_Site_Laser', 'laser_id'),
+            'surgeon' => array(self::BELONGS_TO, 'User', 'operator_id'),
+        );
+    }
 
-	/**
-	 * @return array customized attribute labels (name=>label)
-	 */
-	public function attributeLabels()
-	{
-		return array(
-			'id' => 'ID',
-			'event_id' => 'Event',
-			'site_id' => 'Site',
-			'laser_id' => 'Laser',
-			'operator_id' => 'Laser operator',
-		);
-	}
+    /**
+     * @return array customized attribute labels (name=>label)
+     */
+    public function attributeLabels()
+    {
+        return array(
+            'id' => 'ID',
+            'event_id' => 'Event',
+            'site_id' => 'Site',
+            'laser_id' => 'Laser',
+            'operator_id' => 'Laser operator',
+        );
+    }
 
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+    /**
+     * Retrieves a list of models based on the current search/filter conditions.
+     * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+     */
+    public function search()
+    {
+        // Warning: Please modify the following code to remove attributes that
+        // should not be searched.
 
-		$criteria = new CDbCriteria;
+        $criteria = new CDbCriteria;
 
-		$criteria->compare('id', $this->id, true);
-		$criteria->compare('event_id', $this->event_id, true);
+        $criteria->compare('id', $this->id, true);
+        $criteria->compare('event_id', $this->event_id, true);
 
-		$criteria->compare('site_id', $this->site_id);
-		$criteria->compare('laser_id', $this->laser_id);
-		$criteria->compare('operator_id', $this->operator_id);
+        $criteria->compare('site_id', $this->site_id);
+        $criteria->compare('laser_id', $this->laser_id);
+        $criteria->compare('operator_id', $this->operator_id);
 
-		return new CActiveDataProvider(get_class($this), array(
-				'criteria' => $criteria,
-			));
-	}
+        return new CActiveDataProvider(get_class($this), array(
+                'criteria' => $criteria,
+            ));
+    }
 
-	/**
-	 * Set default values for forms on create
-	 */
-	public function setDefaultOptions()
-	{
-		if (Yii::app()->getController()->getAction()->id == 'create') {
-			$user = Yii::app()->session['user'];
+    /**
+     * Set default values for forms on create
+     */
+    public function setDefaultOptions()
+    {
+        if (Yii::app()->getController()->getAction()->id == 'create') {
+            $user = Yii::app()->session['user'];
 
-			if ($user->is_doctor) {
-				$this->operator_id = $user->id;
-			}
-		}
-	}
+            if ($user->is_doctor) {
+                $this->operator_id = $user->id;
+            }
+        }
+    }
 
-	public function getSurgeons()
-	{
-		if (!$this->operatorlist) {
-			$this->operatorlist = array();
+    public function getSurgeons()
+    {
+        if (!$this->operatorlist) {
+            $this->operatorlist = array();
 
-			foreach (OphTrLaser_Laser_Operator::model()->with('operator')->findAll(array('order' => 'first_name asc, last_name asc')) as $laser_operator) {
-				$this->operatorlist[] = $laser_operator->operator;
-			}
-		}
+            foreach (OphTrLaser_Laser_Operator::model()->with('operator')->findAll(array('order' => 'first_name asc, last_name asc')) as $laser_operator) {
+                $this->operatorlist[] = $laser_operator->operator;
+            }
+        }
 
-		return $this->operatorlist;
-	}
+        return $this->operatorlist;
+    }
 
-	/*
-	 * validation to ensure that the selected laser is on the selected site
-	 */
-	public function laserBelongsToSite($attribute)
-	{
-		if ($this->site_id && $this->laser && $this->site_id != $this->laser->site_id) {
-			$this->addError($attribute, "Selected laser must be on the selected site");
-		}
-	}
+    /*
+     * validation to ensure that the selected laser is on the selected site
+     */
+    public function laserBelongsToSite($attribute)
+    {
+        if ($this->site_id && $this->laser && $this->site_id != $this->laser->site_id) {
+            $this->addError($attribute, "Selected laser must be on the selected site");
+        }
+    }
 }

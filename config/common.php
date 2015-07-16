@@ -18,10 +18,10 @@
  */
 
 return array(
-	'params' => array(
-		'admin_menu' => array(
-			'Manage Lasers' => '/OphTrLaser/admin/manageLasers',
-			'Laser operators' => '/OphTrLaser/admin/viewLaserOperators',
-		),
-	),
+    'params' => array(
+        'admin_menu' => array(
+            'Manage Lasers' => '/OphTrLaser/admin/manageLasers',
+            'Laser operators' => '/OphTrLaser/admin/viewLaserOperators',
+        ),
+    ),
 );

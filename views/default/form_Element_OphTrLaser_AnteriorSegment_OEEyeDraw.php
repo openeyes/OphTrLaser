@@ -18,21 +18,21 @@
  ?>
 <?php
 $this->widget('application.modules.eyedraw.OEEyeDrawWidget', array(
-	'doodleToolBarArray' => array(
-		array('LaserSpot', 'FocalLaser', 'MacularGrid'),
-	),
-	'onReadyCommandArray' => array(
-		array('addDoodle', array('AntSeg')),
-		array('deselectDoodles', array()),
-	),
-	'bindingArray' => array(),
-	'idSuffix' => $side.'_'.$element->elementType->id,
-	'side' => ($side == 'right') ? 'R' : 'L',
-	'mode' => 'edit',
-	'width' => 300,
-	'height' => 300,
-	'model' => $element,
-	'template' => 'OEEyeDrawWidget_InlineToolbar',
-	'attribute' => $side.'_eyedraw',
+    'doodleToolBarArray' => array(
+        array('LaserSpot', 'FocalLaser', 'MacularGrid'),
+    ),
+    'onReadyCommandArray' => array(
+        array('addDoodle', array('AntSeg')),
+        array('deselectDoodles', array()),
+    ),
+    'bindingArray' => array(),
+    'idSuffix' => $side.'_'.$element->elementType->id,
+    'side' => ($side == 'right') ? 'R' : 'L',
+    'mode' => 'edit',
+    'width' => 300,
+    'height' => 300,
+    'model' => $element,
+    'template' => 'OEEyeDrawWidget_InlineToolbar',
+    'attribute' => $side.'_eyedraw',
 ));
 ?>

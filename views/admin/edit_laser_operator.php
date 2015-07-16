@@ -21,20 +21,20 @@
 <div class="box admin">
 	<h2><?php echo $laser_operator->id ? 'Edit' : 'Add'?> laser operator</h2>
 	<?php
-	$form = $this->beginWidget('BaseEventTypeCActiveForm', array(
-		'id'=>'adminform',
-		'enableAjaxValidation'=>false,
-		'focus'=>'#username',
-		'layoutColumns' => array(
-			'label' => 2,
-			'field' => 5
-		)
-	))?>
-	<?php echo $this->renderPartial('//admin/_form_errors',array('errors' => $errors))?>
-	<?php echo $form->dropDownList($laser_operator,'user_id',CHtml::listData(User::model()->findAll(array('condition' => 'active = 1','order' => 'last_name, first_name')),'id','reversedFullName'),array('empty' => '- Select -'))?>
+    $form = $this->beginWidget('BaseEventTypeCActiveForm', array(
+        'id'=>'adminform',
+        'enableAjaxValidation'=>false,
+        'focus'=>'#username',
+        'layoutColumns' => array(
+            'label' => 2,
+            'field' => 5
+        )
+    ))?>
+	<?php echo $this->renderPartial('//admin/_form_errors', array('errors' => $errors))?>
+	<?php echo $form->dropDownList($laser_operator, 'user_id', CHtml::listData(User::model()->findAll(array('condition' => 'active = 1', 'order' => 'last_name, first_name')), 'id', 'reversedFullName'), array('empty' => '- Select -'))?>
 	<?php echo $form->formActions(array(
-		'delete' => $laser_operator->id ? 'Delete' : false
-	));?>
+        'delete' => $laser_operator->id ? 'Delete' : false
+    ));?>
 	<?php $this->endWidget()?>
 </div>
 
