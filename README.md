@@ -1,13 +1,5 @@
-Introduction
-============
+## THIS REPOSITORY IS NO LONGER IN USE
 
-This is the Laser Event module for OpenEyes, designed to record laser surgery events for patients.
+As of Openeyes release 1.12.1, the OphTrLaser module has been merged into the core [openeyes](https://github.com/openeyes/openeyes) repository.
 
-The functional specification for this module can be found at https://docs.google.com/document/d/1bq_zDffQy88YuMRSdp77zW05RW1GKcdKveBkfxr_kQg/
-
-The first release version of this module is 1.4.
-
-Initialisation
---------------
-
-Lasers need to be configured for sites to allow records to be created for patients. The ophtrlaser_site_laser table should be updated for this.
+This repository is kept for historic purposes only
